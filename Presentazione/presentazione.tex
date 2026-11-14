@@ -1,0 +1,505 @@
+\documentclass[aspectratio=169, 10pt]{beamer}
+
+% Impostazioni lingua e codifica
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+
+% Pacchetti matematici, grafici e circuitali
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{circuitikz}
+\usepackage{microtype}
+
+% Stile beamer minimale e pulito
+\usetheme{default}
+\usecolortheme{dove}
+
+% Disattiva simboli di navigazione
+\setbeamertemplate{navigation symbols}{}
+
+% Intestazione e piè di pagina minimali
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+  \hfill%
+  \usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\,/\,\inserttotalframenumber%
+  \kern1.5em\vskip0.8em%
+}
+
+% Formattazione del titolo delle slide minimale
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.3em}%
+  \raggedright%
+  {\large\color{black!90}\insertframetitle}\par%
+  \vspace*{0.1em}%
+}
+
+% Spaziature display math compatte
+\setlength{\abovedisplayskip}{2pt}
+\setlength{\belowdisplayskip}{2pt}
+\setlength{\abovedisplayshortskip}{1pt}
+\setlength{\belowdisplayshortskip}{1pt}
+
+% Liste senza pallini pesanti
+\setbeamertemplate{itemize item}{\raisebox{0.2ex}{\tiny$\bullet$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.2ex}{\tiny$\circ$}}
+
+\title{Caratterizzazione del transitorio elettrico a $V_{DC} = 0\text{ V}$}
+\date{}
+
+\begin{document}
+
+% -------------------------------------------------------------
+% SLIDE 1: LINEARIZZAZIONE DEL MODELLO A ORDINE RIDOTTO (ROM)
+% -------------------------------------------------------------
+\begin{frame}{Linearizzazione del modello del paper}
+\vspace{0.2em}
+{\small Sviluppo delle forze attorno all'equilibrio}
+\vspace{0.2em}
+\[
+  \frac{f_{DD}^{(1)}}{\varepsilon_0} \approx c_{0,DD}^{(1)} + c_{1,DD}^{(1)} q_1, \qquad
+  \frac{f_{DA}^{(1)}}{\varepsilon_0} \approx c_{0,DA}^{(1)}, \qquad
+  \beta_1 \approx c_{1,\beta}^{(1)} q_1
+\]
+
+\vspace{0.6em}
+{\small Equazioni del modello del MEMS}
+\vspace{0.2em}
+\[
+  \begin{cases}
+    \ddot{q}_1 + \dfrac{\omega_{01}}{Q_1}\dot{q}_1 + \left(c_{1,\beta}^{(1)} - \varepsilon_0 c_{1,DD}^{(1)} V_{DC}^2\right) q_1 \approx \varepsilon_0 c_{0,DD}^{(1)} V_{DC}^2 + 2\varepsilon_0 c_{0,DA}^{(1)} V_{DC}\, v_{in}(t) \\[10pt]
+    i_s(t) \approx \varepsilon_0 c_{0,DA}^{(1)} V_{DC}\, \dot{q}_1(t)
+  \end{cases}
+\]
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 2: DINAMICA LIBERA E CIRCUITO EQUIVALENTE RLC
+% -------------------------------------------------------------
+\begin{frame}{Dinamica libera e circuito equivalente RLC}
+\vspace{0.2em}
+{\small Risposta libera di ringdown (allo spegnimento di $v_{in}$):}
+\vspace{0.2em}
+\[
+  q_{1}(t) = A_0 e^{-t/\tau} \cos(\omega_r t + \phi_0)
+\]
+\[
+  \lambda_{1,2} = \mu \pm j\omega_r, \qquad \mu = -\frac{\omega_{01}}{2Q_1} = -\frac{1}{\tau}
+\]
+\[
+  \omega_r = \sqrt{c_{1,\beta}^{(1)} - \varepsilon_0 c_{1,DD}^{(1)} V_{DC}^2 - \frac{\omega_{01}^2}{4Q_1^2}} \approx \sqrt{\omega_{01}^2 - \varepsilon_0 c_{1,DD}^{(1)} V_{DC}^2}
+\]
+
+\vspace{0.4em}
+{\small Parametri del ramo RLC serie:}
+\vspace{0.2em}
+\[
+  L_m = \frac{1}{2(\varepsilon_0 c_{0,DA}^{(1)} V_{DC})^2}, \qquad
+  R_m = \frac{\omega_{01} L_m}{Q_1}, \qquad
+  C_m = \frac{1}{\omega_1^2(V_{DC}) L_m}
+\]
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 3: FIT ESPONENZIALE DELL'INVILUPPO DEI PICCHI (4 CASI)
+% -------------------------------------------------------------
+\begin{frame}{Inviluppo esponenziale dei picchi di oscillazione durante il ringdown}
+\centering
+\includegraphics[height=0.78\textheight, width=0.95\textwidth, keepaspectratio]{../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 2: RISPOSTA IN AMPIEZZA DEL MEMS VS FREQUENZA DI INGRESSO
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 3: FREQUENZA DI OSCILLAZIONE VS FREQUENZA DI INGRESSO
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Ampiezza_Frequenza/grafici/frequenza_vs_fin.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 4: COSTANTE DI DECADIMENTO TAU VS FREQUENZA DI ECCITAZIONE
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 5: RISPOSTA IN FREQUENZA DEL MEMS (RLC + Cp)
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Risposta in frequenza/grafici/bode_completo.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 6: RISPOSTA IN FREQUENZA COMPENSATA SOFTWARE
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Risposta in frequenza/grafici/bode_compensato.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 7: SCHEMA CIRCUITO DI COMPENSAZIONE HARDWARE ATTIVA
+% -------------------------------------------------------------
+\begin{frame}{Circuito di compensazione hardware attiva}
+\centering
+\vspace{1.0em}
+\begin{circuitikz}[scale=0.55, transform shape, line width=0.7pt]
+  % -----------------------------------------------------------
+  % INGRESSO Vin E STADIO 1: REGOLAZIONE DI FASE (U1)
+  % Ramo ingresso distanziato con C_phi, R_phi1 fissa e R_Pphi1 trimmer
+  % -----------------------------------------------------------
+  \draw (-2.3, 0.5) node[left] {$v_{in}(t)$} to[short, o-] (-1.6, 0.5)
+    to[C, l=$C_{\phi}$] (-0.3, 0.5)
+    to[short] (0.1, 0.5)
+    to[R, l=$R_{\phi 1}$] (1.6, 0.5)
+    to[short] (2.0, 0.5)
+    to[vR, l=$R_{P\phi 1}$] (3.5, 0.5)
+    to[short] (4.0, 0.5) coordinate (in1);
+
+  \node[op amp] (oa1) at (5.4, 0) {};
+  \node[font=\scriptsize, below=3pt] at (oa1.south) {$U_1$};
+  \draw (in1) -- (oa1.-);
+  \draw (oa1.+) -- ++(0, -0.4) node[ground]{};
+
+  % Retroazione Stadio 1: Rfissa R_phi2 + R_Pphi2 con spaziature
+  \draw (in1) to[short, *-] ++(0, 1.8) coordinate (fb1_start)
+    to[R, l=$R_{\phi 2}$] ++(1.6, 0)
+    to[short] ++(0.3, 0)
+    to[vR, l=$R_{P\phi 2}$] ++(1.6, 0)
+    -- ++(0.3, 0) coordinate (fb1_drop);
+
+  % Connessione uscita U1 e chiusura anello di retroazione
+  \draw (oa1.out) -- (fb1_drop |- oa1.out) coordinate (oa1_join);
+  \draw (fb1_drop) to[short, -*] (oa1_join);
+  
+  % Prolungamento orizzontale verso il partitore
+  \draw (oa1_join) to[short] (9.0, 0) coordinate (turn_div);
+  \node[above=2pt, font=\scriptsize, color=black!60] at (turn_div) {$\Delta\phi \approx 180^\circ$};
+
+  % -----------------------------------------------------------
+  % STADIO 2: REGOLAZIONE DI AMPIEZZA (Partitore R_PA con terminali puliti)
+  % -----------------------------------------------------------
+  \draw (turn_div) to[short] (9.0, -0.4)
+    to[R, l_={$R_{A1}$}] (9.0, -2.0)
+    to[short, -*] (9.0, -2.3) coordinate (wiper)
+    to[short] (9.0, -2.6)
+    to[R, l_={$R_{A2}$}] (9.0, -4.2)
+    to[short] (9.0, -4.5) node[ground]{};
+
+  \node[left=3pt, font=\scriptsize, color=black!70] at (wiper) {$R_{PA}$};
+
+  % -----------------------------------------------------------
+  % STADIO 3: BUFFER A GUADAGNO UNITARIO (U2)
+  % -----------------------------------------------------------
+  \node[op amp] (oa2) at (12.0, -1.8) {};
+  \node[font=\scriptsize, below=3pt] at (oa2.south) {$U_2$};
+  
+  % Connessione orizzontale al morsetto (+)
+  \draw (wiper) to[short] (oa2.+);
+
+  % Retroazione unitaria
+  \draw (oa2.out) to[short, -*] ++(0.4, 0) coordinate (buf_out)
+    -- ++(0, 1.4) coordinate (buf_top)
+    -- (10.8, -0.4)
+    |- (oa2.-);
+
+  % -----------------------------------------------------------
+  % STADIO 4: RETE DI INIEZIONE Cc // R_Pc
+  % -----------------------------------------------------------
+  \draw (buf_out) to[short] ++(0.6, 0) coordinate (split_inj);
+  
+  % Ramo superiore: Trimmer capacitivo Cc
+  \draw (split_inj) to[short, *-] ++(0, 0.8)
+    to[vC, l=$C_c$] ++(2.2, 0) coordinate (top_inj);
+
+  % Ramo inferiore: Trimmer resistivo R_Pc
+  \draw (split_inj) to[short, *-] ++(0, -0.8)
+    to[vR, l_=$R_{Pc}$] ++(2.2, 0) coordinate (bot_inj);
+
+  % Ricongiungimento
+  \draw (top_inj) -- ++(0, -0.8) coordinate (join_inj)
+    -- (bot_inj);
+
+  % Connessione finale al nodo TIA con freccia corrente
+  \draw (join_inj) to[short, *-, i=$i_{\text{comp}}(t)$] ++(1.4, 0)
+    to[short, -o] ++(0.3, 0) coordinate (final_node);
+  \node[right=2pt, font=\footnotesize] at (final_node) {Al nodo $V^-$ del TIA};
+
+\end{circuitikz}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 8: ANALISI E TARATURA DEL CIRCUITO DI COMPENSAZIONE
+% -------------------------------------------------------------
+\begin{frame}{Analisi e taratura del circuito di compensazione}
+\footnotesize
+\vspace{-0.5em}
+\begin{columns}[t]
+  \begin{column}{0.48\textwidth}
+    Funzione di trasferimento di $U_1$:
+    \vspace{0.4em}
+    \begin{equation*}
+      T_1(s) = -\frac{s C_{\phi} R_f}{1 + s C_{\phi} R_{in}}
+    \end{equation*}
+    \vspace{0.4em}
+    con $R_{in} = R_{\phi 1} + R_{P\phi 1}$ e $R_f = R_{\phi 2} + R_{P\phi 2}$.
+    \begin{itemize}
+      \setlength{\itemsep}{0.4em}
+      \item Modulo: $|T_1(\omega)| = \dfrac{\omega C_\phi R_f}{\sqrt{1 + (\omega C_\phi R_{in})^2}}$
+      \item Fase: $\angle T_1(\omega) = 180^\circ + \arctan\left(\dfrac{1}{\omega C_\phi R_{in}}\right)$
+    \end{itemize}
+  \end{column}
+
+  \begin{column}{0.48\textwidth}
+    Procedura di taratura:
+    \begin{enumerate}
+      \setlength{\itemsep}{0.4em}
+      \item Facciamo variare $R_{P\phi 1}$ per ottenere $\Delta\phi = 180.0^\circ$ alla frequenza di risonanza.
+      \item Facciamo variare $R_{P\phi 2}$ per avere guadagno unitario $|T_1(f_0)| = 1$ ($T_1 = -1$).\\
+      \vspace{0.4em}
+      Poiché $\dfrac{\partial \angle T_1}{\partial R_{P\phi 2}} = 0$, la fase non viene alterata.
+    \end{enumerate}
+  \end{column}
+\end{columns}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 8: RISPOSTA IN FREQUENZA CON COMPENSAZIONE HARDWARE
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Compensazione Hardware/grafici/bode_set2.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 8: RISPOSTA IN FREQUENZA CON COMPENSAZIONE HARDWARE (V_DC = 0 V)
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Compensazione Hardware/grafici/bode_off.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 9: AMPIEZZA RINGDOWN VS TENSIONE DI ECCITAZIONE (DUFFING)
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Duffing/duffing_ampiezza_compressione.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 10: EVOLUZIONE DELLA FREQUENZA ISTANTANEA NEL TEMPO (DUFFING)
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Duffing/duffing_backbone_e_chirp.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 11: AMPIEZZE ARMONICHE MEMS VS TENSIONE DI ECCITAZIONE (DISTORSIONE)
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Distorsione/distorsione_armoniche_vs_vac.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 12: DISTORSIONE SECONDO MODO (p2 / p1) VS VAC
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Distorsione/distorsione_hd2_rapporto.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 13: EFFETTO DI SPRING SOFTENING (f1^2 vs V_DC^2)
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.84\textheight, width=0.96\textwidth, keepaspectratio]{../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 14: DINAMICA TEMPORALE DELLA CONTROFASE
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Decay/grafici/controfase_dinamica_completa.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 15: INVILUPPO ESPONENZIALE CONTINUO CON CAMBIO DI SEGNO
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Decay/grafici/esponenziale_controfase.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 16: INVILUPPO SPERIMENTALE E MODELLO TEORICO IN CONTROFASE
+% -------------------------------------------------------------
+\begin{frame}
+\centering
+\includegraphics[height=0.88\textheight, width=0.98\textwidth, keepaspectratio]{../Decay/grafici/inviluppo_e_modello_teorico.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 16: GRAFICO SPERIMENTALE A SCHERMO INTERO
+% -------------------------------------------------------------
+\begin{frame}{Risposta allo spegnimento del gate, con capacità parassita compensata \\ ($V_{DC} = 0\text{ V}$, $A_{V_{in}} = 100\text{ mV}$, $f_{V_{in}} = 417.830\text{ kHz}$)} 
+\centering
+\includegraphics[height=0.77\textheight]{../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 17: ORIGINE DEL DISTURBO
+% -------------------------------------------------------------
+\begin{frame}{Origine del disturbo}
+\begin{itemize}
+  \setlength{\itemsep}{0.02em}
+  \item Con $V_{DC} = 0\text{ V}$:
+  \[
+    i_{\text{RLC}}(t) \approx c_{0,DA}^{(1)} V_{DC} \dot{q}_1(t) = 0\text{ A}
+  \]
+
+  \item Corrente parassita netta iniettata al nodo d'ingresso del TIA dovuta a $\Delta C = C_p - C_c$:
+  \[
+    i_{\text{net}}(t) = \Delta C \frac{dv_{in}(t)}{dt}
+  \]
+
+  \item Gradino di corrente allo spegnimento del gate:
+  \[
+    \Delta I = 0 - i_{\text{net}}(t) = -\Delta C \frac{dv_{in}}{dt}
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.1em}
+    \item Pendenza negativa $\frac{dv_{in}}{dt} < 0 \implies \Delta I > 0$: picco iniziale positivo di $+804\text{ mV}$ 
+    \item Pendenza positiva $\frac{dv_{in}}{dt} > 0 \implies \Delta I < 0$: picco iniziale negativo di $-607\text{ mV}$
+  \end{itemize}
+
+
+    \item Oscillazione parassita a $\approx 600\text{ kHz}$
+    \item Scende sotto il $10\%$ del picco massimo in $\approx 2.2\ \mu\text{s}$
+  \end{itemize}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 18: FUNZIONE DI TRASFERIMENTO COMPLESSIVA E CIRCUITO
+% -------------------------------------------------------------
+\begin{frame}{Modello circuitale
+ \\
+ (con $C_{\text{in}}$ e $C_f$ per giustificare la frequenza di oscillazione a $\approx 600\text{ kHz}$ e  lo smorzamento)}
+\centering
+\begin{circuitikz}[scale=0.68, transform shape, line width=0.7pt]
+  % Ingresso Vin
+  \draw (-1.2, 0.5) node[left] {$v_{in}(t)$} to[short, o-] (-0.2, 0.5);
+  \draw (-0.2, 0.5) -- (-0.2, 1.6);
+  \draw (-0.2, 0.5) -- (-0.2, -0.6);
+  
+  % Ramo parassita diretto Cp (in alto)
+  \draw (-0.2, 1.6) to[C, l_={$C_p$}] (3.6, 1.6) -- (4.0, 1.6);
+
+  % Ramo compensazione con blocco [-1] e Cc (in basso)
+  \node[draw, rectangle, fill=white, inner sep=3.8pt, font=\scriptsize] (inv) at (1.0, -0.6) {$-1$};
+  \draw (-0.2, -0.6) -- (inv.west);
+  \draw (inv.east) -- (1.7, -0.6) to[C, l={$C_c$}] (3.6, -0.6) -- (4.0, -0.6);
+
+  % Connessione al nodo di sense
+  \draw (4.0, 1.6) -- (4.0, -0.6);
+  \draw (4.0, 0.5) to[short, -*] (5.0, 0.5) coordinate (sense);
+  
+  % Cin verso massa (etichetta in basso a sinistra in ampio spazio vuoto)
+  \draw (5.0, 0.5) to[C, *-] (5.0, -1.4) node[ground]{};
+  \node[left=3pt] at (4.8, -0.85) {$C_{\text{in}}$};
+
+  % TIA OPA656 (distanziato da Cin per massima chiarezza visiva)
+  \node[op amp] (opamp1) at (7.2, 0) {};
+  \node[font=\scriptsize, below=3pt] at (opamp1.south) {OPA656};
+  \draw (sense) -- (opamp1.-);
+  \draw (opamp1.+) -- (opamp1.+ |- 0, -1.4) node[ground]{};
+
+  % Retroazione TIA (Cf sopra Rf)
+  \draw (sense) -- (5.0, 2.3) -- (5.7, 2.3);
+  \draw (5.7, 3.0) to[C, l=$C_f$] (7.9, 3.0);
+  \draw (5.7, 1.8) to[R, l=$R_f$] (7.9, 1.8);
+  \draw (5.7, 3.0) -- (5.7, 1.8);
+  \draw (7.9, 3.0) -- (7.9, 1.8);
+  \draw (7.9, 2.3) -| (opamp1.out);
+
+  % Secondo stadio AD817 (invertente G = -10)
+  \node[op amp] (opamp2) at (11.5, -0.5) {};
+  \node[font=\scriptsize, below=3pt] at (opamp2.south) {AD817};
+  \draw (opamp1.out) -- (8.4, 0) to[R, l_={$R_1$}] (10.2, 0) -- (opamp2.-);
+  \draw (opamp2.+) -- (opamp2.+ |- 0, -1.4) node[ground]{};
+
+  % Retroazione AD817 (R2)
+  \draw (opamp2.-) to[short, *-] ++(0, 1.5) to[R, l={$R_2$}] ++(2.0, 0) -| (opamp2.out);
+  
+  % Uscita finale
+  \draw (opamp2.out) to[short, -o] ++(0.8, 0) node[right] {$V_{\text{out}}$};
+\end{circuitikz}
+
+\vspace{0.4em}
+{\small
+Modellando l'operazionale OPA656 con guadagno $A(s) \approx \frac{\omega_t}{s} \implies V^- = -\frac{s}{\omega_t} V_{\text{out}_{\text{TIA}}}$
+}
+
+\vspace{0.1em}
+\[
+  \frac{V_{\text{out}}(s)}{V_{in}(s)} = \frac{10 \cdot s R_f (C_p - C_c)}{1 + s \left( R_f C_f + \frac{1}{\omega_t} \right) + s^2 \frac{R_f (C_{\text{in}} + C_p + C_c + C_f)}{\omega_t}}
+\]
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 19: SOVRAPPOSIZIONE MISURA REALE VS MODELLO TEORICO
+% -------------------------------------------------------------
+\begin{frame}{Simulazione del transistorio}
+\begin{columns}[c]
+  \begin{column}{0.63\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png}
+  \end{column}
+  \begin{column}{0.35\textwidth}
+    \centering
+    \footnotesize
+    \begin{tabular}{ll}
+      \toprule
+      Parametro & Valore \\
+      \midrule
+      $R_f$ & $500\text{ k}\Omega$ \\
+      $C_{\text{in}}$ & $188\text{ pF}$ \\
+      $C_f$ & $0.25\text{ pF}$ \\
+      $C_p, C_c$ & $\approx 1.0\text{ pF}$ \\
+      $\Delta C$ & $C_p - C_c \approx 40\text{ fF}$ \\
+      $\omega_t$ & $1.445\times 10^9\text{ rad/s}$ \\
+      $G_2$ & $-10$ \\
+      \bottomrule
+    \end{tabular}
+  \end{column}
+\end{columns}
+\end{frame}
+
+% -------------------------------------------------------------
+% SLIDE 20: VARIAZIONE DEI PICCHI VS FASE DI SPEGNIMENTO GATE
+% -------------------------------------------------------------
+\begin{frame}{Variazione dei picchi dell'oscillazione con la fase di spegnimento del gate}
+  \centering
+  \includegraphics[height=0.76\textheight]{../Oscillazione parassita/Grafici/sweep_fase_con_scope.png}
+\end{frame}
+
+\end{document}

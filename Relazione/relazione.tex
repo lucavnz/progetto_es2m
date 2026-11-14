@@ -1,0 +1,2012 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- PACCHETTI FONDAMENTALI ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+% --- MATEMATICA E FISICA ---
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{siunitx}
+\usepackage{bm} 
+
+% --- GRAFICA E CIRCUITI ---
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, patterns, decorations.pathmorphing, shapes.geometric}
+\usepackage{circuitikz}
+
+% --- COLORI PERSONALIZZATI PER DIAGRAMMI ---
+\definecolor{memsblue}{RGB}{41, 128, 185}
+\definecolor{drivegreen}{RGB}{39, 174, 96}
+\definecolor{senseorange}{RGB}{230, 126, 34}
+\definecolor{anchorcolor}{RGB}{127, 140, 141}
+\definecolor{groundgray}{RGB}{189, 195, 199}
+\definecolor{chipbg}{RGB}{248, 249, 251}
+\definecolor{chipborder}{RGB}{215, 222, 230}
+
+% --- RIFERIMENTI E IPERTESTO ---
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=memsblue,
+    citecolor=drivegreen,
+    urlcolor=senseorange
+}
+\usepackage{microtype}
+
+\title{\textbf{Caratterizzazione sperimentale di un risonatore MEMS e tecnica per la riduzione del tempo di decadimento}}
+\author{\textbf{Avanzi Luca - Corazzina Marco}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\tableofcontents
+\newpage
+
+\section{Struttura e principi di funzionamento del MEMS}
+
+
+Il dispositivo è un risonatore MEMS realizzato tramite il processo \textit{ThELMA} (\textit{Thick Epitaxial Layer for Microactuators and Accelerometers}) di STMicroelectronics. La struttura è quella di una trave a doppio incastro, sospesa sopra il substrato di silicio. La trave non è perfettamente rettilinea, ma presenta una lieve curvatura  ad arco. Le sue dimensioni sono: lunghezza $L = \SI{532}{\micro\meter}$ (intesa lungo l'arco, ovvero a trave distesa), larghezza $w = \SI{5}{\micro\meter}$, spessore $h = \SI{24}{\micro\meter}$.
+
+A differenza di una trave dritta, questa forma curva introduce un'asimmetria nella risposta elastica della struttura. Nei paper teorici di riferimento, questa geometria è stata progettata apposta per favorire uno scambio di energia tra il primo modo di vibrazione e il secondo modo a frequenza doppia, fenomeno noto come risonanza interna 1:2.
+
+\vspace{0.3cm}
+\noindent Nelle nostre misure sperimentali, tuttavia, questo accoppiamento non viene innescato: la trave viene sollecitata a livelli tali da operare esclusivamente sul primo modo fondamentale. 
+
+\vspace{0.3cm}
+\noindent Lateralmente all'arco sono disposti degli elettrodi ad una distanza di $g_0 = \SI{1.8}{\micro\meter}$. In figura \ref{fig:mems_layout} è mostrato uno schema concettuale semplificato della struttura. 
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % -------------------------------------------------------------
+    % Bounding Box per centratura orizzontale perfetta
+    % -------------------------------------------------------------
+    \useasboundingbox (-6.8, -2.5) rectangle (6.8, 2.5);
+
+    % Terna assi cartesiani (spostata piu a sinistra e in basso, isolata da Incastro SX)
+    \begin{scope}[shift={(-6.2, -1.85)}]
+        \draw[->, thick, black!70] (0, 0) -- (0.8, 0) node[right, font=\scriptsize\bfseries] {$y$};
+        \draw[->, thick, black!70] (0, 0) -- (0, 0.8) node[above, font=\scriptsize\bfseries] {$x$};
+        \filldraw[fill=white, draw=black!70, thick] (0, 0) circle (2pt);
+        \fill[black!70] (0, 0) circle (0.6pt);
+        \node[below=2pt, font=\tiny, text=black!60] at (0, 0) {$\odot z$};
+    \end{scope}
+
+    % -------------------------------------------------------------
+    % Incastri Meccanici (SX e DX) - stesso potenziale della trave (memsblue)
+    % -------------------------------------------------------------
+    % Incastro SX
+    \fill[memsblue!20] (-5.6, -0.85) rectangle (-4.2, 0.85);
+    \fill[pattern=north east lines, pattern color=memsblue!35] (-5.6, -0.85) rectangle (-4.2, 0.85);
+    \draw[thick, memsblue!90!black] (-5.6, -0.85) rectangle (-4.2, 0.85);
+    \node[font=\footnotesize\bfseries, align=center, text=memsblue!90!black] at (-4.9, 0) {Incastro\\SX};
+
+    % Incastro DX
+    \fill[memsblue!20] (4.2, -0.85) rectangle (5.6, 0.85);
+    \fill[pattern=north east lines, pattern color=memsblue!35] (4.2, -0.85) rectangle (5.6, 0.85);
+    \draw[thick, memsblue!90!black] (4.2, -0.85) rectangle (5.6, 0.85);
+    \node[font=\footnotesize\bfseries, align=center, text=memsblue!90!black] at (4.9, 0) {Incastro\\DX};
+
+    % -------------------------------------------------------------
+    % Elettrodo di DRIVE (Superiore)
+    % -------------------------------------------------------------
+    \draw[thick, drivegreen!80!black, fill=drivegreen!15, rounded corners=4pt] (-3.3, 1.35) rectangle (3.3, 2.15);
+    \node[font=\small\bfseries, text=drivegreen!90!black] at (0, 1.75) {Elettrodo di attuazione (drive)};
+
+    % -------------------------------------------------------------
+    % Elettrodo di SENSE (Inferiore)
+    % -------------------------------------------------------------
+    \draw[thick, senseorange!80!black, fill=senseorange!15, rounded corners=4pt] (-3.3, -2.15) rectangle (3.3, -1.35);
+    \node[font=\small\bfseries, text=senseorange!90!black] at (0, -1.75) {Elettrodo di rilevamento (sense)};
+
+    % -------------------------------------------------------------
+    % Trave Mobile (Micro-arco al centro)
+    % -------------------------------------------------------------
+    % Asse rettilineo geometrico y (riferimento a corda)
+    \draw[dashed, black!25, thin] (-4.2, 0) -- (4.2, 0);
+
+    % Profili di deflessione dinamica tratteggiati (vibrazione in-plane)
+    \draw[thick, dashed, memsblue!45] (-4.2, 0) to[bend left=11] (4.2, 0);
+    \draw[thick, dashed, memsblue!45] (-4.2, 0) to[bend right=5] (4.2, 0);
+
+    % Micro-arco a riposo (curvatura iniziale fabbricata ad arco nel piano xy)
+    \draw[line width=1.8pt, memsblue!90!black, fill=memsblue!30] 
+        (-4.2, 0.12) to[bend left=5] (4.2, 0.12) -- 
+        (4.2, -0.12) to[bend right=5] (-4.2, -0.12) -- cycle;
+
+    % Etichetta centrale della trave (minimale, pulita, centrata nel gap)
+    \node[font=\footnotesize\bfseries, text=memsblue!90!black] (lbltrave) at (0, 0.92) {Arco mobile};
+
+    % -------------------------------------------------------------
+    % Indicazione tecnica sobria della deflessione dinamica x(t)
+    % -------------------------------------------------------------
+    \draw[<->, thick, memsblue!90!black] (2.2, -0.7) -- (2.2, 0.7)
+        node[above=2pt, font=\footnotesize\bfseries, text=memsblue!90!black] {$x(t)$};
+
+\end{tikzpicture}
+\caption{Schema concettuale semplificato della struttura del MEMS e degli elettrodi.}
+\label{fig:mems_layout}
+\end{figure}
+
+\noindent Da un punto di vista elettrostatico, ci sono due condensatori: 
+
+\begin{enumerate}
+    \item Condensatore di attuazione (di drive):
+    formato tra l'elettrodo di drive e la trave mobile: è responsabile della forza elettrostatica che mette in oscillazione la trave.
+    
+    \item Condensatore di rilevamento (di sense):
+    formato tra la trave mobile e l'elettrodo di sense. Quando la trave vibra con velocità $\dot{x}(t)$, il gap varia nel tempo, modulando la capacità. La carica elettrostatica immagazzinata varia, inducendo una corrente motrice.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent Nella configurazione sperimentale adottata, la trave (e gli incastri, in blu) è tenuta al potenziale $V_{\text{DC}}$. Sull'elettrodo di drive viene applicato $v_{\text{in}}(t) = V_{\text{AC}} \sin(\omega t)$. L'elettrodo di sense è tenuto a $\SI{0}{\volt}$. Il moto della trave lungo la direzione $x$ modula la capacità di sense. Ci sono in realtà altri elettrodi nella struttura (che vengono impiegati per la risonanza interna $1:2$), ma nella nostra configurazione vengono posti a massa, così non interferiscono con lo studio del solo primo modo.
+
+
+
+\newpage
+
+\noindent Quando la trave vibra, ogni suo punto di coordinata $y \in [0, L]$ si sposta lungo la direzione $x$ al variare del tempo $t$: la deformazione dell'intera struttura è quindi descritta da una funzione di due variabili, $u(y, t)$.
+
+La trave ha infiniti modi di vibrazione, ciascuno caratterizzato da una propria frequenza di risonanza e da una specifica forma geometrica:
+\begin{itemize}
+    \item Il primo modo flessionale con una singola ``pancia'' centrale (figura~\ref{fig:modi_fem}a);
+    \item Il secondo modo flessionale a forma di ``S'' antisimmetrica (figura~\ref{fig:modi_fem}b);
+    \item Modi superiori a frequenze nell'ordine dei megahertz.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=center] (img) at (0,0) {\includegraphics[width=0.78\textwidth]{../Paper/modi_vibrazione_trave.png}};
+    \node[font=\small\bfseries, anchor=east] at ($(img.north west) + (0.05, -0.95)$) {(a)};
+    \node[font=\small\bfseries, anchor=east] at ($(img.south west) + (0.05,  0.95)$) {(b)};
+\end{tikzpicture}
+\caption{Esempi di forme modali del MEMS: (a)~primo modo flessionale a singola ``pancia'' centrale; (b)~modo flessionale antisimmetrico a forma di ``S''.}
+\label{fig:modi_fem}
+\end{figure}
+\noindent (Facciamo qui una precisazione sulla nomenclatura che useremo nel resto della relazione: poiché nel nostro MEMS il fattore di merito è molto elevato ($Q \approx 2800$), useremo come sinonimi frequenza naturale, frequenza di risonanza e frequenza di oscillazione libera, indicandole tutte con lo stesso simbolo).
+
+\vspace{0.3cm}
+
+\noindent Il moto $u(y, t)$ sarebbe dato dalla sovrapposizione di tutti questi modi. Tuttavia, un fattore di qualità così alto rende il risonatore un filtro meccanico estremamente selettivo:
+\begin{itemize}
+    \item Quando applichiamo all'elettrodo di drive una tensione sinusoidale con frequenza $f_{in}$ prossima a quella del primo modo flessionale, la risposta meccanica su questo specifico modo viene amplificata di un fattore pari a $Q$.
+    \item Tutti gli altri modi hanno frequenze di risonanza distanti dalla frequenza di eccitazione. Di conseguenza, la loro ampiezza di oscillazione risulta del tutto trascurabile rispetto alla risposta del primo modo.
+\end{itemize}
+\newpage
+
+\noindent Dato che viene eccitato solo il primo modo, durante l'oscillazione la forma geometrica assunta dalla trave nello spazio (il profilo a singola ``pancia'') rimane fissa e non cambia nel tempo: a variare nel tempo è soltanto l'ampiezza della flessione. Questo permette di separare la dipendenza spaziale ($y$) da quella temporale ($t$), scrivendo la funzione $u(y, t)$ come prodotto di due termini:
+\begin{equation}
+    \label{eq:separazione_variabili}
+    u(y, t) = \phi(y) \cdot x(t)
+\end{equation}
+dove:
+\begin{itemize}
+    \item $\phi(y)$ è la forma modale: dipende solo dalla coordinata spaziale $y$ e descrive la geometria fissa assunta dalla trave durante l'oscillazione (figura~\ref{fig:mode_shape}). Per convenzione, la forma modale è normalizzata imponendo che valga $0$ agli incastri ($\phi(0) = \phi(L) = 0$) e $1$ al centro dell'arco ($y = L/2$).
+    \item $x(t)$ è la coordinata modale. Dato che al centro vale $\phi(L/2) = 1$, sostituendo nell'eq.~\eqref{eq:separazione_variabili} si ottiene $u(L/2, t) = x(t)$. Quindi, $x(t)$ è lo spostamento nel tempo del punto centrale della trave.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Assi cartesiani
+    \draw[->, thick, black!70] (-0.5, 0) -- (9.0, 0) node[right, font=\small] {Posizione $y$ lungo la trave};
+    \draw[->, thick, black!70] (0, -0.4) -- (0, 2.7) node[above, font=\small] {Forma modale $\phi(y)$};
+
+    % Incastri meccanici a y=0 e y=L
+    \fill[pattern=north east lines, pattern color=black!25] (-0.45, -0.4) rectangle (0, 0.4);
+    \draw[thick, fill=anchorcolor!25] (-0.45, -0.4) rectangle (0, 0.4);
+
+    \fill[pattern=north east lines, pattern color=black!25] (7.5, -0.4) rectangle (7.95, 0.4);
+    \draw[thick, fill=anchorcolor!25] (7.5, -0.4) rectangle (7.95, 0.4);
+
+    % Curva modale phi(y)
+    \draw[ultra thick, memsblue, domain=0:7.5, samples=100] 
+        plot (\x, {2.0 * 0.5 * (1 - cos(deg(2*pi*\x/7.5)))});
+    
+    % Punto centrale y=L/2 e quote
+    \draw[dashed, black!40] (3.75, 0) -- (3.75, 2.0);
+    \draw[dashed, black!40] (0, 2.0) -- (3.75, 2.0);
+    \filldraw[memsblue!90!black] (3.75, 2.0) circle (2.5pt);
+    \node[below=5pt, font=\small\bfseries] at (3.75, 0) {$y = L/2$};
+
+    % Ticks e quote asse Y
+    \draw[thick] (-0.1, 2.0) -- (0.1, 2.0);
+    \node[left=3pt, font=\small\bfseries, text=memsblue!90!black] at (0, 2.0) {$1.0$};
+
+    % Valori notevoli agli estremi (posizionati sopra gli incastri per non sovrapporsi alla curva)
+    \node[above=3pt, font=\scriptsize, text=black!75] at (-0.22, 0.4) {$\phi(0) = 0$};
+    \node[above=3pt, font=\scriptsize, text=black!75] at (7.72, 0.4) {$\phi(L) = 0$};
+\end{tikzpicture}
+\caption{Visualizzazione della forma modale $\phi(y)$.}
+\label{fig:mode_shape}
+\end{figure}
+
+\newpage
+
+\noindent Grazie alla relazione \eqref{eq:separazione_variabili}, possiamo conoscere:
+\begin{enumerate}
+    \item Lo spostamento di ogni punto $u(y, t) = \phi(y) \, x(t)$. (Es. al centro sbanda di $x(t)$, a un quarto sbanda di $\phi(L/4) x(t)$, agli incastri sbanda di $0$);
+    \item La velocità $v(y, t) = \frac{\partial u}{\partial t} = \phi(y) \, \dot{x}(t)$;
+    \item L'accelerazione $a(y, t) = \frac{\partial^2 u}{\partial t^2} = \phi(y) \, \ddot{x}(t)$;
+\end{enumerate}
+
+\noindent In regime di piccole oscillazioni, applicando la seconda legge di Newton ($\sum F = m \cdot a$), la forza elastica di richiamo della trave segue la legge di Hooke lineare ($F_{\text{el}}(x) \approx k_m x(t)$) e l'equazione del moto del punto centrale della trave è quella di un oscillatore armonico smorzato:
+
+\begin{equation}
+    \label{eq:meccanica_1dof}
+    m_{\text{eff}} \ddot{x}(t) + b_{\text{eff}} \dot{x}(t) + k_m x(t) = F_e(t)
+\end{equation}
+dove:
+\begin{itemize}
+    \item $m_{\text{eff}}$ è la massa efficace associata al primo modo di vibrazione.
+    \item $k_m$ è la costante elastica meccanica efficace associata al primo modo di vibrazione (indicata con il pedice $m$ per distinguerla dalla rigidezza elettrostatica $k_e$ e da quella complessiva $k_{\text{eff}} = k_m - k_e$ che verranno introdotte nella sezione successiva).
+    \item $b_{\text{eff}}$ è lo smorzamento viscoso efficace associato al primo modo di vibrazione.
+    \item $F_e(t)$ è la forza elettrostatica applicata dall'elettrodo di attuazione.
+\end{itemize}
+\noindent Definiamo $\omega_{01}$ come la pulsazione naturale in assenza di forze esterne applicate ($F_e(t) = 0$), pari a:
+    \begin{equation}
+        \omega_{01} = \sqrt{\frac{k_m}{m_{\text{eff}}}}
+    \end{equation}
+
+\newpage
+
+\subsection{Attuazione elettrostatica}
+\label{sec:forze_elettrostatiche}
+
+Consideriamo la capacità di drive $C_d(x)$ formata tra l'elettrodo di drive e la trave mobile. L'energia elettrostatica immagazzinata nel condensatore è:
+\begin{equation}
+    U_e = \frac{1}{2} C_d(x) V^2(t)
+\end{equation}
+dove la differenza di potenziale $V(t)$ applicata tra la trave (a potenziale $V_{\text{DC}}$) e l'elettrodo di drive (pilotato da $v_{\text{in}}(t)$) è:
+
+\begin{equation}
+    V(t) = V_{\text{DC}} - v_{\text{in}}(t)
+\end{equation}
+
+\noindent La forza elettrostatica che agisce sulla trave è dunque:
+
+\begin{equation}
+    \label{eq:forza_elettrostatica}
+    F_e(x, t) = \frac{\partial U_e}{\partial x} = \frac{1}{2} \frac{\partial C_d(x)}{\partial x} \left( V_{\text{DC}} - v_{\text{in}}(t) \right)^2
+\end{equation}
+
+\noindent Sviluppando il quadrato del binomio:
+
+\begin{equation}
+    \left( V_{\text{DC}} - v_{\text{in}}(t) \right)^2 = V_{\text{DC}}^2 - 2 V_{\text{DC}} v_{\text{in}}(t) + v_{\text{in}}^2(t)
+\end{equation}
+
+\noindent Dato che $|v_{\text{in}}(t)| \ll V_{\text{DC}}$, il termine quadratico $v_{\text{in}}^2(t)$ può essere trascurato. Poiché la capacità $C_d(x)$ dipende dalla distanza $g_0 - x(t)$ tra la trave e l'elettrodo, in regime di piccole oscillazioni ($|x(t)| \ll g_0$) possiamo approssimare la derivata $\frac{\partial C_d(x)}{\partial x}$ al primo ordine dello sviluppo di Taylor attorno alla posizione di riposo $x = 0$:
+
+\begin{equation}
+    \frac{\partial C_d(x)}{\partial x} \approx \left. \frac{\partial C_d}{\partial x} \right|_{x=0} + \left. \frac{\partial^2 C_d}{\partial x^2} \right|_{x=0} x(t)
+\end{equation}
+\noindent Sostituendo nell'espressione della forza elettrostatica~\eqref{eq:forza_elettrostatica}, otteniamo:
+\begin{equation}
+    F_e(x, t) \approx \underbrace{\frac{1}{2} \left. \frac{\partial C_d}{\partial x} \right|_0 V_{\text{DC}}^2}_{F_{\text{DC}}} + \underbrace{\frac{1}{2} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0 V_{\text{DC}}^2 x(t)}_{k_e \, x(t)} - \underbrace{V_{\text{DC}} \left. \frac{\partial C_d}{\partial x} \right|_0 v_{\text{in}}(t)}_{F_{\text{drive}}(t)}
+\end{equation}
+
+\noindent Analizziamo ciascun termine:
+
+\begin{enumerate}
+    \item $F_{\text{DC}}$ è una forza costante nel tempo che sposta il punto di riposo della trave, attorno a cui avviene la vibrazione. Se scomponiamo lo spostamento totale nella somma di una componente continua e di una oscillante, $x_{\text{tot}}(t) = x_{\text{DC}} + x(t)$, allora lo spostamento statico vale (utilizzando i coefficienti delle tabelle~1 e~2 di~\cite{frangi2023}):
+    \begin{equation}
+        x_{\text{DC}} = \frac{F_{\text{DC}}}{k_{\text{eff}}} = \SI{3.1}{\nano\meter}
+    \end{equation}
+    \item $k_e x(t)$ è il termine legato alla rigidezza elettrostatica $k_e$. Sostituendo lo sviluppo di $F_e(x, t)$ nell'equazione del moto \eqref{eq:meccanica_1dof}, otteniamo:
+    \begin{equation}
+        \label{eq:moto_keff}
+        m_{\text{eff}} \ddot{x}(t) + b_{\text{eff}} \dot{x}(t) + \underbrace{\left( k_m - k_e \right)}_{k_{\text{eff}}(V_{\text{DC}})} x(t) = F_{\text{drive}}(t)
+    \end{equation}
+    La forza elettrostatica agisce dunque come una molla con costante elastica negativa. Definiamo la rigidezza efficace come:
+    \begin{equation}
+        k_{\text{eff}}(V_{\text{DC}}) = k_m - k_e(V_{\text{DC}}) = k_m - \frac{1}{2} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0 V_{\text{DC}}^2
+    \end{equation}
+    \noindent A causa di questo fenomeno, la pulsazione di risonanza diminuisce all'aumentare di $V_{\text{DC}}$:
+    \begin{equation}
+        \omega_1^2(V_{\text{DC}}) = \frac{k_{\text{eff}}(V_{\text{DC}})}{m_{\text{eff}}} = \omega_{01}^2 - \frac{1}{2 m_{\text{eff}}} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0 V_{\text{DC}}^2
+    \end{equation}
+    \vspace{0.3cm}
+    \noindent Nel lavoro di Frangi~\cite{frangi2023}, il coefficiente $\frac{1}{2 m_{\text{eff}}} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0$ è indicato come $\varepsilon_0 c_{1,DD}$, ottenendo:
+    \begin{equation}
+        \label{eq:softening}
+        \omega_1(V_{\text{DC}}) \approx \sqrt{\omega_{01}^2 - \varepsilon_0 c_{1,DD} V_{\text{DC}}^2}
+    \end{equation}
+    \item $F_{\text{drive}}$ è la forza che trasforma la tensione sinusoidale d'ingresso $v_{\text{in}}(t)$ in una spinta meccanica, governata dal fattore di trasduzione elettromeccanica $\eta$:
+    \begin{equation}
+        \label{eq:eta_def}
+        \eta = V_{\text{DC}} \left. \frac{\partial C_d}{\partial x} \right|_{x=0}
+    \end{equation}
+    da cui:
+    \begin{equation}
+        F_{\text{drive}}(t) = \eta \, v_{\text{in}}(t)
+    \end{equation}
+\end{enumerate}
+
+\newpage
+
+\subsection{Modello elettrico equivalente RLC}
+\label{sec:modello_rlc}
+
+La carica immagazzinata sull'elettrodo di sense è data da:
+\begin{equation}
+    q_{\text{s}}(t) = C_s(x) \cdot V_{\text{DC}}
+\end{equation}
+Quando la trave vibra con velocità $\dot{x}(t) = \frac{dx}{dt}$, la capacità $C_s(x)$ varia nel tempo. La corrente che esce dalla capacità di sense è:
+\begin{equation}
+    i_m(t) = \frac{d q_{\text{s}}}{dt} = \frac{d}{dt} \left[ C_s(x) V_{\text{DC}} \right] = V_{\text{DC}} \frac{d C_s}{dt} = V_{\text{DC}} \left( \left. \frac{\partial C_s}{\partial x} \right|_0 \frac{dx}{dt} \right)
+\end{equation}
+Definiamo il fattore di trasduzione in uscita $\eta_{\text{s}} = V_{\text{DC}} \left. \frac{\partial C_s}{\partial x} \right|_0$. Dato che l'elettrodo di sense è identico a quello di drive, possiamo dire che i due fattori di trasduzione sono uguali:
+\begin{equation}
+    \eta_{\text{sense}} = \eta_{\text{drive}} = \eta
+\end{equation}
+L'espressione della corrente di rilevamento si scrive come:
+\begin{equation}
+    \label{eq:is_vs_xdot}
+    i_m(t) = \eta \, \dot{x}(t)
+\end{equation}
+La corrente erogata dal MEMS è quindi direttamente proporzionale alla velocità meccanica della trave.
+\vspace{0.3cm}
+
+\noindent Il legame tra il dominio elettrico e quello meccanico può essere studiato rappresentando il dispositivo come un doppio trasformatore ideale (Fig.~\ref{fig:trasformatore}):
+\begin{enumerate}
+    \item Un trasformatore ideale con rapporto $1 : \eta$ converte la tensione $v_{\text{in}}(t)$ nella forzante:
+    \begin{equation}
+        F(t) = \eta \, v_{\text{in}}(t)
+    \end{equation}
+    \item La forza $F(t)$ agisce sulla maglia meccanica serie composta da massa $m_{\text{eff}}$, smorzamento $b_{\text{eff}}$ e cedevolezza $1/k_{\text{eff}}$. Mette la trave in oscillazione con velocità $\dot{x}(t)$. Vale la relazione:
+    \begin{equation}
+        F(t) = m_{\text{eff}} \frac{d\dot{x}}{dt} + b_{\text{eff}} \dot{x}(t) + k_{\text{eff}} \int \dot{x}(t) \, dt
+    \end{equation}
+    \item Un secondo trasformatore ideale con rapporto $\eta : 1$ converte la velocità $\dot{x}(t)$ nella corrente elettrica di uscita:
+    \begin{equation}
+        i_m(t) = \eta \, \dot{x}(t)
+    \end{equation}
+\end{enumerate}
+
+\newpage
+
+
+\begin{figure}[htbp]
+\centering
+\begin{circuitikz}[scale=0.88, transform shape]
+    % --- INGRESSO DRIVE ---
+    \draw (0.5, 2) node[left] {$v_{\text{in}}(t)$} to[short, o-] (2.0, 2);
+    \draw (0.5, 0) node[ground]{} -- (2.0, 0);
+
+    % Trasformatore 1: Drive (1 : eta)
+    \draw (2.0, 2) to[L, l_={}] (2.0, 0);
+    \draw (2.8, 2) to[L, l_={}] (2.8, 0);
+    \draw[thick] (2.3, 2.1) -- (2.3, -0.1);
+    \draw[thick] (2.5, 2.1) -- (2.5, -0.1);
+    \node[above, font=\footnotesize] at (2.4, 2.2) {$1 : \eta$};
+
+    % Anello Meccanico Centrale (Massa - Smorzatore - Molla)
+    \draw (2.8, 2) -- (4.2, 2)
+        to[L, l_=$m_{\text{eff}}$] (5.8, 2)
+        to[R, l_=$b_{\text{eff}}$] (7.4, 2)
+        to[C, l_=$1/k_{\text{eff}}$] (9.0, 2)
+        -- (10.2, 2);
+    \draw (2.8, 0) -- (10.2, 0);
+
+    % Trasformatore 2: Sense (eta : 1)
+    \draw (10.2, 2) to[L, l_={}] (10.2, 0);
+    \draw (11.0, 2) to[L, l_={}] (11.0, 0);
+    \draw[thick] (10.5, 2.1) -- (10.5, -0.1);
+    \draw[thick] (10.7, 2.1) -- (10.7, -0.1);
+    \node[above, font=\footnotesize] at (10.6, 2.2) {$\eta : 1$};
+
+    % Uscita Elettrica
+    \draw (11.0, 2) to[short, -o, i=$i_m(t)$] (12.5, 2);
+    \draw (11.0, 0) -- (12.5, 0) node[ground]{};
+
+\end{circuitikz}
+\caption{Modello elettromeccanico del dispositivo.}
+\label{fig:trasformatore}
+\end{figure}
+
+\noindent Come ricavato nell'equazione \eqref{eq:is_vs_xdot}:
+\begin{equation}
+    i_m(t) = \eta \, \dot{x}(t) \iff \dot{x}(t) = \frac{i_m(t)}{\eta}
+\end{equation}
+Sostituendo $\dot{x}(t) = \frac{i_m(t)}{\eta}$ e lo spostamento $x(t) = \int \dot{x}(t) \, dt = \frac{1}{\eta} \int i_m(t) \, dt$ all'interno dell'equazione del moto \eqref{eq:moto_keff} (con $F_{\text{drive}}(t) = \eta \, v_{\text{in}}(t)$):
+\begin{equation}
+    m_{\text{eff}} \frac{d}{dt}\left( \frac{i_m(t)}{\eta} \right) + b_{\text{eff}} \left( \frac{i_m(t)}{\eta} \right) + k_{\text{eff}} \int \left( \frac{i_m(t)}{\eta} \right) dt = \eta \, v_{\text{in}}(t)
+\end{equation}
+Dividendo entrambi i membri per il fattore di accoppiamento $\eta$, otteniamo:
+\begin{equation}
+    \label{eq:rlc_fondamentale}
+    \underbrace{\left(\frac{m_{\text{eff}}}{\eta^2}\right)}_{L_m} \frac{di_m(t)}{dt} + \underbrace{\left(\frac{b_{\text{eff}}}{\eta^2}\right)}_{R_m} i_m(t) + \underbrace{\left(\frac{k_{\text{eff}}}{\eta^2}\right)}_{\frac{1}{C_m}} \int i_m(t) \, dt = v_{\text{in}}(t)
+\end{equation}
+
+\noindent I tre parametri $L_m$, $R_m$ e $C_m$ formano il modello elettrico equivalente RLC della trave. Confrontando l'equazione~\eqref{eq:rlc_fondamentale} con i risultati del paper di Frangi~\cite{frangi2023}, possiamo ricavare i valori dei parametri elettrici equivalenti RLC:
+
+\begin{equation}
+    L_m = \frac{1}{2\left(\varepsilon_0 c_{0,DA}^{(1)} V_{\text{DC}}\right)^2}, \qquad
+    R_m = \frac{\omega_{01} L_m}{Q_1}, \qquad
+    C_m = \frac{1}{\omega_1^2(V_{\text{DC}}) L_m}
+\end{equation}
+dove:
+\begin{itemize}
+    \item $\varepsilon_0 = \SI{8.854e-12}{\farad/\meter}$ è la costante dielettrica del vuoto;
+    \item $c_{0,DA}^{(1)}$ è un coefficiente elettrostatico di trasduzione (estratto dalla tab.~2 del paper~\cite{frangi2023}, con $\varepsilon_0 c_{0,DA}^{(1)} = \SI{8.129e-4}{\newton/\volt^2}$).
+    \item $V_{\text{DC}}$ è la tensione continua di polarizzazione applicata al corpo della trave mobile.
+    \item $\omega_{01}$ è la pulsazione naturale del primo modo a $V_{\text{DC}} = 0\text{ V}$.
+    \item $Q_1 \approx 2800$ è il fattore di merito del primo modo.
+    \item $\omega_1(V_{\text{DC}}) = \sqrt{c_{1,\beta}^{(1)} - \varepsilon_0 c_{1,DD}^{(1)} V_{\text{DC}}^2}$ è la pulsazione di risonanza.
+\end{itemize}
+Per $V_{\text{DC}} = \SI{5.0}{\volt}$, otteniamo le seguenti stime:
+\begin{itemize}
+    \item Induttanza motrice: $L_m = \mathbf{\SI{30.27}{\kilo\henry}}$;
+    \item Resistenza motrice: $R_m = \mathbf{\SI{28.29}{\mega\ohm}}$;
+    \item Capacità motrice: $C_m = \mathbf{\SI{4.83}{\atto\farad}}$;
+\end{itemize}
+\subsubsection{Capacità parassita}
+Nel dispositivo reale sono presenti accoppiamenti capacitivi parassiti. I risultati raccolti durante la sperimentazione in laboratorio ci hanno indirizzato a modellare una capacità parassita $C_p$ in parallelo al ramo serie RLC, come mostrato in Fig.~\ref{fig:mems_circuito}. Come si vedrà a breve, il nodo da cui viene estratta la corrente $i_{\text{tot}}(t)$ sarà mantenuto a $0\text{ V}$ dalla massa virtuale di un amplificatore a transimpedenza (TIA).
+
+\begin{figure}[htbp]
+\centering
+\begin{circuitikz}[scale=0.8, transform shape]
+    % Morsetto di ingresso
+    \draw (0, 1.5) node[left] {$v_{\text{in}}(t)$} to[short, o-*] (1.5, 1.5);
+
+    % Ramo parassita Cp in alto
+    \draw (1.5, 1.5) -- (1.5, 3.0) to[C, l=$C_p$] (6.5, 3.0) -- (6.5, 1.5);
+
+    % Ramo motrice RLC serie in basso
+    \draw (1.5, 1.5) -- (1.5, 0)
+        to[R, l=$R_m$] (3.0, 0)
+        to[L, l=$L_m$] (4.8, 0)
+        to[C, l=$C_m$] (6.5, 0)
+        -- (6.5, 1.5);
+
+    % Morsetto di uscita (corrente erogata verso massa virtuale)
+    \draw (6.5, 1.5) to[short, *-o, i=$i_{\text{tot}}(t)$] (8.0, 1.5);
+\end{circuitikz}
+\caption{Circuito equivalente del MEMS: ramo serie $R_m$-$L_m$-$C_m$ in parallelo alla capacità parassita $C_p$ (con porta di uscita chiusa su massa virtuale).}
+\label{fig:mems_circuito}
+\end{figure}
+
+\section{Circuito di condizionamento}
+\label{sec:condizionamento}
+
+La corrente complessiva $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$ prodotta dal MEMS entra nella catena di amplificazione riportata in fig.~\ref{fig:frontend_schema}.
+
+\begin{figure}[htbp]
+\centering
+\begin{circuitikz}[scale=0.72, transform shape, line width=0.7pt]
+    % -------------------------------------------------------------
+    % INGRESSO Vin E BLOCCO MEMS (RLC // Cp)
+    % -------------------------------------------------------------
+    \draw (-1.5, 0.5) node[left] {$v_{\text{in}}(t)$} to[short, o-*] (-0.4, 0.5) coordinate (in_split);
+    
+    % Ramo superiore parassita Cp
+    \draw (in_split) -- (-0.4, 1.8) to[C, l=$C_p$] (4.6, 1.8) -- (4.6, 0.5);
+
+    % Ramo inferiore motrice RLC serie
+    \draw (in_split) -- (-0.4, -0.8)
+        to[R, l=$R_m$] (1.1, -0.8)
+        to[L, l=$L_m$] (2.8, -0.8)
+        to[C, l=$C_m$] (4.6, -0.8) -- (4.6, 0.5);
+
+    % Nodo di giunzione al sense
+    \draw (4.6, 0.5) to[short, *-*] (5.4, 0.5) coordinate (sense);
+
+    % -------------------------------------------------------------
+    % STADIO 1: TIA (OPA656)
+    % -------------------------------------------------------------
+    \node[op amp] (opamp1) at (7.4, 0) {};
+    \node[font=\scriptsize, below=3pt] at (opamp1.south) {OPA656};
+    \draw (sense) -- (opamp1.-);
+    \draw (opamp1.+) -- ++(0, -0.4) node[ground]{};
+
+    % Retroazione TIA puramente resistiva Rf (senza Cf)
+    \draw (sense) to[short, *-] ++(0, 1.5) coordinate (fb1_start)
+        to[R, l=$R_f$] (fb1_start -| opamp1.out)
+        to[short, -*] (opamp1.out);
+
+    % -------------------------------------------------------------
+    % STADIO 2: AMPLIFICATORE INVERTENTE (AD817)
+    % -------------------------------------------------------------
+    \draw (opamp1.out) to[short] ++(0.4, 0) to[R, l_=$R_1$] ++(1.8, 0) coordinate (in2);
+    
+    \node[op amp] (opamp2) at (12.2, -0.5) {};
+    \node[font=\scriptsize, below=3pt] at (opamp2.south) {AD817};
+    \draw (in2) -- (opamp2.-);
+    \draw (opamp2.+) -- ++(0, -0.4) node[ground]{};
+
+    % Retroazione secondo stadio (R2)
+    \draw (in2) to[short, *-] ++(0, 1.5) coordinate (fb2_start)
+        to[R, l=$R_2$] (fb2_start -| opamp2.out)
+        to[short, -*] (opamp2.out);
+
+    % Uscita finale
+    \draw (opamp2.out) to[short, -o] ++(0.8, 0) node[right] {$v_{\text{out}}(t)$};
+\end{circuitikz}
+\caption{Schema circuitale completo: circuito equivalente RLC del MEMS con in parallelo la capacità parassita, e il circuito di condizionamento in uscita.}
+\label{fig:frontend_schema}
+\end{figure}
+\noindent Il circuito di condizionamento è formato da due stadi:
+
+\begin{enumerate}
+    \item 
+    Amplificatore a transimpedenza (TIA): l'ingresso invertente dell'opamp OPA656 è fissato a massa virtuale. La corrente in ingresso viene convertita in tensione attraverso la resistenza di retroazione $R_f=\SI{500}{\kilo\ohm}$:
+    \begin{equation}
+        v_{\text{out, TIA}}(t) = - R_f \cdot i_{\text{tot}}(t)
+    \end{equation}
+    \item 
+    Amplificatore invertente: l'opamp AD817 è configurato per dare un guadagno in tensione di -10, attraverso le resistenze $R_1 = \SI{100}{\ohm}$ e $R_2 = \SI{1}{\kilo\ohm}$:
+    \begin{equation}
+        G_{\text{IA}} = -\frac{R_2}{R_1} = -\frac{\SI{1}{\kilo\ohm}}{\SI{100}{\ohm}} = -10
+    \end{equation}
+\end{enumerate}
+
+\noindent La tensione all'uscita della catena di condizionamento è dunque legata alla corrente $i_{\text{tot}}(t)$ da una transresistenza equivalente:
+\begin{equation}
+    \label{eq:transresistenza_totale}
+    v_{\text{out}}(t) = G_{\text{IA}} \cdot v_{\text{out, TIA}}(t) = (-10) \cdot \left( -R_f \cdot i_{\text{tot}}(t) \right) = \underbrace{10 \, R_f}_{R_{\text{trans}}} \cdot i_{\text{tot}}(t) = R_{\text{trans}} \cdot i_{\text{tot}}(t)
+\end{equation}
+
+\newpage
+\section{Caratterizzazione sperimentale della risposta libera (ringdown)}
+\label{sec:ringdown}
+
+In questa sezione presentiamo le misure sperimentali condotte sul MEMS per determinare la frequenza di risonanza $f_1$, la costante di tempo di smorzamento $\tau$ e il fattore di merito $Q$ del primo modo, analizzando la risposta libera a seguito dell'interruzione di una forzante. A partire dall'istante di spegnimento dell'eccitazione, la trave non riceve più alcuna spinta forzante dall'esterno e si ritrova in regime di oscillazione libera smorzata, in cui l'energia meccanica viene gradualmente dissipata.
+
+\vspace{0.3cm}
+\noindent Ecco gli step che abbiamo fatto:
+
+\begin{itemize}
+    \item La tensione di polarizzazione della trave è stata fissata a $V_{\text{DC}} = \SI{5.0}{\volt}$.
+    \item Abbiamo applicato un segnale sinusoidale $v_{\text{in}}(t) = V_{\text{AC}} \sin(2\pi f_{\text{in}} t)$, con ampiezza $V_{\text{AC}} = \SI{100}{\milli\volt}$, sull'elettrodo di drive, in modalità burst,controllata da un segnale di sincronizzazione logico (Gate): finché il gate è alto, il segnale sinusoidale è applicato sull'elettrodo di drive; al fronte di discesa del gate (istante $t = 0$ nella scala dei tempi delle misure che presenteremo), $v_{\text{in}}(t)$ viene interrotta e portata a $\SI{0}{\volt}$.
+    \item Tramite l'oscilloscopio, abbiamo estrapolato la traccia del ringdown. L'esperimento è stato ripetuto per 25 diverse frequenze di ingresso $f_{\text{in}}$, distribuite in una finestra compresa tra $\SI{417.26}{\kilo\hertz}$ e $\SI{418.40}{\kilo\hertz}$.
+\end{itemize}
+
+
+\vspace{0.3cm}
+
+\noindent Sul generatore è possibile impostare la fase di arresto del burst $\phi$, ossia il punto del ciclo sinusoidale in cui viene interrotta $v_{\text{in}}(t)$ al fronte di discesa del gate. Questo ci interessa perchè, appena stacchiamo il gate, compare un'oscillazione parassita sull'uscita, e proprio per ridurre questo disturbo, abbiamo impostato una fase $\phi \approx 103^\circ$ (interrompiamo il gate esattamente quando $v_{\text{out}}(t)=\SI{0}{\volt}$, ne parleremo in modo dettagliato nella sezione~\ref{sec:variazione_fase_gate}). Rimane comunque un breve transitorio elettrico dovuto a $C_p$ che si esaurisce in circa $\SI{2.4}{\micro\second}$; per evitare che questo disturbo sporchi le nostre misure, abbiamo scartato i primi $\SI{20}{\micro\second}$ successivi al fronte del gate. 
+
+\vspace{0.3cm}
+\noindent Abbiamo realizzato un algoritmo che individua i picchi locali della sinusoide smorzata. Questi picchi seguono un decadimento esponenziale di questo tipo:
+\begin{equation}
+        \label{eq:legge_decadimento}
+        A(t) = A_0 e^{-t/\tau}
+    \end{equation}
+dove $A_0$ è l'ampiezza di picco estrapolata all'istante di spegnimento $t=0$, e $\tau$ è la costante di tempo di smorzamento.
+
+
+\newpage
+
+\noindent Abbiamo fittato i picchi ai minimi quadrati. In fig.~\ref{fig:ringdown_4casi} sono riportati i ringdown di quattro frequenze di eccitazione rappresentative.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth]{../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png}
+\caption{Decadimento temporale dell'oscillazione libera per quattro frequenze di eccitazione in ingresso.}
+\label{fig:ringdown_4casi}
+\end{figure}
+
+
+\subsection{Risposta in ampiezza del risonatore (\texorpdfstring{$A_0$}{A0} vs \texorpdfstring{$f_{\text{in}}$}{fin})}
+\label{subsec:risposta_ampiezza}
+
+
+In fig.~\ref{fig:ampiezza_vs_frequenza} è riportato il grafico dell'ampiezza iniziale $A_0$ estratta all'istante di spegnimento del gate ($t=0$) in funzione della frequenza forzante $f_{\text{in}}$. Poiché per $t < 0$ la trave si trova in regime sinusoidale forzato, ci aspettiamo che l'energia meccanica accumulata (e quindi l'ampiezza $A_0$) sia massima quando la frequenza di eccitazione è vicina alla frequenza di risonanza del primo modo, ovvero $f_{\text{in}} = f_1$.
+
+\noindent La linea tratteggiata rossa di fig.~\ref{fig:ampiezza_vs_frequenza} rappresenta il fit lorenziano ottenuto per regressione ai minimi quadrati:
+
+\begin{equation}
+    \label{eq:lorentziana_ampiezza}
+    A_0(f_{\text{in}}) = \frac{A_{\max}}{\sqrt{1 + \left( \frac{2(f_{\text{in}} - f_1)}{\Delta f} \right)^2}}
+\end{equation}
+dove:
+\begin{itemize}
+    \item $A_{\max}$ è l'ampiezza di picco alla risonanza;
+    \item $f_1$ è la frequenza di risonanza del primo modo flessionale a $V_{\text{DC}} = \SI{5.0}{\volt}$;
+    \item $\Delta f$ è la larghezza di banda a metà potenza ($\SI{-3}{\decibel}$ in ampiezza, per $A_0 = A_{\max}/\sqrt{2}$).
+\end{itemize}
+
+\newpage 
+
+\noindent I parametri stimati dal fit sono:
+\begin{equation}
+    f_1 = \SI{417.84}{\kilo\hertz}, \quad A_{\max} = \SI{37.26}{\milli\volt}, \quad \Delta f = \SI{175.1}{\hertz}
+\end{equation}
+Il punto sperimentale più vicino al picco si trova a $f_{\text{in}} = \SI{417.83}{\kilo\hertz}$ con ampiezza misurata $A_0 = \SI{36.13}{\milli\volt}$. Allontanandosi di $\pm \SI{500}{\hertz}$ dal picco, l'ampiezza di oscillazione crolla a valori inferiori a $\SI{5}{\milli\volt}$.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png}
+\caption{Ampiezza iniziale di oscillazione $A_0$ al momento dello spegnimento dell'eccitazione in funzione della frequenza della forzante $f_{\text{in}}$, a $V_{\text{DC}} = \SI{5.0}{\volt}$.}
+\label{fig:ampiezza_vs_frequenza}
+\end{figure}
+
+\newpage
+
+\subsection{Frequenza di oscillazione libera durante il ringdown (\texorpdfstring{$f_1$}{f1} vs \texorpdfstring{$f_{\text{in}}$}{fin})}
+\label{subsec:frequenza_ringdown}
+
+In fig.~\ref{fig:frequenza_vs_fin} è riportato il grafico della frequenza di oscillazione $f_1$ durante il ringdown rispetto alla frequenza $f_{\text{in}}$ di eccitazione. I punti arancio sono stati ottenuti tramite FFT, mentre quelli blu tramite fit lineare della fase istantanea $\phi(t) = 2\pi f_1 t + \phi_0$, il cui valor medio, rappresentato tramite la linea tratteggiata rossa, è di $f_1 = \SI{417859}{\hertz}$
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png}
+\caption{Frequenza di oscillazione $f_1$ misurata durante il ringdown rispetto alla frequenza di eccitazione in ingresso $f_{\text{in}}$.}
+\label{fig:frequenza_vs_fin}
+\end{figure}
+
+\noindent Come si vede dai punti blu, la frequenza  presenta una variabilità di $\SI{12}{\hertz}$; lo script infatti ci da un massimo di $\SI{417856}{\hertz}$ e un minimo di $\SI{417843}{\hertz}$. Questo è dovuto a due fattori:
+\begin{itemize}
+    \item La frequenza di risonanza dipende dall'ampiezza iniziale $A_0$ del ringdown. Vedremo nel dettaglio questo fenomeno nella sezione~\ref{sec:regime_non_lineare}.
+    \item C'è una deriva della frequenza di risonanza nel tempo che ci abbiamo messo per acquisire le misure: in laboratorio abbiamo infatti registrato prima i punti da $\SI{417.83}{\kilo\hertz}$ scendendo fino a $\SI{417.26}{\kilo\hertz}$, e in un secondo momento abbiamo ripreso dal centro ($\SI{417.84}{\kilo\hertz}$) salendo fino a $\SI{418.40}{\kilo\hertz}$.
+\end{itemize}
+
+\newpage
+
+\subsection{Costante di tempo di decadimento \texorpdfstring{$\tau$}{tau} e stima del fattore di merito \texorpdfstring{$Q$}{Q}}
+\label{subsec:tau_q}
+La costante di tempo di decadimento $\tau$ descrive la velocità con cui l'energia meccanica viene dissipata.
+In fig.~\ref{fig:tau_vs_frequenza} sono riportati i valori di $\tau$, estratti dal fit esponenziale dei picchi, al variare della frequenza forzante $f_{\text{in}}$. Il valor medio sperimentale risulta essere $\tau_{\text{medio}} = \SI{2.32}{\milli\second}$.
+
+\noindent Da $\tau$, possiamo calcolare il fattore di merito meccanico $Q$ del primo modo flessionale:
+\begin{equation}
+    \label{eq:calcolo_Q_sperimentale}
+    Q = \pi f_1 \tau
+\end{equation}
+Sostituendo i valori medi sperimentali misurati ($f_1 =\SI{417850}{\hertz}$ e $\tau = \SI{2.32}{\milli\second}$), si ottiene $Q = 3045$. Questo valore è in accordo con la stima teorica di riferimento riportata da Frangi~\cite{frangi2023} ($Q_1 \approx 2800$), con una discrepanza inferiore al $9\%$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png}
+\caption{Costante di tempo di decadimento $\tau$ ricavata dal fit esponenziale dei picchi durante il ringdown in funzione della frequenza di eccitazione $f_{\text{in}}$.}
+\label{fig:tau_vs_frequenza}
+\end{figure}
+
+\newpage
+\section{Caratterizzazione sperimentale della risposta in frequenza}
+\label{sec:risposta_in_frequenza}
+
+
+In questa sezione analizziamo la risposta del MEMS nel dominio della frequenza in regime forzato (quindi non stacchiamo ad un certo punto l'eccitazione della forzante, come abbiamo fatto nel capitolo precedente).
+
+\vspace{0.3cm}
+\noindent Per misurare la funzione di trasferimento $T(j\omega) = \frac{V_{\text{out}}(j\omega)}{V_{\text{in}}(j\omega)}$ abbiamo impostato le seguenti condizioni:
+\begin{itemize}
+    \item $V_{\text{DC}} = \SI{5.0}{\volt}$ e $v_{\text{in}}(t) = V_{\text{AC}} \sin(2\pi f_{\text{in}} t)$, con ampiezza $V_{\text{AC}} = \SI{100}{\milli\volt}$, esattamente come per l'analisi del ringdown nel capitolo precedente.
+    \item Abbiamo fatto uno sweep della $f_{\text{in}}$: 500 punti compresi nell'intervallo da $\SI{417.20}{\kilo\hertz}$ e $\SI{418.00}{\kilo\hertz}$, con un passo di con un passo di $\SI{2}{\hertz}$.
+    \item Per ogni frequenza $f_{\text{in}}$ vengono registrati il guadagno in ampiezza e lo sfasamento tra ingresso e uscita.
+\end{itemize}
+
+\noindent Come illustrato nello schema circuitale equivalente di fig.~\ref{fig:frontend_schema}, la corrente complessiva $i_{\text{tot}}(t)$ che fluisce verso il nodo di massa virtuale del TIA è $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$. L'ammettenza vista dall'ingresso è dunque:
+\begin{equation}
+    Y(j\omega) = \frac{I_{\text{tot}}(j\omega)}{V_{\text{in}}(j\omega)} = \underbrace{\frac{1}{R_m + j\omega L_m + \frac{1}{j\omega C_m}}}_{Y_m(j\omega) \text{ (ramo RLC)}} + \underbrace{j\omega C_p}_{Y_{p}(j\omega) \text{ (ramo parassita)}}
+\end{equation}
+Poiché l'uscita finale del circuito di condizionamento è legata alla corrente $I_{\text{tot}}(j\omega)$ (con le lettere maiuscole delle grandezze elettriche stiamo indicando le trasformate fasoriali) dalla transresistenza $R_{\text{trans}}$, la funzione di trasferimento complessiva è:
+\begin{equation}
+    \label{eq:trasferimento_totale}
+    T(j\omega) = \frac{V_{\text{out}}(j\omega)}{V_{\text{in}}(j\omega)} = R_{\text{trans}} \cdot Y_{\text{mems}}(j\omega) = \frac{R_{\text{trans}}}{R_m + j\omega L_m + \frac{1}{j\omega C_m}} + j \omega C_p R_{\text{trans}}
+\end{equation}
+
+\newpage
+
+\subsection{Risposta in frequenza e fit del modello RLC + \texorpdfstring{$C_p$}{Cp}}
+\label{subsec:bode_completo}
+
+In Fig.~\ref{fig:bode_completo} sono riportati i diagrammi di Bode (modulo in alto, fase in basso) della risposta in frequenza, insieme alla curva teorica del fit con la funzione di trasferimento~\eqref{eq:trasferimento_totale}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{../Risposta in frequenza/grafici/bode_completo.png}
+\caption{Diagrammi di Bode della risposta in frequenza del MEMS a $V_{\text{DC}} = \SI{5.0}{\volt}$.}
+\label{fig:bode_completo}
+\end{figure}
+
+
+\noindent Dal fit, possiamo ricavare: la frequenza di risonanza $f_1 = \SI{417665}{\hertz}$ e il fattore di merito $Q = 2991$. Essendo la larghezza di banda circa $\SI{175}{\hertz}$, dall'eq.~\eqref{eq:lorentziana_ampiezza}, lontano dalla risonanza a $\SI{417.8}{\kilo\hertz}$ la risposta in frequenza è dominata quasi esclusivamente dalla capacità parassita $C_p$. Essendo il guadagno in ampiezza a $f_{\text{max}}=\SI{417.8}{\kilo\hertz}$ pari a $|T_{\text{p}}| = 11.701$, possiamo ricavare il valore di $C_p$:
+\begin{equation}
+    \label{eq:cp_da_fit}
+    C_p = \frac{|T_{\text{p}}|}{2\pi f_{\text{max}} R_{\text{trans}}} = \mathbf{\SI{0.892}{\pico\farad}}
+\end{equation}
+
+\noindent Abbiamo verificato questo valore con un setup dedicato, ponendo $V_{\text{DC}} = \SI{0}{\volt}$. Come dimostrato nell'eq.~\eqref{eq:eta_def}, il fattore di accoppiamento elettromeccanico $\eta = V_{\text{DC}} \left.\frac{\partial C}{\partial x}\right|_0$ è direttamente proporzionale a $V_{\text{DC}}$. Ponendo $V_{\text{DC}} = \SI{0}{\volt}$, la forzante $F_{\text{drive}} = \eta v_{\text{in}}$ si azzera e la trave non vibra. In queste condizioni, l'unica corrente che attraversa il dispositivo e arriva al TIA è quella che passa attraverso la capacità parassita $C_p$. Misurando la tensione di uscita direttamente sull'oscilloscopio, la capacità $C_p$ è data dalla formula:
+\begin{equation}
+    \label{eq:cp_scope_formula}
+    C_p = \frac{V_{\text{out, pp}}}{V_{\text{in, pp}} \cdot 2\pi f \cdot R_{\text{trans}}}
+\end{equation}
+\newpage
+
+\noindent Abbiamo eseguito l'esperimento a due frequenze diverse:
+\begin{enumerate}
+    \item A $f_{\text{in}} = \SI{50}{\kilo\hertz}$ siamo un ordine di gradezza al di sotto della risonanza meccanica. Le ampiezze misurate sono $V_{\text{in, pk}} = \SI{99.84}{\milli\volt}$ e $V_{\text{out, pk}} = \SI{140.96}{\milli\volt}$ (guadagno pari a 1.412). Lo sfasamento misurato è $\Delta\phi = +87.8^\circ$.  Applicando l'eq.~\eqref{eq:cp_scope_formula} si ottiene $C_p = \mathbf{\SI{0.899}{\pico\farad}}$.
+    
+    \item In prossimità della risonanza, a $f = \SI{417.79}{\kilo\hertz}$, le ampiezze misurate sono $V_{\text{in, pk}} = \SI{100.20}{\milli\volt}$ e $V_{\text{out, pk}} = \SI{1.212}{\volt}$ (guadagno pari a 12.094). Esce $C_p = \mathbf{\SI{0.921}{\pico\farad}}$.
+\end{enumerate}
+
+
+
+\subsection{Compensazione software di \texorpdfstring{$C_p$}{Cp} e isolamento del picco motrice}
+\label{subsec:compensazione_software}
+
+All'uscita dell'amplificatore arriva la somma di due cose: il segnale del ramo RLC e la corrente parassita che passa per $C_p$. Dato che il circuito è stato trattato come lineare, la risposta totale misurata $T(f)$ è la somma dei due contributi: $T_{\text{m}}(f)$ e $T_{\text{p}}(f)$. Per isolare il comportamento del ramo RLC, possiamo compensare la capacità $C_p$ via software, sottraendo $T_p$ dalla risposta totale:
+\begin{equation}
+    \label{eq:sottrazione_software}
+    T_m(f) = T(f) - T_{\text{p}}(f)
+\end{equation}
+In fig.~\ref{fig:bode_compensato} è riportata la risposta in frequenza ottenuta a seguito della compensazione software.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{../Risposta in frequenza/grafici/bode_compensato.png}
+\caption{Diagramma di Bode della risposta in frequenza del solo ramo RLC, ottenuta a seguito della compensazione software di $C_p$ a $V_{\text{DC}} = \SI{5.0}{\volt}$.}
+\label{fig:bode_compensato}
+\end{figure}
+\noindent Emerge chiaramente un profilo lorenziano, centrato attorno a $f_1 = \SI{417665}{\hertz}$ e con un ampiezza di picco pari a:
+    \begin{equation}
+        A_{\text{max}} = \left| \frac{V_{\text{out}}}{V_{\text{in}}} \right|_{\max} = 0.4364
+    \end{equation}
+
+
+\noindent A partire dai parametri estratti dal fit ($f_1$, $Q$, $A_{\text{max}}$) e conoscendo la transresistenza $R_{\text{trans}} = \SI{5.0}{\mega\ohm}$, possiamo calcolare i tre parametri circuitali $R_m$, $L_m$ e $C_m$. Alla frequenza di risonanza $f_1$, i termini reattivi si cancellano ($\omega_1 L_m - \frac{1}{\omega_1 C_m} = 0$). L'impedenza del ramo si riduce al solo termine resistivo $Z_m(j\omega_1) = R_m$. La corrente di picco che entra nel nodo di massa virtuale del TIA è:
+\begin{equation}
+    I_{\text{max}} = \frac{V_{\text{in}}}{R_m}
+\end{equation}
+La tensione in uscita dallo stadio di condizionamento è legata a questa corrente da:
+\begin{equation}
+    V_{\text{out, max}} = R_{\text{trans}} \cdot I_{\text{max}} = \frac{R_{\text{trans}}}{R_m} V_{\text{in}}
+\end{equation}
+Di conseguenza, il guadagno di picco $A_{\text{max}}$ è il rapporto tra la transresistenza del circuito e la resistenza del risonatore:
+\begin{equation}
+    A_{\text{max}} = \frac{R_{\text{trans}}}{R_m} \implies R_m = \frac{R_{\text{trans}}}{A_{\text{max}}}
+\end{equation}
+Sostituendo i valori sperimentali, ricaviamo $R_m  = \mathbf{\SI{11.46}{\mega\ohm}}$. Dal fattore di qualità $Q = \frac{\omega_1 L_m}{R_m}$, ricaviamo l'induttanza $L_m$:
+\begin{equation}
+    \label{eq:lm_sperimentale}
+    L_m = \frac{Q \cdot R_m}{\omega_1}  = \mathbf{\SI{13.06}{\kilo\henry}}
+\end{equation}
+
+\noindent Imponendo la condizione di risonanza $\omega_1^2 = \frac{1}{L_m C_m}$, determiniamo la capacità  $C_m$:
+\begin{equation}
+    \label{eq:cm_sperimentale}
+    C_m = \frac{1}{\omega_1^2 L_m} =  \mathbf{\SI{11.12}{\atto\farad}}
+\end{equation}
+
+
+\noindent Confrontando i valori circuitali, notiamo che:
+    \begin{itemize}
+        \item $R_m$ sperimentale è inferiore a quello teorico di un fattore pari a:
+        \begin{equation}
+            \frac{R_{m, \text{teor}}}{R_{m, \text{sper}}} = \frac{28.29}{11.46} = 2.47
+        \end{equation}
+        \item $L_m$ sperimentale è inferiore a quello teorico di circa lo stesso fattore:
+        \begin{equation}
+            \frac{L_{m, \text{teor}}}{L_{m, \text{sper}}} = \frac{30.27}{13.06} = 2.32
+        \end{equation}
+        \item $C_m$ sperimentale è invece superiore di circa lo stesso fattore:
+        \begin{equation}
+            \frac{C_{m, \text{sper}}}{C_{m, \text{teor}}} = \frac{11.12}{4.83} = 2.30
+        \end{equation}
+    \end{itemize}
+
+\noindent Questa discrepanza è assolutamente spiegabile guardando il fattore di trasduzione elettromeccanica $\eta = V_{\text{DC}} \left.\frac{\partial C}{\partial x}\right|_0$. Ricordiamo le relazioni dell'eq.~\eqref{eq:rlc_fondamentale}:
+    \begin{equation}
+        R_m = \frac{b_{\text{eff}}}{\eta^2}, \qquad L_m = \frac{m_{\text{eff}}}{\eta^2}, \qquad C_m = \frac{\eta^2}{k_{\text{eff}}}
+    \end{equation}
+Se il rapporto tra fattore di trasduzione sperimentale e teorico è, per esempio, $\frac{\eta_{\text{sper}}}{\eta_{\text{teor}}} \approx \sqrt{2.35}$, possiamo giustificare il fatto che $R_m$ e $L_m$ scalano verso il basso di un fattore $2.35$, mentre $C_m$ scala verso l'alto dello stesso identico fattore.
+
+\noindent Inoltre, moltiplicando $R_m$ e $C_m$, il fattore $\eta$ si elide:
+    \begin{equation}
+        R_m \cdot C_m = \left( \frac{b_{\text{eff}}}{\eta^2} \right) \cdot \left( \frac{\eta^2}{k_{\text{eff}}} \right) = \frac{b_{\text{eff}}}{k_{\text{eff}}} = \frac{1}{\omega_1 Q}
+    \end{equation}
+Eseguendo il prodotto con i dati sperimentali e con quelli teorici:
+    \begin{align}
+        (R_m \cdot C_m)_{\text{teor}} &= (\SI{28.29e6}{\ohm}) \times (\SI{4.83e-18}{\farad}) = \SI{0.137}{\nano\second} \\
+        (R_m \cdot C_m)_{\text{sper}} &= (\SI{11.46e6}{\ohm}) \times (\SI{11.12e-18}{\farad}) = \SI{0.127}{\nano\second}
+    \end{align}
+
+\newpage
+\section{Compensazione hardware attiva della capacità parassita}
+\label{sec:compensazione_hardware}
+
+In questo capitolo, presentiamo un circuito per la compensazione della capacità parassita $C_p$: deve iniettare sul nodo di massa virtuale del TIA una corrente uguale in modulo e sfasata di $180^\circ$ rispetto alla corrente parassita. Poniamo $V_{\text{DC}}=0$ (così possiamo trascurare il ramo RLC e concentrarci solo su quello parassita) ed eccitiamo alla frequenza di risonanza.
+
+Anticipiamo fin da subito che, per le ragioni che evidenzieremo tra poco nella sezione~\ref{subsec:ruolo_rp_scope}, abbiamo ipotizzato la presenza di una resistenza parassita $R_p$ posta in parallelo a $C_p$. Di conseguenza, nello schema del circuito di compensazione riportato in fig.~\ref{fig:schema_comp_hw}, la rete di compensazione collegata al nodo $V^-$ del TIA comprende due componenti:
+\begin{itemize}
+    \item $C_c = \SI{10}{\pico\farad}$, che rappresenta la capacità di compensazione (incaricata di cancellare il contributo di $C_p$);
+    \item $R_c = \SI{1}{\mega\ohm}$, che rappresenta la resistenza di compensazione posta in parallelo a $C_c$ (incaricata di cancellare il contributo di $R_p$).
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\vspace{0.3em}
+\begin{circuitikz}[scale=0.62, transform shape, line width=0.7pt]
+  % -----------------------------------------------------------
+  % INGRESSO Vin E STADIO 1: REGOLAZIONE DI FASE (U1)
+  % Ramo ingresso distanziato con C_phi, R_phi1 fissa e R_Pphi1 trimmer
+  % -----------------------------------------------------------
+  \draw (-2.3, 0.5) node[left] {$v_{\text{in}}(t)$} to[short, o-] (-1.6, 0.5)
+    to[C, l=$C_{\phi}$] (-0.3, 0.5)
+    to[short] (0.1, 0.5)
+    to[R, l=$R_{\phi 1}$] (1.6, 0.5)
+    to[short] (2.0, 0.5)
+    to[vR, l=$R_{P\phi 1}$] (3.5, 0.5)
+    to[short] (4.0, 0.5) coordinate (in1);
+
+  \node[op amp] (oa1) at (5.4, 0) {};
+  \node[font=\scriptsize, below=3pt] at (oa1.south) {$U_1$};
+  \draw (in1) -- (oa1.-);
+  \draw (oa1.+) -- ++(0, -0.4) node[ground]{};
+
+  % Retroazione Stadio 1: Rfissa R_phi2 + R_Pphi2 con spaziature
+  \draw (in1) to[short, *-] ++(0, 1.8) coordinate (fb1_start)
+    to[R, l=$R_{\phi 2}$] ++(1.6, 0)
+    to[short] ++(0.3, 0)
+    to[vR, l=$R_{P\phi 2}$] ++(1.6, 0)
+    -- ++(0.3, 0) coordinate (fb1_drop);
+
+  % Connessione uscita U1 e chiusura anello di retroazione
+  \draw (oa1.out) -- (fb1_drop |- oa1.out) coordinate (oa1_join);
+  \draw (fb1_drop) to[short, -*] (oa1_join);
+  
+  % Prolungamento orizzontale verso il partitore
+  \draw (oa1_join) to[short, -*] (9.0, 0) coordinate (turn_div);
+  \node[above=2pt, font=\footnotesize] at (turn_div) {$v_{U1}(t)$};
+
+  % -----------------------------------------------------------
+  % STADIO 2: REGOLAZIONE DI AMPIEZZA (Partitore R_PA)
+  % -----------------------------------------------------------
+  \draw (turn_div) to[short] (9.0, -0.4)
+    to[R, l_={$R_{A1}$}] (9.0, -2.0)
+    to[short, -*] (9.0, -2.3) coordinate (wiper)
+    to[short] (9.0, -2.6)
+    to[R, l_={$R_{A2}$}] (9.0, -4.2)
+    to[short] (9.0, -4.5) node[ground]{};
+
+  \node[left=3pt, font=\footnotesize] at (wiper) {$v_A(t)$};
+
+  % -----------------------------------------------------------
+  % STADIO 3: BUFFER A GUADAGNO UNITARIO (U2)
+  % -----------------------------------------------------------
+  \node[op amp] (oa2) at (12.0, -1.8) {};
+  \node[font=\scriptsize, below=3pt] at (oa2.south) {$U_2$};
+  
+  % Connessione orizzontale al morsetto (+)
+  \draw (wiper) to[short] (oa2.+);
+
+  % Retroazione unitaria
+  \draw (oa2.out) to[short, -*] ++(0.4, 0) coordinate (buf_out)
+    -- ++(0, 1.4) coordinate (buf_top)
+    -- (10.8, -0.4)
+    |- (oa2.-);
+
+  % -----------------------------------------------------------
+  % STADIO 4: RETE FISSA DI INIEZIONE Cc // R_c (senza frecce variabili)
+  % -----------------------------------------------------------
+  \draw (buf_out) to[short] ++(0.6, 0) coordinate (split_inj);
+  \node[below=3pt, font=\footnotesize] at (buf_out) {$v_{U2}(t)$};
+  
+  % Ramo superiore: Condensatore fisso Cc = 10 pF (senza freccia)
+  \draw (split_inj) to[short, *-] ++(0, 0.8)
+    to[C, l=$C_c$] ++(2.2, 0) coordinate (top_inj);
+
+  % Ramo inferiore: Resistore fisso R_c = 1 MOhm (senza freccia)
+  \draw (split_inj) to[short, *-] ++(0, -0.8)
+    to[R, l_=$R_c$] ++(2.2, 0) coordinate (bot_inj);
+
+  % Ricongiungimento
+  \draw (top_inj) -- ++(0, -0.8) coordinate (join_inj)
+    -- (bot_inj);
+
+  % Connessione finale al nodo TIA con freccia corrente
+  \draw (join_inj) to[short, *-, i=$i_{\text{comp}}(t)$] ++(1.4, 0)
+    to[short, -o] ++(0.3, 0) coordinate (final_node);
+  \node[right=2pt, font=\footnotesize] at (final_node) {Al nodo $V^-$ del TIA};
+
+\end{circuitikz}
+\caption{Schema elettrico del circuito di compensazione hardware.}
+\label{fig:schema_comp_hw}
+\end{figure}
+
+
+\noindent Affinché la corrente $i_{\text{comp}}(t)$ che scorre in $C_c \parallel R_c$ sia esattamente in opposizione di fase rispetto alla corrente parassita $i_p(t)$ che scorre in $C_p \parallel R_p$, dobbiamo garantire lo sfasamento di $180^\circ$ tra la tensione d'ingresso $v_{\text{in}}(t)$ (ai capi di $C_p \parallel R_p$) e la tensione in uscita dal secondo amplificatore operazionale $v_{U2}(t)$ (ai capi di $C_c \parallel R_c$). Poiché nella realtà sia il primo operazionale $U_1$ sia il secondo $U_2$ introducono un ritardo di fase alla frequenza di eccitazione in ingresso ($\approx \SI{417.7}{\kilo\hertz}$), è indispensabile introdurre nel primo stadio una rete sfasatrice regolabile che compensi il ritardo complessivo dei due operazionali fino a portare $v_{U2}(t)$ in esatta controfase rispetto a $v_{\text{in}}(t)$.
+
+\vspace{0.3cm}
+
+\newpage
+
+\noindent Il primo stadio, basato sull'amplificatore operazionale $U_1$, presenta:
+\begin{itemize}
+    \item Un ramo serie d'ingresso formato dal condensatore $C_\phi$, dalla resistenza fissa $R_{\phi 1}$ e dal trimmer $R_{P\phi 1}$ (con $R_{\text{in}} = R_{\phi 1} + R_{P\phi 1}$).
+    \item Un ramo resistivo di retroazione formato dal resistore fisso $R_{\phi 2}$ in serie al trimmer $R_{P\phi 2}$ (con $R_{f1} = R_{\phi 2} + R_{P\phi 2}$).
+\end{itemize}
+Indicando con $v_{U1}(t)$ la tensione in uscita dal primo amplificatore operazionale $U_1$, la funzione di trasferimento del primo stadio è:
+\begin{equation}
+    \label{eq:T1_laplace}
+    T_1(s) = \frac{V_{U1}(s)}{V_{\text{in}}(s)} = -\frac{R_{f1}}{Z_{\text{in}}(s)} = -\frac{s C_\phi R_{f1}}{1 + s C_\phi R_{\text{in}}} = -\frac{s C_\phi \left(R_{\phi 2} + R_{P\phi 2}\right)}{1 + s C_\phi \left(R_{\phi 1} + R_{P\phi 1}\right)}
+\end{equation}
+Passando a $s = j\omega$, il modulo e la fase di $T_1(j\omega)$ sono:
+\begin{align}
+    \label{eq:T1_modulo}
+    |T_1(j\omega)| &= \frac{\omega C_\phi R_{f1}}{\sqrt{1 + \left(\omega C_\phi R_{\text{in}}\right)^2}} = \frac{\omega C_\phi \left(R_{\phi 2} + R_{P\phi 2}\right)}{\sqrt{1 + \left[\omega C_\phi \left(R_{\phi 1} + R_{P\phi 1}\right)\right]^2}} \\[6pt]
+    \label{eq:T1_fase}
+    \angle T_1(j\omega) &= 180^\circ + \arctan\left(\frac{1}{\omega C_\phi R_{\text{in}}}\right) = 180^\circ + \arctan\left(\frac{1}{\omega C_\phi \left(R_{\phi 1} + R_{P\phi 1}\right)}\right)
+\end{align}
+
+\noindent Mentre eccitiamo alla frequenza di risonanza $f_1$, monitoriamo sull'oscilloscopio lo sfasamento tra l'ingresso $v_{\text{in}}(t)$ e l'uscita del secondo operazionale $v_{U2}(t)$. Giriamo la vite del trimmer d'ingresso $R_{P\phi 1}$ per regolare il contributo $\arctan\left(\frac{1}{\omega_1 C_\phi R_{\text{in}}}\right)$ in modo da compensare esattamente il ritardo di fase introdotto dagli operazionali $U_1$ e $U_2$, fino a ottenere l'esatta opposizione di fase ($\Delta\phi = \angle V_{U2} - \angle V_{\text{in}} = 180.0^\circ$) tra il segnale d'ingresso $v_{\text{in}}(t)$ e l'uscita del secondo operazionale $v_{U2}(t)$.
+
+\vspace{0.3cm}
+\noindent Agiamo ora su $R_{P\phi 2}$ per regolare il modulo del guadagno del primo stadio $U_1$ fino a portarlo a guadagno unitario ($|T_1(j\omega_1)| = 1$, in modo che l'ampiezza di $v_{U1}(t)$ coincida con l'ampiezza di $v_{\text{in}}(t)$). Poiché la resistenza di retroazione $R_{f1} = R_{\phi 2} + R_{P\phi 2}$ non compare nell'espressione della fase \eqref{eq:T1_fase}, vale che:
+\begin{equation}
+    \frac{\partial \angle T_1(j\omega)}{\partial R_{P\phi 2}} = 0
+\end{equation}
+Di conseguenza, la regolazione del guadagno tramite $R_{P\phi 2}$ è disaccoppiata dalla fase: è possibile aggiustare il guadagno di $U_1$ senza alterare la condizione di controfase appena raggiunta tra $v_{\text{in}}(t)$ e $v_{U2}(t)$.
+
+\vspace{0.3cm}
+\noindent All'uscita del primo operazionale $U_1$, abbiamo inserito un trimmer $R_A$ usato come partitore di tensione (schematizzato in fig.~\ref{fig:schema_comp_hw} dalle due resistenze $R_{A1}$ e $R_{A2}$). Indicando con $\alpha \in [0, 1]$ la frazione di partizione impostata dalla posizione del cursore:
+\begin{equation}
+    \alpha = \frac{R_{A2}}{R_{A1} + R_{A2}} = \frac{R_{A2}}{R_A}
+\end{equation}
+la tensione al cursore $v_A(t)$ vale:
+\begin{equation}
+    v_A(t) = \alpha \, v_{U1}(t)
+\end{equation}
+Questa tensione viene applicata all'ingresso non invertente del secondo amplificatore operazionale $U_2$, configurato come buffer a guadagno unitario.
+
+\noindent La tensione $v_{U2}(t)$ in uscita dal secondo amplificatore operazionale $U_2$ vale:
+\begin{equation}
+    \label{eq:vU2_definizione}
+    v_{U2}(t) = -\alpha \, v_{\text{in}}(t)
+\end{equation}
+L'equazione della corrente di compensazione $i_{\text{comp}}(t)$ è dunque:
+\begin{equation}
+    \label{eq:icomp_da_vU2}
+    i_{\text{comp}}(t) = C_c \frac{dv_{U2}(t)}{dt} + \frac{v_{U2}(t)}{R_c} = -\alpha C_c \frac{dv_{\text{in}}(t)}{dt} - \frac{\alpha}{R_c} v_{\text{in}}(t)
+\end{equation}
+Poiché il partitore $R_A$ può soltanto attenuare l'ampiezza del segnale ($\alpha \in [0, 1]$), la capacità di compensazione efficace è:
+\begin{equation}
+    C_{c,\text{eff}}(\alpha) = \alpha \, C_c
+\end{equation}
+Affinché esista una posizione del cursore $\alpha \in (0, 1)$ in grado di bilanciare esattamente la capacità parassita del MEMS, è indispensabile scegliere $C_c$ strettamente maggiore di $C_p$. Abbiamo scelto un condensatore da $C_c = \SI{10}{\pico\farad}$. In questo modo, non ci serve conoscere esattamente il valore di $C_p$ (anche perchè con tutti i nuovi componenti collegati, la capacità parassita complessiva potrebbe essere maggiore rispetto al valore ricavato di $\SI{0.892}{\pico\farad}$). Ruotiamo la vite del potenziometro $R_A$ fino a trovare la posizione del cursore che garantisce la massima compensazione possibile (ossia la minima ampiezza residua in uscita).
+
+\subsection{Resistenza parassita \texorpdfstring{$R_p$}{Rp} e dimensionamento di \texorpdfstring{$R_c$}{Rc}}
+\label{subsec:ruolo_rp_scope}
+
+Analizziamo ora perchè nella rete di compensazione di fig.~\ref{fig:schema_comp_hw} abbiamo inserito in parallelo al condensatore $C_c = \SI{10}{\pico\farad}$ anche il resistore di compensazione $R_c = \SI{1}{\mega\ohm}$.
+
+\vspace{0.3cm}
+
+\noindent Ai capi del parallelo $C_p \parallel R_p$ cade la tensione d'ingresso $v_{\text{in}}(t) = V_{\text{AC}} \sin(\omega t)$. La corrente parassita $i_p(t)$ che entra nel nodo di massa virtuale $V^-$ del TIA è la somma di un contributo capacitivo in quadratura e di un contributo resistivo in fase:
+\begin{equation}
+    \label{eq:ip_scomposiz}
+    i_p(t) = C_p \frac{dv_{\text{in}}(t)}{dt} + \frac{v_{\text{in}}(t)}{R_p} = \omega C_p V_{\text{AC}} \cos(\omega t) + \frac{V_{\text{AC}}}{R_p} \sin(\omega t)
+\end{equation}
+Se utilizziamo il solo condensatore $C_c$ senza il resistore $R_c$, essendo $v_{U2}(t) = -\alpha v_{\text{in}}(t)$, la corrente di compensazione iniettata nel nodo $V^-$ è puramente in quadratura:
+\begin{equation}
+    i_{Cc}(t) = C_c \frac{dv_{U2}(t)}{dt} = -\alpha C_c \frac{dv_{\text{in}}(t)}{dt} = -\omega \alpha C_c V_{\text{AC}} \cos(\omega t)
+\end{equation}
+Sommando le correnti al nodo di massa virtuale $V^-$ del TIA ($I_{\text{net}} = I_p + I_{Cc}$) e ruotando il potenziometro $R_A$ fino al punto di bilanciamento capacitivo ($\alpha C_c = C_p$), si ottiene:
+\begin{equation}
+    I_{\text{net}}(j\omega) = \frac{V_{\text{in}}(j\omega)}{R_p} + j\omega \underbrace{\left( C_p - \alpha C_c \right)}_{= \, 0} V_{\text{in}}(j\omega)
+\end{equation}
+Ciò significa che il termine in quadratura $\cos(\omega t)$ dovuto a $C_p$ viene completamente cancellato, ma resta la componente in fase legata a $R_p$, proporzionale a $\sin(\omega t)$:
+\begin{equation}
+    i_{\text{net}}(t) = \underbrace{\left( \omega C_p - \omega \alpha C_c \right)}_{= \, 0} V_{\text{AC}} \cos(\omega t) + \frac{V_{\text{AC}}}{R_p} \sin(\omega t) = \frac{V_{\text{AC}}}{R_p} \sin(\omega t)
+\end{equation}
+Questa corrente produce una tensione in uscita pari a:
+\begin{equation}
+    v_{\text{out, R}}(t) = R_{\text{trans}} \, i_{\text{net}}(t) = \frac{R_{\text{trans}}}{R_p} V_{\text{AC}} \sin(\omega t)
+\end{equation}
+Con il solo condensatore $C_c = \SI{10}{\pico\farad}$, abbiamo osservato che l'uscita non si azzera completamente, ma rimane un segnale sinusoidale residuo di ampiezza di picco $V_{\text{out, res}} = \SI{44.5}{\milli\volt}$, corrispondente a una resistenza parassita pari a:
+\begin{equation}
+    \label{eq:stima_rp_mems}
+    R_p = R_{\text{trans}} \frac{V_{\text{AC}}}{V_{\text{out, R}}} = \mathbf{\SI{11.2}{\mega\ohm}}
+\end{equation}
+Nei capitolo precedenti abbiamo trascurato questa resistenza $R_p$. Questo perchè alla frequenza di risonanza $f_1$, la reattanza di $C_p = \SI{0.892}{\pico\farad}$ vale $X_{Cp} = \frac{1}{2\pi f_1 C_p}$. La corrente che viene iniettata da $C_p$ sul nodo di massa virtuale del TIA è $\SI{234}{\nano\ampere}$, che dà $V_{\text{out}, Cp} = \SI{1170}{\milli\volt}$; quella di $R_p$ è $\SI{8.9}{\nano\ampere}$, che dà $V_{\text{out}, Rp} = \SI{44.5}{\milli\volt}$; il modulo dell'uscita con entrambi i contributi è:
+    \begin{equation}
+        |V_{\text{out, tot}}| = \sqrt{V_{\text{out}, C}^2 + V_{\text{out}, R}^2} = \sqrt{(\SI{1170}{\milli\volt})^2 + (\SI{44.5}{\milli\volt})^2} = \SI{1170.8}{\milli\volt}
+    \end{equation}
+    In assenza di compensazione hardware, $R_p$ altera il modulo per meno dello $0.07\%$.
+
+
+\vspace{0.3cm}
+\noindent Per cancellare anche la corrente di $R_p$, abbiamo inserito il resistore di compensazione $R_c$ in parallelo a $C_c$. La corrente totale di compensazione è:
+\begin{equation}
+    \label{eq:icomp_completa}
+    i_{\text{comp}}(t) = C_c \frac{dv_{U2}(t)}{dt} + \frac{v_{U2}(t)}{R_c} = -\alpha C_c \frac{dv_{\text{in}}(t)}{dt} - \frac{\alpha}{R_c} v_{\text{in}}(t)
+\end{equation} 
+Sommando la corrente parassita $I_p(j\omega)$ e la corrente di compensazione $I_{\text{comp}}(j\omega)$, la corrente totale risulta:
+\begin{equation}
+    I_{\text{net}}(j\omega) = I_p(j\omega) + I_{\text{comp}}(j\omega) = \left( \frac{1}{R_p} - \frac{\alpha}{R_c} \right) V_{\text{in}}(j\omega) + j\omega \left( C_p - \alpha C_c \right) V_{\text{in}}(j\omega)
+\end{equation}
+Per annullare sia la componente in quadratura sia la componente in fase con l'ingresso, devono valere le due condizioni:
+
+\begin{equation}
+    \label{eq:formula_progetto_rp}
+    \begin{cases}
+        C_p - \alpha C_c = 0 \implies \alpha = \dfrac{C_p}{C_c} = 0.0892 \\[10pt]
+        \dfrac{1}{R_p} - \dfrac{\alpha}{R_c} = 0 \implies R_c = \alpha \, R_p = \dfrac{C_p}{C_c} R_p
+    \end{cases}
+\end{equation}
+\vspace{0.2cm}
+
+\noindent Sostituendo $\alpha = 0.0892$ e $R_p = \SI{11.2}{\mega\ohm}$, otteniamo $R_c = \alpha \, R_p \approx \mathbf{\SI{1.0}{\mega\ohm}}$. In fig.~\ref{fig:scope_161_165_rp} è mostrata l'uscita con il ramo di compensazione attivo.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{../Compensazione Hardware/grafici/scope_165_compensato.png}
+\caption{Verifica sperimentale all'oscilloscopio dell'azzeramento del segnale parassita post-compensazione.}
+\label{fig:scope_161_165_rp}
+\end{figure}
+
+\subsection{Risposta in frequenza con compensazione capacitiva}
+\label{subsec:comp_hw_off}
+
+Per verificare sperimentalmente il funzionamento della rete di compensazione, abbiamo effettuato uno sweep in frequenza su una banda da $\SI{407.75}{\kilo\hertz}$ a $\SI{427.75}{\kilo\hertz}$.
+
+Come dimostrato nella sezione~\ref{subsec:bode_completo}, a $V_{\text{DC}} = \SI{0}{\volt}$ il fattore di trasduzione elettromeccanica è nullo e il MEMS si riduce al solo ramo parassita. In fig.~\ref{fig:bode_hw_off} è riportato il diagramma di Bode misurato in questa condizione.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth]{../Compensazione Hardware/grafici/bode_off.png}
+\caption{Funzione di trasferimento sperimentale del circuito con compensazione hardware attiva a MEMS spento ($V_{\text{DC}} = \SI{0}{\volt}$).}
+\label{fig:bode_hw_off}
+\end{figure}
+
+\noindent Lontano dalla frequenza di risonanza, il guadagno vale circa $-\SI{6.0}{\decibel}$. Avvicinandosi al centro, il modulo scende fino a circa $\mathbf{-\SI{20}{\decibel}}$. Per quanto riguarda la fase, in prossimità della frequenza di risonanza, c'è la rotazione di $180^\circ$.
+
+\vspace{0.2cm}
+\noindent Questo andamento si spiega considerando che la taratura dei trimmer è stata fatta a una singola frequenza fissa, ma il modulo e la fase dello stadio sfasatore $T_1(j\omega)$ (eq.~\eqref{eq:T1_modulo}--\eqref{eq:T1_fase}) e degli operazionali dipendono dalla frequenza. Il fondo della buca non scende a $-\infty\,\si{\decibel}$ ma si appiattisce attorno a $-\SI{20}{\decibel}$ perché ovviamente la compensazione capacità non può essere perfetta, c'è uno sbilanciamento residuo. Spostandosi invece verso gli estremi, avendo tarato il circuito di compensazione alla frequenza di risonanza, la corrente residua netta $i_{\text{net}} = i_p + i_{\text{comp}}$ cresce e il modulo risale fino a $-\SI{6.0}{\decibel}$. 
+
+Spostandosi immediatamente a destra e sinistra del minimo del modulo, si inverte quale delle due correnti prevale sull'altra (sotto $f_1$ domina leggermente un ramo, sopra $f_1$ domina l'altro). Di conseguenza, la corrente residua $i_{\text{net}}$ cambia di segno, producendo il salto di fase di $180^\circ$ (con i punti centrali più dispersi perché lì il segnale è quasi nullo e immerso nel rumore).
+
+\newpage
+
+\noindent Una volta verificato il funzionamento del ramo di compensazione a MEMS spento, abbiamo applicato la tensione di polarizzazione continua $V_{\text{DC}} = \SI{5.0}{\volt}$ per attivare il risonatore. In fig.~\ref{fig:bode_hw_set2} è riportato il diagramma di Bode di modulo e fase con compensazione attiva.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth]{../Compensazione Hardware/grafici/bode_set2.png}
+\caption{Diagramma di Bode della risposta in frequenza del MEMS con compensazione hardware attiva ($V_{\text{DC}} = \SI{5.0}{\volt}$).}
+\label{fig:bode_hw_set2}
+\end{figure}
+
+\noindent Dal fit della risposta compensata via hardware ricaviamo la frequenza di risonanza $f_1 = \SI{417754}{\hertz}$, il fattore di merito $Q = 2261.8$ e il guadagno massimo:
+\begin{equation}
+    A_{\text{max}} = \left| \frac{V_{\text{out}}}{V_{\text{in}}} \right|_{\max} = 0.4629 \quad (-\SI{6.69}{\decibel})
+\end{equation}
+Procedendo esattamente come nella sezione~\ref{subsec:compensazione_software}, a partire da questi parametri e dalla transresistenza $R_{\text{trans}} = \SI{5.0}{\mega\ohm}$ ricaviamo i parametri circuitali equivalenti $R_m$, $L_m$ e $C_m$ stimati con la compensazione hardware:
+\begin{equation}
+    \label{eq:rm_hw}
+    R_m = \frac{R_{\text{trans}}}{A_{\text{max}}} = \mathbf{\SI{10.80}{\mega\ohm}}
+\end{equation}
+Dal fattore di qualità $Q = \frac{\omega_1 L_m}{R_m}$, ricaviamo l'induttanza $L_m$:
+\begin{equation}
+    \label{eq:lm_hw}
+    L_m = \frac{Q \cdot R_m}{\omega_1} = \mathbf{\SI{9.31}{\kilo\henry}}
+\end{equation}
+Imponendo infine la condizione di risonanza $\omega_1^2 = \frac{1}{L_m C_m}$, determiniamo la capacità $C_m$:
+\begin{equation}
+    \label{eq:cm_hw}
+    C_m = \frac{1}{\omega_1^2 L_m} = \mathbf{\SI{15.59}{\atto\farad}}
+\end{equation}
+I valori trovati sono coerenti con quelli estratti tramite compensazione software ($R_m = \SI{11.46}{\mega\ohm}$, $L_m = \SI{13.06}{\kilo\henry}$, $C_m = \SI{11.12}{\atto\farad}$): in particolare $R_m$ coincide entro meno del $6\%$, mentre la  differenza su $L_m$ e $C_m$ è legata al valore di $Q$ che risulta inferiore ($2262$ contro $2992$), probabilmente dovuto al piccolo fondo capacitivo residuo.
+
+\vspace{0.3cm}
+\noindent In fig.~\ref{fig:benchmark_con_senza_hw} è riportato il confronto tra la risposta in frequenza non compensata e la risposta con compensazione hardware attiva, mentre in fig.~\ref{fig:confronto_hw_vs_sw} il modulo ottenuto via hardware è sovrapposto a quello ricavato tramite compensazione software nella sezione~\ref{subsec:compensazione_software}. Poiché le due acquisizioni sono state effettuate in giorni diversi, la frequenza di risonanza ha subito una lieve deriva di circa $\SI{100}{\hertz}$ ($\SI{417.66}{\kilo\hertz}$ contro $\SI{417.76}{\kilo\hertz}$); per confrontare direttamente la forma delle due campane sullo stesso intervallo di frequenze, in fig.~\ref{fig:confronto_hw_vs_sw} la curva software è stata traslata orizzontalmente di $+\SI{100}{\hertz}$ in modo da riallineare i due picchi.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth]{../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png}
+\caption{Confronto tra la risposta in frequenza non compensata (in grigio, dominata da $C_p$) e la risposta con compensazione hardware attiva (in verde/viola).}
+\label{fig:benchmark_con_senza_hw}
+\end{figure}
+
+
+
+
+\newpage
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{../Compensazione Hardware/grafici/confronto_hardware_vs_software.png}
+\caption{Confronto tra la risposta in frequenza ottenuta mediante compensazione software (in viola, traslata di $+\SI{100}{\hertz}$ per compensare la deriva termica tra le sessioni di misura) e quella misurata con il circuito di compensazione hardware attiva (in verde).}
+\label{fig:confronto_hw_vs_sw}
+\end{figure}
+
+\noindent Rappresentiamo ora la funzione di trasferimento $T(j\omega) = \mathrm{Re}\{T(j\omega)\} + j\,\mathrm{Im}\{T(j\omega)\}$ nel piano complesso di Gauss. 
+Consideriamo inizialmente il solo ramo RLC del MEMS (senza parassiti). Definiamo la variabile $x(f)$, già introdotta nell'eq.~\eqref{eq:lorentziana_ampiezza} per descrivere la lorenziana:
+\begin{equation}
+    \label{eq:coordinata_x_lorentz}
+    x(f) = \frac{2(f - f_1)}{\Delta f} = 2Q \frac{f - f_1}{f_1}
+\end{equation}
+La funzione di trasferimento $T_m(x)$ (ideale, senza considerare lo sfasamento introdotto dallo stadio di condizionamento) si scrive come:
+\begin{equation}
+    T_m(x) = \frac{A_m}{1 + j x}
+\end{equation}
+Separando la parte reale $u(x)$ e la parte immaginaria $v(x)$ di $T_m(x)$:
+\begin{equation}
+    T_m(x) = \frac{A_m(1 - jx)}{1 + x^2} = \underbrace{\frac{A_m}{1 + x^2}}_{u(x) = \mathrm{Re}\{T_m\}} + j \underbrace{\left(-\frac{A_m x}{1 + x^2}\right)}_{v(x) = \mathrm{Im}\{T_m\}}
+\end{equation}
+Calcoliamo la distanza quadratica nel piano $(u, v)$ rispetto al punto di coordinate $(A_m/2, 0)$:
+\begin{align}
+    \left(u(x) - \frac{A_m}{2}\right)^2 + v^2(x) &= \left(\frac{A_m}{1 + x^2} - \frac{A_m}{2}\right)^2 + \left(-\frac{A_m x}{1 + x^2}\right)^2 \nonumber \\
+    &= \frac{A_m^2}{4} \frac{(1 - x^2)^2 + 4x^2}{(1 + x^2)^2} = \frac{A_m^2}{4} \frac{(1 + x^2)^2}{(1 + x^2)^2} = \left(\frac{A_m}{2}\right)^2
+\end{align}
+Al variare della frequenza, $T_m(x)$ traccia nel piano complesso una circonferenza di raggio $R_{\text{cerchio}} = A_m/2$, centrata in $(A_m/2, 0)$. Se includiamo il ramo parassita ($C_p \parallel R_p$) e lo sfasamento $\phi_m$ introdotto dagli operazionali, il termine parassita $T_p$ vale:
+\begin{equation}
+    T_p = R_{\text{trans}} \left( \frac{1}{R_p} + j\omega_1 C_p \right) e^{j\phi_m}
+\end{equation}
+La funzione di trasferimento complessiva misurata all'uscita vale dunque:
+\begin{equation}
+    \label{eq:cerchio_traslato_complesso}
+    T(f) = T_p + T_m(f) e^{j\phi_m} = T_p + \frac{A_m e^{j\phi_m}}{1 + j x(f)}
+\end{equation}
+Si tratta quindi di una circonferenza sottoposta a due trasformazioni geometriche: una rotazione di un angolo $\phi_m \approx -21.4^\circ$ (dovuta al ritardo di fase del TIA e dello stadio invertente), e una traslazione.
+\vspace{0.3cm}
+
+\noindent Per visualizzare questo comportamento direttamente sui dati di laboratorio, abbiamo sviluppato uno script dedicato che esegue il fit nel piano complesso e traccia i luoghi di Nyquist sperimentali e teorici. Nelle fig.~\ref{fig:cerchio_nyquist_globale}, \ref{fig:cerchio_nyquist_fano} e \ref{fig:nyquist_set2_freq} abbiamo presentato i piani complessi con e senza compensazione, con delle note specifiche relative ai fenomeni osservati nei diagrammi di Bode dei capitoli precedenti (risonanza, antirisonanza ecc...).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png}
+\caption{Rappresentazione nel piano complesso di $\mathrm{Re}\{T(j\omega)\}$ vs $\mathrm{Im}\{T(j\omega)\}$ con e senza compensazione.}
+\label{fig:cerchio_nyquist_globale}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png}
+\caption{Rappresentazione nel piano complesso di $\mathrm{Re}\{T(j\omega)\}$ vs $\mathrm{Im}\{T(j\omega)\}$ con e senza compensazione}
+\label{fig:cerchio_nyquist_fano}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{../Compensazione Hardware/grafici/nyquist_set2_frequenza.png}
+\caption{Rappresentazione nel piano complesso di $\mathrm{Re}\{T(j\omega)\}$ vs $\mathrm{Im}\{T(j\omega)\}$ con e senza compensazione, con mappatura cromatica in funzione della frequenza forzante $f_{\text{in}}$}
+\label{fig:nyquist_set2_freq}
+\end{figure}
+
+\newpage
+\section{Caratterizzazione in regime di grande segnale}
+\label{sec:regime_non_lineare}
+
+Nelle sezioni precedenti abbiamo caratterizzato il MEMS in regime di piccolo segnale, mantenendo relativamente bassa l'ampiezza picco-picco $V_{\text{ACpp}}$ della tensione di ingresso $v_{\text{in}}(t)$. In questa sezione abbiamo sperimentato cosa accade quando l'ampiezza picco-picco di eccitazione $V_{\text{ACpp}}$ viene incrementata progressivamente fino a $\SI{2.0}{\volt}$: le forze elastiche ed elettrostatiche manifestano dipendenze non lineari con lo spostamento.
+
+\subsection{Variazione della frequenza di risonanza con l'ampiezza di oscillazione in ingresso}
+\label{subsec:variazione_frequenza_ampiezza}
+
+In regime di piccolo segnale, la forza di richiamo elastica segue la legge lineare di Hooke $F_{\text{m}}(x) = k_m x$. All'aumentare dello spostamento $x(t)$, se sviluppiamo la forza elastica in serie di Taylor attorno alla posizione di riposo $x = 0$:
+\begin{equation}
+        F_{\text{m}}(x) = k_m x + k_{m2} x^2 + k_{m3} x^3
+\end{equation}
+compaiono coefficienti di rigidezza meccanica non lineari.
+
+\vspace{0.3cm}
+\noindent Come visto nella sezione~\ref{sec:forze_elettrostatiche}, la forza elettrostatica complessiva esercitata dall'elettrodo di drive sulla trave polarizzata a $V_{\text{DC}}$ vale:
+\begin{equation}
+    F_e(x, t) = \frac{1}{2} \frac{\partial C_d(x)}{\partial x} \left( V_{\text{DC}} - v_{\text{in}}(t) \right)^2 = \underbrace{\frac{1}{2} \frac{\partial C_d(x)}{\partial x} V_{\text{DC}}^2}_{F_{\text{DC}}(x)} - \underbrace{\frac{\partial C_d(x)}{\partial x} V_{\text{DC}} \, v_{\text{in}}(t)}_{F_{\text{drive}}(t)} + \frac{1}{2} \frac{\partial C_d(x)}{\partial x} v_{\text{in}}^2(t)
+\end{equation}
+Prima dello spegnimento del gate ($t < 0$), il generatore è attivo e il termine $F_{\text{drive}}$ rappresenta la forzante che mette in vibrazione la trave fino a portarla ad un'ampiezza di oscillazione di regime $X_0$. Dopo lo spegnimento del gate ($t > 0$, durante il ringdown), il generatore viene staccato ($v_{\text{in}}(t) = 0$) e quindi $F_{\text{drive}}(t) = 0$. La componente $F_{\text{DC}}(x) = \frac{1}{2} \frac{\partial C_d(x)}{\partial x} V_{\text{DC}}^2$ rimane invece sempre presente in entrambe le fasi, poiché la tensione continua $V_{\text{DC}} = \SI{5.0}{\volt}$ resta applicata alla trave.
+
+\vspace{0.3cm}
+\noindent In regime di grandi oscillazioni, la derivata della capacità rispetto allo spostamento $\frac{\partial C_d(x)}{\partial x}$ non si ferma al primo ordine. Fino al terzo ordine vale:
+\begin{equation}
+    \frac{\partial C_d(x)}{\partial x} = \left. \frac{\partial C_d}{\partial x} \right|_0 + \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0 x + \frac{1}{2} \left. \frac{\partial^3 C_d}{\partial x^3} \right|_0 x^2 + \frac{1}{6} \left. \frac{\partial^4 C_d}{\partial x^4} \right|_0 x^3
+\end{equation}
+Sostituendo nell'espressione di $F_{\text{DC}}(x)$:
+\begin{equation}
+    F_{\text{DC}}(x) = F_{\text{DC}} + k_e x + k_{e2} x^2 + k_{e3} x^3
+\end{equation}
+compaiono, oltre alla componente statica $F_{\text{DC}}$ e a $k_e$, anche i coefficienti di rigidezza elettrostatica non lineari.
+
+\vspace{0.3cm}
+\noindent Applichiamo la seconda legge di Newton:
+\begin{equation}
+    m_{\text{eff}} \ddot{x}(t) + b_{\text{eff}} \dot{x}(t) + F_{\text{m}}(x) = F_{\text{DC}}(x) + F_{\text{drive}}(t)
+\end{equation}
+Portiamo i termini dipendenti da $x(t)$ al primo membro (e trascuriamo la deflessione statica costante $F_{\text{DC}}$):
+\begin{equation}
+    m_{\text{eff}} \ddot{x}(t) + b_{\text{eff}} \dot{x}(t) + \underbrace{(k_m - k_e)}_{k_{\text{eff}}} x(t) + \underbrace{(k_{m2} - k_{e2})}_{k_{\text{eff}, 2}} x^2(t) + \underbrace{(k_{m3} - k_{e3})}_{k_{\text{eff}, 3}} x^3(t) = F_{\text{drive}}(t)
+\end{equation}
+Se dividiamo entrambi i membri per la massa efficace $m_{\text{eff}}$ ed esprimiamo il termine $\frac{b_{\text{eff}}}{m_{\text{eff}}} = \frac{\omega_{01}}{Q_1}$, otteniamo l'equazione differenziale non lineare del moto per lo spostamento $x(t)$:
+\begin{equation}
+    \label{eq:oscillatore_non_lineare}
+    \ddot{x}(t) + \frac{\omega_{01}}{Q_1}\dot{x}(t) + \omega_1^2 x(t) + \alpha_2 x^2(t) + \alpha_3 x^3(t) = \frac{F_{\text{drive}}(t)}{m_{\text{eff}}}
+\end{equation}
+dove $\omega_{01} = \sqrt{\frac{k_m}{m_{\text{eff}}}}$ è la pulsazione di risonanza del primo modo senza l'effetto di $V_{\text{DC}}$, $\omega_1 = \sqrt{\frac{k_m - k_e}{m_{\text{eff}}}}$ è la pulsazione di risonanza di piccolo segnale a $V_{\text{DC}} = \SI{5.0}{\volt}$, mentre $\alpha_2 = \frac{k_{m2} - k_{e2}}{m_{\text{eff}}}$ e $\alpha_3 = \frac{k_{m3} - k_{e3}}{m_{\text{eff}}}$ sono i coefficienti di non linearità.
+\vspace{0.3cm}
+\noindent Per legare lo spostamento $x(t)$ alla tensione d'uscita $v_{\text{out}}(t)$ durante il ringdown ($t > 0$), ricordiamo che una volta azzerato l'ingresso ($v_{\text{in}}(t) = 0$) la corrente nella capacità parassita $C_p$ è nulla ($i_{Cp} = C_p \frac{dv_{\text{in}}}{dt} = 0$, esaurito il transitorio iniziale di pochi microsecondi). Quindi nel nodo del TIA entra unicamente la corrente del ramo RLC $i_m(t) = \eta \dot{x}(t)$, per cui l'uscita vale:
+\begin{equation}
+    v_{\text{out}}(t) = R_{\text{trans}} \, \eta \, \dot{x}(t)
+\end{equation}
+Se consideriamo all'istante iniziale del ringdown ($t = 0$) un'oscillazione sinusoidale della trave di ampiezza $X_0$, ovvero $x(t) = X_0 \cos(\omega_1 t)$, derivando rispetto al tempo otteniamo la velocità $\dot{x}(t) = -\omega_1 X_0 \sin(\omega_1 t)$ e sostituendola nell'espressione di $v_{\text{out}}(t)$, otteniamo:
+\begin{equation}
+    v_{\text{out}}(t) = - \underbrace{\left( R_{\text{trans}} \, \eta \, \omega_1 \, X_0 \right)}_{A_0} \sin(\omega_1 t)
+\end{equation}
+L'ampiezza iniziale del ringdown $A_0$ è quindi direttamente proporzionale all'ampiezza dello spostamento $X_0$:
+\begin{equation}
+    \label{eq:legame_ampiezza_x_A}
+    A_0 = R_{\text{trans}} \, \eta \, \omega_1 \, X_0 \iff X_0 = \frac{A_0}{R_{\text{trans}} \eta \omega_1}
+\end{equation}
+Sostituendo l'eq.~\eqref{eq:legame_ampiezza_x_A} nella \eqref{eq:oscillatore_non_lineare}, otteniamo:
+\begin{equation}
+    \label{eq:backbone_legge}
+    f_1'(A_0) = f_1 + \beta A_0^2
+\end{equation}
+dove $f_1$ è la frequenza di risonanza di piccolo segnale e $\beta$ è il coefficiente che racchiude l'effetto complessivo dei termini non lineari ($\alpha_2$ e $\alpha_3$) e del fattore di conversione elettromeccanica: quando l'ampiezza di oscillazione $A_0$ aumenta, la frequenza di risonanza della trave di grande segnale $f_1'(A_0)$ varia rispetto al valore di piccolo segnale $f_1$.
+
+\vspace{0.3cm}
+\noindent Vediamo ora cosa succede all'ampiezza $A_0$ quando eccitiamo a frequenza fissa $f_{\text{in}} = f_1$ e aumentiamo progressivamente la tensione d'ingresso $V_{\text{ACpp}}$. Ricordiamo che nella sezione~\ref{subsec:risposta_ampiezza} avevamo descritto la risposta in ampiezza del MEMS tramite la curva lorenziana dell'eq.~\eqref{eq:lorentziana_ampiezza}:
+\begin{equation}
+    \label{eq:richiamo_lorentz_nl}
+    A_0(f_{\text{in}}) = \frac{A_{\max}}{\sqrt{1 + \left( \dfrac{2(f_{\text{in}} - f_1)}{\Delta f} \right)^2}}
+\end{equation}
+In questa formula $A_{\max}$ è il picco della campana (cioè l'ampiezza che si avrebbe se il generatore rimanesse sempre centrato esattamente sulla frequenza di risonanza). Come visto nella sezione~\ref{subsec:compensazione_software}, sul picco il MEMS si comporta come la sola resistenza $R_m$, quindi $A_{\max}$ cresce in modo direttamente proporzionale alla tensione di eccitazione $V_{\text{ACpp}}$:
+\begin{equation}
+    \label{eq:amax_lineare_vac}
+    A_{\max} = k \, V_{\text{ACpp}}
+\end{equation}
+dove $k$ è la costante di proporzionalità. Però, in regime di grande segnale, il centro della campana non resta fermo in $f_1$, ma si sposta in $f_1'(A_0) = f_1 + \beta A_0^2$ secondo l'eq.~\eqref{eq:backbone_legge}. Sostituendo quindi $A_{\max} = k \, V_{\text{ACpp}}$ e la nuova frequenza di risonanza $f_1'(A_0)$ al posto di $f_1$ otteniamo:
+\begin{equation}
+    A_0(f_{\text{in}}) = \frac{k \, V_{\text{ACpp}}}{\sqrt{1 + \left( \dfrac{2\left(f_{\text{in}} - f_1'(A_0)\right)}{\Delta f} \right)^2}}
+\end{equation}
+Poiché nel nostro esperimento abbiamo mantenuto la frequenza del generatore fissa a $f_{\text{in}} = f_1$, vale che $f_{\text{in}} - f_1'(A_0) = f_1 - (f_1 + \beta A_0^2) = -\beta A_0^2$. Sostituendo questa relazione nella formula precedente, arriviamo ad una relazione tra $A_0$ e $V_{\text{ACpp}}$:
+\begin{equation}
+    \label{eq:compressione_ampiezza_nl}
+    A_0 = \frac{k \, V_{\text{ACpp}}}{\sqrt{1 + \left( \dfrac{2 \beta A_0^2}{\Delta f} \right)^2}}
+\end{equation}
+\newpage
+
+\noindent Abbiamo verificato questo comportamento sperimentalmente: abbiamo mantenuto fissa la tensione continua $V_{\text{DC}} = \SI{5.0}{\volt}$, abbiamo applicato in ingresso una forzante a frequenza fissa $f_{\text{in}} = f_1$ e abbiamo plottato l'ampiezza iniziale del ringdown $A_0$ in funzione dell'ampiezza picco picco di eccitazione $V_{\text{ACpp}}$, come mostrato in fig.~\ref{fig:ampiezza_compressione_nl}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{../Duffing/duffing_ampiezza_compressione.png}
+\caption{Ampiezza iniziale del ringdown $A_0$ in funzione dell'ampiezza picco picco di eccitazione $V_{\text{ACpp}}$ a $V_{\text{DC}} = \SI{5.0}{\volt}$. La retta continua blu mostra l'andamento lineare di piccolo segnale calcolato sui primi punti ($V_{\text{ACpp}} \le \SI{280}{\milli\volt}$).}
+\label{fig:ampiezza_compressione_nl}
+\end{figure}
+
+\noindent Finché l'ampiezza di eccitazione è bassa ($V_{\text{ACpp}} \le \SI{280}{\milli\volt}$), l'ampiezza $A_0$ è piccola e il termine $\left(\frac{2\beta A_0^2}{\Delta f}\right)^2$ è trascurabile rispetto a $1$: la campana
+ non si è ancora spostata da $f_1$, il denominatore dell'eq.~\eqref{eq:compressione_ampiezza_nl} vale circa $1$ e quindi l'ampiezza misurata $A_0$ coincide proprio con il picco $A_{\max} = k \, V_{\text{ACpp}}$ e cresce linearmente lungo la retta blu. Se facciamo il fit lineare sui primi 6 punti sperimentali ($V_{\text{ACpp}} \le \SI{280}{\milli\volt}$), troviamo una pendenza pari a $k = \SI{0.1343}{\milli\volt/\milli\volt}$.
+
+\vspace{0.3cm}
+\noindent Quando invece superiamo i $\SI{300}{\milli\volt}$, i punti sperimentali si staccano dalla retta blu. Questo accade perché nell'eq.~\eqref{eq:compressione_ampiezza_nl} agiscono contemporaneamente due effetti opposti: al numeratore $V_{\text{ACpp}}$ continua ad aumentare, ma al denominatore la crescita di $A_0$ fa aumentare $\beta A_0^2$ e quindi il centro della campana si allontana da $f_{\text{in}}$. A tensioni alte invece, quando il termine $\left(\frac{2\beta A_0^2}{\Delta f}\right)^2$ sotto radice diventa molto più grande di $1$, possiamo trascurare l'$1$ al denominatore dell'eq.~\eqref{eq:compressione_ampiezza_nl}:
+\begin{equation}
+    A_0 \approx \frac{k \, V_{\text{ACpp}}}{\sqrt{\left( \dfrac{2 \beta A_0^2}{\Delta f} \right)^2}} = \frac{k \, V_{\text{ACpp}}}{\dfrac{2 |\beta| A_0^2}{\Delta f}}
+\end{equation}
+Se ora moltiplichiamo entrambi i membri per $\frac{2 |\beta| A_0^2}{\Delta f}$:
+\begin{equation}
+    \frac{2 |\beta|}{\Delta f} A_0^3 \approx k \, V_{\text{ACpp}} \implies A_0^3 \approx \frac{k \, \Delta f}{2 |\beta|} \, V_{\text{ACpp}}
+\end{equation}
+Quindi otteniamo:
+\begin{equation}
+    \label{eq:legge_radice_cubica}
+    A_0 \approx \sqrt[3]{\frac{k \, \Delta f}{2 |\beta|} \, V_{\text{ACpp}}}
+\end{equation}
+$A_0$ rallenta passando da una crescita lineare a una crescita con la radice cubica.
+
+\vspace{0.3cm}
+\noindent Dall'eq.~\eqref{eq:compressione_ampiezza_nl} possiamo anche ricavare il valore di $|\beta|$:
+\begin{equation}
+    \label{eq:stima_beta_da_compressione}
+    |\beta| = \frac{\Delta f}{2 A_0^2} \sqrt{\left( \frac{k \, V_{\text{ACpp}}}{A_0} \right)^2 - 1} = \SI{0.0177}{\hertz/\milli\volt^2}
+\end{equation}
+
+\subsection{Evoluzione temporale della frequenza di risonanza durante il ringdown}
+\label{subsec:chirp_frequenza_ringdown}
+
+Nella sezione precedente~\ref{subsec:variazione_frequenza_ampiezza} abbiamo visto che la frequenza di risonanza varia con il quadrato dell'ampiezza. In questa sezione, abbiamo analizzato come evolve nel tempo la frequenza di risonanza di grande segnale $f_1'(t)$ dopo che abbiamo staccato il gate. Durante il ringdown, l'ampiezza dell'oscillazione non rimane fissa al valore iniziale $A_0$, ma si smorza esponenzialmente nel tempo con costante di tempo $\tau$:
+\begin{equation}
+    A(t) = A_0 \, e^{-t/\tau}
+\end{equation}
+Se sostituiamo l'ampiezza istantanea $A(t)$ al posto di $A_0$ nell'eq.~\eqref{eq:backbone_legge}, otteniamo un'equazione che ci dice come varia nel tempo la frequenza di risonanza $f_1'(t)$ durante il decadimento:
+\begin{equation}
+    \label{eq:chirp_esponenziale}
+    f_1'(t) = f_1 + \beta \left( A_0 \, e^{-t/\tau} \right)^2 = f_1 + \beta A_0^2 \, e^{-2t/\tau} = f_1 + \Delta f_0 \, e^{-t/\tau_f}
+\end{equation}
+dove $f_1$ è la frequenza di risonanza di piccolo segnale, $\Delta f_0 = \beta A_0^2$ è lo spostamento iniziale di frequenza all'istante $t = 0$ e $\tau_f = \tau / 2$. 
+
+\vspace{0.3cm}
+\noindent Abbiamo realizzato uno script che calcola la frequenza di risonanza a partire dalla fase istantanea (come già visto nella sezione~\ref{subsec:frequenza_ringdown}) su una finestra mobile di larghezza $W = \SI{0.75}{\milli\second}$ per quattro livelli di eccitazione ($V_{\text{ACpp}} = \SI{200}{\milli\volt}$, $\SI{500}{\milli\volt}$, $\SI{1000}{\milli\volt}$ e $\SI{2000}{\milli\volt}$), ed esegue il fit dei punti ottenuti con l'eq.~\eqref{eq:chirp_esponenziale}.
+
+\vspace{0.3cm}
+
+\noindent In fig.~\ref{fig:frequenza_tempo_nl} è riportato il grafico dell'evoluzione temporale della frequenza di risonanza $f_1'(t)$ al variare dell'ampiezza $V_{\text{ACpp}}$. Per le tensioni più alte, all'inizio del ringdown l'ampiezza di oscillazione è grande e la frequenza di oscillazione parte da un valore più basso (questo mostra che il coefficiente $\beta$ ha segno negativo); mano a mano che l'oscillazione si smorza nel tempo, tutte le curve risalgono esponenzialmente fino a tornare al valore di piccolo segnale $f_1$. Dividendo gli spostamenti iniziali di frequenza $\Delta f_0$ estratti dal fit ($\Delta f_0 = \SI{-39.7}{\hertz}$ a $\SI{500}{\milli\volt}$, $\SI{-98.7}{\hertz}$ a $\SI{1000}{\milli\volt}$ e $\SI{-163.8}{\hertz}$ a $\SI{2000}{\milli\volt}$) per il quadrato delle rispettive ampiezze iniziali $A_0^2$, otteniamo $\beta = \frac{\Delta f_0}{A_0^2} = \SI{-0.0161}{\hertz/\milli\volt^2}$, in accordo con quello ricavato nella sezione precedente.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{../Duffing/duffing_backbone_e_chirp.png}
+\caption{Evoluzione temporale della frequenza di risonanza $f_1'(t)$ durante il ringdown (in funzione del tempo trascorso dal taglio del gate) per quattro ampiezze: $V_{\text{ACpp}} = \SI{200}{\milli\volt}$ (in verde), $\SI{500}{\milli\volt}$ (in giallo), $\SI{1000}{\milli\volt}$ (in arancio) e $\SI{2000}{\milli\volt}$ (in rosso). Le curve continue rappresentano il fit del modello esponenziale $f_1'(t) = f_1 + \Delta f_0 e^{-t/\tau_f}$.}
+\label{fig:frequenza_tempo_nl}
+\end{figure}
+
+\newpage
+\section{Risonanza interna 1:2}
+\label{sec:distorsione_armonica}
+
+Come mostrato nel paper di Frangi~\cite{frangi2023}, il MEMS è stato progettato in modo che la frequenza di risonanza del primo modo $f_1$ e quella del secondo modo $f_2$ si trovino in un rapporto $1:2$ ($f_2 = 2 f_1$). Quando stimoliamo il MEMS alla frequenza del primo modo $f_1$, stiamo in realtà eccitando anche il secondo modo a frequenza doppia. Questo fenomeno prende il nome di risonanza interna 1:2.
+
+\vspace{0.3cm}
+\noindent Per vedere come nasce questo fenomeno, indichiamo con $x_1(t)$ lo spostamento del primo modo (che nei capitoli precedenti abbiamo chiamato semplicemente $x(t)$ senza pedice) e con $x_2(t)$ lo spostamento del secondo modo. Come riportato nel paper~\cite{frangi2023}, le equazioni dello spostamento dei due modi sono accoppiate;
+\begin{align}
+    \label{eq:rom_accoppiato_modo1}
+    \ddot{x}_1(t) + \frac{\omega_{01}}{Q_1}\dot{x}_1(t) + \omega_1^2 x_1(t) + \alpha_{12} \, x_1(t) x_2(t) &= \frac{\eta}{m_{\text{eff}}} v_{\text{in}}(t) \\[4pt]
+    \label{eq:rom_accoppiato_modo2}
+    \ddot{x}_2(t) + \frac{\omega_{02}}{Q_2}\dot{x}_2(t) + \omega_2^2 x_2(t) + \alpha_{21} \, x_1^2(t) &= 0
+\end{align}
+dove $\omega_1$ e $\omega_2$ sono le pulsazioni di risonanza dei due modi alla tensione di polarizzazione $V_{\text{DC}} = \SI{5.0}{\volt}$, $Q_1$ e $Q_2$ sono i fattori di merito, mentre $\alpha_{12}$ e $\alpha_{21}$ sono i coefficienti di accoppiamento tra i due modi.
+
+\vspace{0.3cm}
+\noindent Come già visto nella sezione~\ref{subsec:variazione_frequenza_ampiezza}, quando la trave oscilla alla pulsazione $\omega_1$ con ampiezza $X_0$, lo spostamento del primo modo è dato da:
+\begin{equation}
+    x_1(t) = X_0 \cos(\omega_1 t)
+\end{equation}
+Guardando l'eq.~\eqref{eq:rom_accoppiato_modo2} del secondo modo, compare il termine $-\alpha_{21} x_1^2(t)$. Sviluppiamo il quadrato di $x_1(t)$ tramite la formula di duplicazione del coseno:
+\begin{equation}
+    -\alpha_{21} x_1^2(t) = -\alpha_{21} X_0^2 \cos^2(\omega_1 t) = -\frac{1}{2} \alpha_{21} X_0^2 - \frac{1}{2} \alpha_{21} X_0^2 \cos(2\omega_1 t)
+\end{equation}
+Oltre ad una componente continua, la vibrazione del primo modo genera una forza sinusoidale a frequenza doppia, la cui ampiezza varia con $X_0^2$. Portando infatti questo termine al secondo membro dell'eq.~\eqref{eq:rom_accoppiato_modo2} (e trascurando la componente continua), l'equazione del secondo modo diventa:
+\begin{equation}
+    \ddot{x}_2(t) + \frac{\omega_{02}}{Q_2}\dot{x}_2(t) + \omega_2^2 x_2(t) = -\frac{1}{2} \alpha_{21} X_0^2 \cos(2\omega_1 t)
+\end{equation}
+Passando nel dominio dei fasori, il modulo dello spostamento del secondo modo $X_2$ vale:
+\begin{equation}
+    \label{eq:modulo_X2}
+    X_2 = \frac{\frac{1}{2}|\alpha_{21}| X_0^2}{\sqrt{\left(\omega_2^2 - (2\omega_1)^2\right)^2 + \left(\frac{\omega_{02} \cdot 2\omega_1}{Q_2}\right)^2}} \propto X_0^2
+\end{equation}
+ed è quindi direttamente proporzionale a $X_0^2$.
+
+\vspace{0.3cm}
+\noindent Cerchiamo ora di legare gli spostamenti dei due modi $x_1(t)$ e $x_2(t)$ alla tensione $v_{\text{out}}(t)$. Ricordiamo che in queste misure abbiamo collegato il circuito di compensazione hardware della sezione~\ref{sec:compensazione_hardware} per cancellare la corrente della capacità parassita $C_p$. Di conseguenza, nel nodo del TIA entra solo la corrente del MEMS $i_m(t) = \eta \, \dot{x}(t)$ e la tensione all'uscita dello stadio invertente vale:
+\begin{equation}
+    v_{\text{out}}(t) = R_{\text{trans}} \, \eta \, \dot{x}(t)
+\end{equation}
+Dunque, $v_{\text{out}}(t)$ è direttamente proporzionale alla velocità della trave. Questo significa che nello spettro di $v_{\text{out}}(t)$ osserveremo una componente alla frequenza fondamentale $f_1$ (dovuta a $\dot{x}_1(t)$), la cui ampiezza in tensione $p_1$ è proporzionale a $X_0$, e una componente a frequenza doppia $f_2 = 2 f_1$ (dovuta a $\dot{x}_2(t)$), la cui ampiezza in tensione $p_2$ è proporzionale a $X_2$ e quindi, per l'eq.~\eqref{eq:modulo_X2}, a $X_0^2$:
+\begin{equation}
+    p_1 \propto X_0, \qquad p_2 \propto X_2 \propto X_0^2
+\end{equation}
+Come abbiamo visto nella sezione~\ref{sec:regime_non_lineare} (in fig.~\ref{fig:ampiezza_compressione_nl}), finché la tensione d'ingresso resta nel regime di piccolo segnale, l'ampiezza di oscillazione $X_0$ cresce linearmente con $V_{\text{ACpp}}$, quindi possiamo esprimere i picchi $p_1$ e $p_2$ come:
+\begin{align}
+    \label{eq:legge_p1_lineare}
+    p_1 = a_1 \, V_{\text{ACpp}} \\[4pt]
+    \label{eq:legge_p2_quadratica}
+    p_2 = a_2 \, V_{\text{ACpp}}^2
+\end{align}
+dove $a_1$ e $a_2$ sono i coefficienti di proporzionalità. Quindi se calcoliamo il rapporto $p_2 / p_1$ per valutare quanto pesa la componente del secondo modo rispetto a quella del primo, otteniamo una retta che cresce linearmente con $V_{\text{ACpp}}$:
+\begin{equation}
+    \label{eq:legge_hd2_lineare}
+    \frac{p_2(V_{\text{ACpp}})}{p_1(V_{\text{ACpp}})} = \frac{a_2 \, V_{\text{ACpp}}^2}{a_1 \, V_{\text{ACpp}}} = \left(\frac{a_2}{a_1}\right) V_{\text{ACpp}}
+\end{equation}
+
+\noindent Per verificare sperimentalmente le relazioni~\eqref{eq:legge_p1_lineare}, \eqref{eq:legge_p2_quadratica} e \eqref{eq:legge_hd2_lineare}, abbiamo fissato il MEMS a $V_{\text{DC}} = \SI{5}{\volt}$ ed eccitato il dispositivo con una forzante sinusoidale a frequenza $f_{\text{in}} = f_1$, facendo variare l'ampiezza $V_{\text{ACpp}}$ da $\SI{40}{\milli\volt}$ fino a $\SI{1600}{\milli\volt}$. Tramite uno script apposito, abbiamo calcolato la FFT della tensione di uscita $v_{\text{out}}(t)$ ed estratto le ampiezze dei picchi $p_1$ (a $f_1 = \SI{417.8}{\kilo\hertz}$) e $p_2$ (a $f_2 = \SI{835.6}{\kilo\hertz}$).
+
+\vspace{0.3cm}
+\noindent In fig.~\ref{fig:distorsione_armoniche_vac} è riportato il grafico delle ampiezze $p_1$ (punti blu) e $p_2$ (quadrati rossi) misurate all'uscita in funzione di $V_{\text{ACpp}}$, insieme alle curve dei due fit, lineare e quadratico, mentre in fig.~\ref{fig:distorsione_hd2_rapporto} è riportato l'andamento del rapporto percentuale $p_2 / p_1$ al variare di $V_{\text{ACpp}}$.
+
+\newpage
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.70\textwidth]{../Distorsione/distorsione_armoniche_vs_vac.png}
+\caption{Ampiezze delle componenti di $v_{\text{out}}(t)$ in funzione dell'ampiezza di eccitazione $V_{\text{ACpp}}$.}
+\label{fig:distorsione_armoniche_vac}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.65\textwidth]{../Distorsione/distorsione_hd2_rapporto.png}
+\caption{Rapporto di distorsione di secondo modo $p_2 / p_1$ (in percentuale) in funzione di $V_{\text{ACpp}}$.}
+\label{fig:distorsione_hd2_rapporto}
+\end{figure}
+
+\newpage
+
+\section{Variazione della frequenza di risonanza con la tensione di polarizzazione \texorpdfstring{$V_{\text{DC}}$}{VDC}}
+\label{sec:frequenza_vdc}
+
+Nei capitoli precedenti abbiamo mantenuto fissa la tensione di polarizzazione della trave al valore $V_{\text{DC}} = \SI{5}{\volt}$. In questa sezione studiamo come varia la frequenza di risonanza del primo modo $f_1$ al variare di $V_{\text{DC}}$, verificando la relazione teorica che abbiamo introdotto nella sezione~\ref{sec:forze_elettrostatiche}.
+
+\vspace{0.3cm}
+\noindent Sappiamo che la forza elettrostatica esercitata sulla trave dall'elettrodo di drive è:
+\begin{equation}
+    \label{eq:forza_elettrostatica_richiamo_vdc}
+    F_e(x, t)= \frac{1}{2} \frac{\partial C_d(x)}{\partial x} \left( V_{\text{DC}} - v_{\text{in}}(t) \right)^2
+\end{equation}
+ Nelle misure del ringdown, come visto nella sezione~\ref{sec:ringdown}, per $t < 0$ il generatore mette in oscillazione la trave, mentre all'istante $t = 0$ si interrompe la forzante ($v_{\text{in}}(t) = 0$). Durante il ringdown ($t > 0$), la tensione ai capi del condensatore formato da trave ed elettrodo di drive rimane solo $V_{\text{DC}}$, e la forza elettrostatica~\eqref{eq:forza_elettrostatica_richiamo_vdc} si riduce a:
+\begin{equation}
+    F_e(x) = \frac{1}{2} \frac{\partial C_d(x)}{\partial x} V_{\text{DC}}^2
+\end{equation}
+In regime di piccolo segnale ($x(t) \ll g_0$), sviluppiamo la derivata della capacità $C_d$ al primo ordine attorno alla posizione di riposo $x = 0$:
+\begin{equation}
+    \frac{\partial C_d(x)}{\partial x} \approx \left. \frac{\partial C_d}{\partial x} \right|_{x=0} + \left. \frac{\partial^2 C_d}{\partial x^2} \right|_{x=0} x(t)
+\end{equation}
+Sostituendo questo sviluppo in $F_e(x)$ otteniamo:
+\begin{equation}
+    F_e(x) = \underbrace{\frac{1}{2} \left. \frac{\partial C_d}{\partial x} \right|_0 V_{\text{DC}}^2}_{F_{\text{DC}}} + \underbrace{\left( \frac{1}{2} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0 V_{\text{DC}}^2 \right)}_{k_e(V_{\text{DC}})} x(t)
+\end{equation}
+Come visto nella sezione~\ref{sec:forze_elettrostatiche}, il termine $F_{\text{DC}}$ causa una deflessione statica, mentre il termine $k_e(V_{\text{DC}}) x(t)$ è proporzionale allo spostamento $x(t)$. Inserendo $F_e(x)$ nell'equazione del moto~\eqref{eq:meccanica_1dof} con forzante nulla,  ritroviamo l'eq.~\eqref{eq:moto_keff}:
+\begin{equation}
+    m_{\text{eff}} \ddot{x}(t) + b_{\text{eff}} \dot{x}(t) + \underbrace{\left( k_m - k_e(V_{\text{DC}}) \right)}_{k_{\text{eff}}(V_{\text{DC}})} x(t) = 0
+\end{equation}
+Quindi la rigidezza efficace complessiva della trave diminuisce con il quadrato di $V_{\text{DC}}$:
+\begin{equation}
+    \label{eq:keff_vdc_cap12}
+    k_{\text{eff}}(V_{\text{DC}}) = k_m - k_e(V_{\text{DC}}) = k_m - \frac{1}{2} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0 V_{\text{DC}}^2
+\end{equation}
+
+\vspace{0.3cm}
+\noindent 
+Possiamo ricavare ora la pulsasione di risonanza tenendo conto dell'effetto di $V_{\text{DC}}$:
+\begin{equation}
+    \omega_1^2(V_{\text{DC}}) = \frac{k_{\text{eff}}(V_{\text{DC}})}{m_{\text{eff}}} = \omega_{01}^2 - \frac{1}{2 m_{\text{eff}}} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0 V_{\text{DC}}^2
+\end{equation}
+dove $\omega_{01} = \sqrt{\frac{k_m}{m_{\text{eff}}}} = 2\pi f_{01}$ è la pulsazione di risonanza puramente meccanica con $V_{\text{DC}} = \SI{0}{\volt}$. Passando alle frequenze, otteniamo:
+\begin{equation}
+    \label{eq:legge_quadratica_f1_vdc}
+    f_1^2(V_{\text{DC}}) = f_{01}^2 - \gamma \, V_{\text{DC}}^2
+\end{equation}
+dove abbiamo indicato con $\gamma$ il coefficiente:
+\begin{equation}
+    \gamma = \frac{1}{8\pi^2 m_{\text{eff}}} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0
+\end{equation}
+Confrontando l'eq.~\eqref{eq:legge_quadratica_f1_vdc} con l'equazione del paper~\cite{frangi2023}:
+\begin{equation}
+    \omega_1^2(V_{\text{DC}}) = \omega_{01}^2 - \varepsilon_0 c_{1,DD}^{(1)} V_{\text{DC}}^2
+\end{equation}
+il coefficiente $\gamma$ che abbiamo introdotto secondo il paper vale:
+\begin{equation}
+    \label{eq:gamma_teorico_frangi}
+    \gamma_{\text{teor}} = \frac{\varepsilon_0 c_{1,DD}^{(1)}}{4\pi^2}
+\end{equation}
+Dalla tabella~2 di~\cite{frangi2023}, $c_{1,DD}^{(1)} = \SI{21.11}{\micro\newton/(\volt^2 \cdot \pico\farad)}$; $\varepsilon_0 = \SI{8.854e-12}{\farad/\meter} = \SI{8.854e-6}{\pico\farad/\micro\meter}$; quindi $\varepsilon_0 c_{1,DD}^{(1)} = \SI{1.869e8}{\radian^2/(\second^2 \cdot \volt^2)}$. Sostituendo questo valore nell'eq.~\eqref{eq:gamma_teorico_frangi}:
+\begin{equation}
+    \gamma_{\text{teor}} = \mathbf{\SI{4.735e6}{\hertz^2/\volt^2}}
+\end{equation}
+Per verificare sperimentalmente l'eq.~\eqref{eq:legge_quadratica_f1_vdc}, abbiamo utilizzato lo stesso setup di misura del ringdown descritto nella sezione~\ref{sec:ringdown}. Abbiamo mantenuto il MEMS in regime di piccolo segnale e abbiamo acquisito dall'oscilloscopio la risposta libera della trave per diversi valori di $V_{\text{DC}}$. Per ciascuna traccia, abbiamo estratto mediante uno script la frequenza di oscillazione libera $f_1$.
+
+\newpage
+\noindent Passando da $V_{\text{DC}} = \SI{3.0}{\volt}$ a $V_{\text{DC}} = \SI{6.0}{\volt}$, la frequenza di oscillazione misurata scende da $\SI{417944}{\hertz}$ fino a $\SI{417781}{\hertz}$, con una riduzione complessiva di $\SI{163}{\hertz}$. In fig.~\ref{fig:f1_quadro_vdc_quadro} sono riportati i punti sperimentali di $f_1^2$ in funzione di $V_{\text{DC}}^2$, insieme alla retta del fit lineare (in rosso) e alla retta teorica dal modello di Frangi~\cite{frangi2023}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.84\textwidth]{../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png}
+\caption{Quadrato della requenza di risonanza $f_1^2$ in funzione del quadrato della tensione di polarizzazione $V_{\text{DC}}^2$.}
+\label{fig:f1_quadro_vdc_quadro}
+\end{figure}
+
+\noindent Dal fit lineare dei dati sperimentali con l'eq.~\eqref{eq:legge_quadratica_f1_vdc} otteniamo:
+\begin{equation}
+    \gamma_{\text{sper}} = \mathbf{\SI{5.035e6}{\hertz^2/\volt^2}}
+\end{equation}
+In confronto con il valore teorico di $\gamma_{\text{teor}} = \SI{4.735e6}{\hertz^2/\volt^2}$, osserviamo una differenza del $6.3\%$.
+
+\newpage
+
+\section{Riduzione del tempo di decadimento mediante eccitazione in controfase}
+\label{sec:decay_controfase}
+
+Nella sezione~\ref{sec:ringdown} abbiamo visto che, quando spegniamo la forzante in ingresso ($v_{\text{in}}(t) = 0$), la trave non si ferma istantaneamente ma continua ad oscillare liberamente. In questo capitolo presentiamo una tecnica per ridurre il tempo che impiega per il MEMS per smettere di oscillare, basata sull'applicazione di una tensione sinusoidale in controfase rispetto al moto del risonatore~\cite{wu2021}.
+
+\subsection{Decadimento spontaneo senza controfase}
+\label{subsec:risoluzione_omogenea_decay}
+
+Riportiamo l'equazione differenziale lineare del moto del primo modo della trave (a tensione di polarizzazione fissa $V_{\text{DC}} = \SI{5}{\volt}$), ricavata nella sezione~\ref{sec:forze_elettrostatiche} (eq.~\eqref{eq:moto_keff}):
+\begin{equation}
+    \label{eq:moto_base_decay}
+    m_{\text{eff}} \ddot{x}(t) + b_{\text{eff}} \dot{x}(t) + k_{\text{eff}} x(t) = F_{\text{drive}}(t) = \eta \, v_{\text{in}}(t)
+\end{equation}
+Dividendo per la massa efficace $m_{\text{eff}}$ e sapendo che la pulsazione di risonanza a $V_{\text{DC}} = \SI{5}{\volt}$ vale $\omega_1^2 = \frac{k_{\text{eff}}}{m_{\text{eff}}} = \frac{1}{L_m C_m}$ mentre il termine di smorzamento vale $\frac{b_{\text{eff}}}{m_{\text{eff}}} = \frac{R_m}{L_m} = \frac{\omega_1}{Q}$, l'equazione diventa:
+\begin{equation}
+    \label{eq:ode_canonica_decay}
+    \ddot{x}(t) + \frac{\omega_1}{Q} \dot{x}(t) + \omega_1^2 x(t) = \frac{\eta}{m_{\text{eff}}} v_{\text{in}}(t)
+\end{equation}
+
+\vspace{0.3cm}
+\noindent Studiamo per prima cosa la risposta libera (equazione omogenea associata), che ci dice come si comporta il MEMS quando il generatore d'ingresso è spento ($v_{\text{in}}(t) = 0$):
+\begin{equation}
+    \label{eq:ode_omogenea_decay}
+    \ddot{x}(t) + \frac{\omega_1}{Q} \dot{x}(t) + \omega_1^2 x(t) = 0
+\end{equation}
+Per risolvere questa equazione differenziale del secondo ordine, cerchiamo una soluzione esponenziale nella forma $x(t) = e^{\lambda t}$. Sostituendo questa espressione di $x(t)$, otteniamo che:
+\begin{equation}
+    \lambda^2 + \frac{\omega_1}{Q} \lambda + \omega_1^2 = 0
+\end{equation}
+Applicando la formula risolutiva delle equazioni di secondo grado, le due radici $\lambda_{1,2}$ sono:
+\begin{equation}
+    \lambda_{1,2} = -\frac{\omega_1}{2Q} \pm \sqrt{\left(\frac{\omega_1}{2Q}\right)^2 - \omega_1^2} = -\frac{\omega_1}{2Q} \pm \omega_1 \sqrt{\frac{1}{4Q^2} - 1}
+\end{equation}
+Nel nostro risonatore il fattore di merito è molto elevato ($Q \approx 2800$), per cui il termine $\frac{1}{4Q^2} = 3.2 \times 10^{-8}$ è del tutto trascurabile rispetto a $1$. Il discriminante è quindi negativo e le due radici dell'equazione caratteristica sono complesse coniugate:
+\begin{equation}
+    \lambda_{1,2} = -\frac{\omega_1}{2Q} \pm j\omega_d, \qquad \text{con} \quad \omega_d = \omega_1 \sqrt{1 - \frac{1}{4Q^2}} \approx \omega_1
+\end{equation}
+Indicando con $\tau = \frac{2Q}{\omega_1}$ la costante di tempo di decadimento (da cui $\frac{\omega_1}{2Q} = \frac{1}{\tau}$, come già visto nell'eq.~\eqref{eq:calcolo_Q_sperimentale}), le radici si scrivono come $\lambda_{1,2} = -\frac{1}{\tau} \pm j\omega_1$ e la soluzione dell'omogenea è:
+\begin{equation}
+    \label{eq:sol_omogenea_generale}
+    x_{\text{om}}(t) = e^{-t/\tau} \Big( C_1 \cos(\omega_1 t) + C_2 \sin(\omega_1 t) \Big)
+\end{equation}
+dove le costanti reali $C_1$ e $C_2$ dipendono dalle condizioni iniziali di posizione e velocità. Se prima del ringdown il MEMS è stato messo in oscillazione da un generatore $\propto \sin(\omega_1 t)$ alla frequenza di risonanza, quindi $f_{in}=f_1$, nel ramo RLC serie $L_m$ e $C_m$ si annullano e l'impedenza è puramente resistiva; quindi la corrente $i_m(t) = \eta \, \dot{x}(t)$ e la velocità $\dot{x}(t)$ sono in fase con il generatore e oscillano come $\sin(\omega_1 t)$. Poiché lo spostamento $x(t)$ è l'integrale della velocità (ed è quindi in ritardo di $90^\circ$, cioè oscilla come $-\cos(\omega_1 t)$), abbiamo $C_1 = -X_0$ e $C_2 = 0$, e otteniamo l'equazione dello spostamento durante il ringdown~\cite{wu2021}:
+\begin{equation}
+    \label{eq:ringdown_libero_x}
+    x_{\text{lib}}(t) = -X_0 \, e^{-t/\tau} \cos(\omega_1 t)
+\end{equation}
+Dall'eq.~\eqref{eq:ringdown_libero_x} possiamo calcolare quanto tempo impiega il MEMS a spegnersi spontaneamente. Se imponiamo che l'ampiezza $X_0 e^{-t/\tau}$ scenda all'$1\%$ del valore iniziale $X_0$:
+\begin{equation}
+    t_{1\%} = \tau \ln(100) = 4.61 \, \tau
+\end{equation}
+Con una costante di tempo $\tau = \SI{2.10}{\milli\second}$, si ha $t_{1\%} = \SI{9.68}{\milli\second}$.
+
+\subsection{Teoria dell'eccitazione in controfase e modello matematico}
+\label{subsec:teoria_controfase_unificata}
+
+Concentriamoci ora su come ridurre il tempo di spegnimento applicando una forzante $v_{\text{in}}(t)$ alla frequenza di risonanza $f_1$ ma in controfase rispetto al moto della trave.
+
+\vspace{0.3cm}
+\noindent Ricaviamo la velocità $\dot{x}(t)$ durante il ringdown derivando l'eq.~\eqref{eq:ringdown_libero_x} rispetto al tempo:
+\begin{equation}
+    \label{eq:velocita_ringdown}
+    \dot{x}(t) = \frac{X_0}{\tau} e^{-t/\tau} \cos(\omega_1 t) + \omega_1 X_0 \, e^{-t/\tau} \sin(\omega_1 t) \approx \omega_1 X_0 \, e^{-t/\tau} \sin(\omega_1 t)
+\end{equation}
+La corrente nel ramo RLC serie vale quindi $i_m(t) = \eta \, \dot{x}(t) = \eta \omega_1 X_0 \, e^{-t/\tau} \sin(\omega_1 t)$ e la tensione d'uscita vale $v_{\text{out}}(t) = R_{\text{trans}} \, i_m(t) = R_{\text{trans}} \eta \omega_1 X_0 \, e^{-t/\tau} \sin(\omega_1 t)$, tutte in fase con $\sin(\omega_1 t)$. Per frenare la trave dobbiamo esercitare una forza $F_{\text{drive}}(t) = \eta \, v_{\text{in}}(t)$ di segno opposto alla velocità $\dot{x}(t)$ (sfasata quindi di $180^\circ$, ovvero in controfase). Quindi, all'istante $t = 0$ in cui attiviamo la frenatura in controfase, applichiamo all'ingresso la tensione:
+\begin{equation}
+    \label{eq:vin_controfase_gradino}
+    v_{\text{in}}(t) = -V_{\text{AC}} \sin(\omega_1 t) \cdot u(t)
+\end{equation}
+dove abbiamo indicato con $u(t)$ la funzione gradino che vale:
+\begin{equation}
+    u(t) = \begin{cases} 0 & \text{per } t < 0 \quad \text{(generatore spento)} \\ 1 & \text{per } t \ge 0 \quad \text{(generatore in controfase attivo)} \end{cases}
+\end{equation}
+
+\vspace{0.3cm}
+\noindent Sostituendo l'ingresso~\eqref{eq:vin_controfase_gradino} nell'equazione differenziale~\eqref{eq:ode_canonica_decay}, otteniamo l'equazione valida per tutto l'asse dei tempi ($t < 0$ e $t \ge 0$):
+\begin{equation}
+    \label{eq:ode_completa_gradino}
+    \ddot{x}(t) + \frac{\omega_1}{Q} \dot{x}(t) + \omega_1^2 x(t) = -\frac{\eta V_{\text{AC}}}{m_{\text{eff}}} \sin(\omega_1 t) \cdot u(t)
+\end{equation}
+Risolviamo ora l'eq.~\eqref{eq:ode_completa_gradino} per $t \ge 0$, che è un'equazione differenziale non omogenea. La soluzione è data dalla somma dell'omogenea $x_{\text{om}}(t)$ (già trovata nell'eq.~\eqref{eq:sol_omogenea_generale}) e di una particolare $x_p(t)$~\cite{wu2021}:
+\begin{equation}
+    \label{eq:somma_om_part}
+    x(t) = x_{\text{om}}(t) + x_p(t)
+\end{equation}
+Vogliamo una soluzione particolare nella forma:
+\begin{equation}
+    x_p(t) = A \cos(\omega_1 t) + B \sin(\omega_1 t)
+\end{equation}
+Calcoliamo la derivata prima e la derivata seconda rispetto al tempo:
+\begin{align}
+    \dot{x}_p(t) &= -\omega_1 A \sin(\omega_1 t) + \omega_1 B \cos(\omega_1 t) \\[4pt]
+    \ddot{x}_p(t) &= -\omega_1^2 A \cos(\omega_1 t) - \omega_1^2 B \sin(\omega_1 t) = -\omega_1^2 x_p(t)
+\end{align}
+Sostituendo $x_p(t)$, $\dot{x}_p(t)$ e $\ddot{x}_p(t)$ nell'eq.~\eqref{eq:ode_completa_gradino}, otteniamo:
+\begin{equation}
+    \frac{\omega_1}{Q} \Big( -\omega_1 A \sin(\omega_1 t) + \omega_1 B \cos(\omega_1 t) \Big) = -\frac{\eta V_{\text{AC}}}{m_{\text{eff}}} \sin(\omega_1 t)
+\end{equation}
+Se uguagliamo i coefficienti di $\cos(\omega_1 t)$ e di $\sin(\omega_1 t)$, otteniamo il sistema:
+\begin{equation}
+    \begin{cases}
+        \dfrac{\omega_1^2}{Q} B = 0 \implies B = 0 \\[10pt]
+        -\dfrac{\omega_1^2}{Q} A = -\dfrac{\eta V_{\text{AC}}}{m_{\text{eff}}} \implies A = \dfrac{\eta V_{\text{AC}} Q}{m_{\text{eff}} \omega_1^2} = \dfrac{\eta V_{\text{AC}} Q}{k_{\text{eff}}}
+    \end{cases}
+\end{equation}
+Definiamo con $X_\infty$ l'ampiezza di oscillazione a cui il MEMS si stabilizzerebbe a regime ($t \to \infty$) sotto l'azione della forzante $V_{\text{AC}}$:
+\begin{equation}
+    \label{eq:def_X_inf}
+    X_\infty = \frac{\eta V_{\text{AC}} Q}{k_{\text{eff}}}
+\end{equation}
+Risulta $A = X_\infty$ e $B = 0$, quindi la soluzione particolare vale:
+\begin{equation}
+    \label{eq:sol_particolare_xp}
+    x_p(t) = X_\infty \cos(\omega_1 t)
+\end{equation}
+Sostituendo la soluzione dell'omogenea~\eqref{eq:sol_omogenea_generale} e la soluzione particolare~\eqref{eq:sol_particolare_xp} nella~\eqref{eq:somma_om_part}, la soluzione completa per $t \ge 0$ è:
+\begin{equation}
+    \label{eq:sol_totale_c1c2}
+    x(t) = e^{-t/\tau}\Big( C_1 \cos(\omega_1 t) + C_2 \sin(\omega_1 t) \Big) + X_\infty \cos(\omega_1 t)
+\end{equation}
+Per determinare le costanti $C_1$ e $C_2$, imponiamo la continuità dello spostamento $x(t)$ e della velocità $\dot{x}(t)$ della trave a $t = 0$. Valutando le eq.~\eqref{eq:ringdown_libero_x} e~\eqref{eq:velocita_ringdown} in $t = 0^-$:
+\begin{equation}
+    x(0^-) = -X_0 \cos(0) = -X_0, \qquad \dot{x}(0^-) = \omega_1 X_0 \sin(0) = 0
+\end{equation}
+Valutando invece l'eq.~\eqref{eq:sol_totale_c1c2} in $t = 0^+$ e imponendo $x(0^+) = x(0^-) = -X_0$, otteniamo:
+\begin{equation}
+    x(0^+) = C_1 + X_\infty = -X_0 \implies C_1 = -\left(X_0 + X_\infty\right)
+\end{equation}
+mentre derivando l'eq.~\eqref{eq:sol_totale_c1c2} e imponendo $\dot{x}(0^+) = \dot{x}(0^-) = 0$, otteniamo $\dot{x}(0^+) = \omega_1 C_2 \cos(0) = 0 \implies C_2 = 0$. La risposta completa per $t \ge 0$ è quindi:
+\begin{equation}
+    \label{eq:sol_x_t_mag_0}
+    x(t) = -\Big[ \left(X_0 + X_\infty\right) e^{-t/\tau} - X_\infty \Big] \cos(\omega_1 t)
+\end{equation}
+Separiamo il contributo legato allo stato iniziale $X_0$ da quello legato alla forzante $X_\infty$:
+\begin{equation}
+    x(t) = \underbrace{-X_0 \, e^{-t/\tau} \cos(\omega_1 t)}_{\text{risposta libera (presente per ogni } t\text{)}} + \underbrace{X_\infty \left(1 - e^{-t/\tau}\right) \cos(\omega_1 t)}_{\text{risposta forzata (presente per } t \ge 0\text{)}}
+\end{equation}
+possiamo unificare i due intervalli $t < 0$ e $t \ge 0$ moltiplicando la parte della risposta forzata per il gradino $u(t)$: otteniamo un'unica equazione valida per tutto l'asse temporale:
+\begin{equation}
+    \label{eq:sol_unificata_x}
+    x(t) = -\Big[ X_0 \, e^{-t/\tau} - X_\infty \left(1 - e^{-t/\tau}\right) u(t) \Big] \cos(\omega_1 t)
+\end{equation}
+L'espressione completa della tensione d'uscita su tutto l'asse dei tempi è quindi:
+\begin{equation}
+    \label{eq:vout_unificata_completa}
+    v_{\text{out}}(t) = \underbrace{\Big[ X_0 \, e^{-t/\tau} - X_\infty \left(1 - e^{-t/\tau}\right) u(t) \Big]}_{A_{\text{exp}}(t)} \sin(\omega_1 t)
+\end{equation}
+dove $A_{\text{exp}}(t)$ è la funzione esponenziale che modula la portante sinusoidale.
+\newpage
+
+\noindent Vediamo ora come l'eq~\eqref{eq:vout_unificata_completa} spiega contemporaneamente tutte e tre le regioni temporali mostrate nei grafici sperimentali di fig.~\ref{fig:controfase_dinamica_completa} e fig.~\ref{fig:esponenziale_controfase}:
+\begin{enumerate}
+    \item \textbf{Prima fase ($t < 0$, regione gialla in fig.~\ref{fig:controfase_dinamica_completa}), ringdown senza controfase} \\
+    Per $t < 0$ il generatore in controfase è ancora spento. Nell'eq.~\eqref{eq:vout_unificata_completa} rimane:
+    \begin{equation}
+        A_{\text{exp}}(t) = X_0 \, e^{-t/\tau} > 0 \qquad (t < 0)
+    \end{equation}
+    Il segnale di uscita $v_{\text{out}}(t)$ ci mostra quindi il normale decadimento esponenziale libero con costante di tempo $\tau$, partendo da un'ampiezza più alta per $t < 0$ (dove $-t/\tau > 0$) e scendendo fino al valore $X_0$ a $t = 0$.
+
+    \item \textbf{Seconda fase ($0 \le t \le t^*$, regione azzurra in fig.~\ref{fig:controfase_dinamica_completa}), attiviamo la controfase e il mems frena fino a fermarsi} \\
+    All'istante $t = 0$ attiviamo la controfase ($u(t) = 1$). Otteniamo:
+    \begin{equation}
+        \label{eq:A_exp_t_pos}
+        A_{\text{exp}}(t) = \left(X_0 + X_\infty\right) e^{-t/\tau} - X_\infty \qquad (t \ge 0)
+    \end{equation}
+    L'esponenziale non sta più decadendo da $+X_0$ verso lo $0$, come accadeva per la ringdown senza controfase, ma sta scendendo da $+X_0$ verso $-X_\infty$, con una derivata iniziale pari a
+    \begin{equation}
+        \left.\frac{d A_{\text{exp}}}{dt}\right|_{t=0} = -\frac{X_0 + X_\infty}{\tau} = -\frac{X_0}{\tau}\left(1 + \frac{X_\infty}{X_0}\right)
+    \end{equation}
+    ovvero $\left(1 + \frac{X_\infty}{X_0}\right)$ volte più veloce della pendenza $-\frac{X_0}{\tau}$ del ringdown senza controfase. Calcoliamo l'istante $t = t^*$ in cui l'uscita interseca lo 0, ponendo $A_{\text{exp}}(t^*) = 0$. Otteniamo che:
+    \begin{equation}
+        \label{eq:t_star_formula}
+        t^* = \tau \ln\left(1 + \frac{X_0}{X_\infty}\right)
+    \end{equation}
+
+    \item \textbf{Terza fase ($t > t^*$, regione arancione in fig.~\ref{fig:controfase_dinamica_completa}), ricrescita fino a regime} \\
+    Se dopo l'istante $t = t^*$ il generatore in controfase non viene spento ma resta attivo ($u(t) = 1$), il sistema continua a seguire sempre l'eq~\eqref{eq:A_exp_t_pos}. Ma $A_{\text{exp}}(t)$ diventa negativo, quindi l'uscita:
+    \begin{equation}
+        v_{\text{out}}(t) = -|A_{\text{exp}}(t)| \sin(\omega_1 t) = |A_{\text{exp}}(t)| \sin(\omega_1 t + \pi)
+    \end{equation}
+    L'uscita ha un'inversione di fase di $180^\circ$ e riscresce esponenzialmente fino a raggiungere $X_\infty$.
+\end{enumerate}
+
+\newpage
+
+\subsection{Risultati sperimentali e verifica del modello}
+\label{subsec:risultati_sperimentali_decay}
+
+Per verificare sperimentalmente il modello ricavato, abbiamo polarizzato il MEMS a $V_{\text{DC}} = \SI{5}{\volt}$, abbiamo portato la trave in oscillazione alla frequenza di risonanza $f_1$, abbiamo interrotto l'eccitazione iniziale lasciando iniziare il ringdown, e all'istante $t = 0$, abbiamo attivato l'alimentazione in controfase.
+
+\vspace{0.3cm}
+\noindent In fig.~\ref{fig:controfase_dinamica_completa} è mostrato nel il segnale $v_{\text{in}}(t)$ (nullo per $t < 0$ e attivo per $t \ge 0$), e nel pannello inferiore sono riportati il segnale di uscita del MEMS $v_{\text{out}}(t)$ (in grigio) e il suo inviluppo $|A_{\text{exp}}(t)|$ (in blu). In fig.~\ref{fig:esponenziale_controfase} lo stesso segnale di uscita $v_{\text{out}}(t)$ è sovrapposto a $A_{\text{exp}}(t) = (X_0 + X_\infty)e^{-t/\tau} - X_\infty$ (in rosso), mettendo in evidenza l'esponenziale che attraversa lo zero in $t^*$ e prosegue verso $-X_\infty$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{../Decay/grafici/controfase_dinamica_completa.png}
+\caption{Dinamica temporale completa della prova in controfase: alimentazione $v_{\text{in}}(t)$ (in alto) e uscita $v_{\text{out}}(t)$ con inviluppo $|A_{\text{exp}}(t)|$ (in basso).}
+\label{fig:controfase_dinamica_completa}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{../Decay/grafici/esponenziale_controfase.png}
+\caption{Uscita $v_{\text{out}}(t)$ e $A_{\text{exp}}(t) = (X_0 + X_\infty)e^{-t/\tau} - X_\infty$ (in rosso).}
+\label{fig:esponenziale_controfase}
+\end{figure}
+
+\newpage
+
+\noindent Fittando l'inviluppo sperimentale con l'equazione esponenziale teorica, abbiamo ricavato:
+\begin{equation}
+    X_0 = \SI{14.21}{\milli\volt} \qquad X_\infty = \SI{28.31}{\milli\volt} \qquad \tau = \SI{2.103}{\milli\second}
+\end{equation}
+Se sostituiamo i valori ottenuti di $X_0$, $X_\infty$ e $\tau$ nell'eq.~\eqref{eq:t_star_formula}, possiamo calcolare il tempo di spegnimento teorico:
+\begin{equation}
+    t_{\text{teor}}^* = \tau \ln\left(1 + \frac{X_0}{X_\infty}\right) = \mathbf{\SI{0.855}{\milli\second}}
+\end{equation}
+Invece, il tempo di spegnimento misurato direttamente sulla traccia dell'oscilloscopio è $t_{\text{sper}}^* = \mathbf{\SI{0.853}{\milli\second}}$.
+
+\vspace{0.3cm}
+\noindent In fig.~\ref{fig:simulazione_ode_controfase} è riportato il confronto tra tre andamenti: in grigio il ringdown senza controfase, in blu l'andamento con controfase sempre attiva, e in verde l'andamento che si ottiene interrompendo la controfase all'istante di spegnimento $t^* = \SI{0.85}{\milli\second}$: il MEMS si ferma a zero senza ripartire~\cite{wu2021}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{../Decay/grafici/simulazione_ode_controfase.png}
+\caption{Confronto tra decadimento spontaneo, andamento con controfase sempre attiva (in blu) e andamento con interruzione della controfase a $t^* = \SI{0.85}{\milli\second}$ (in verde).}
+\label{fig:simulazione_ode_controfase}
+\end{figure}
+
+\newpage
+
+\section{Fase di spegnimento del gate, transitorio elettrico parassita e impatto sull'ampiezza iniziale del ringdown}
+\label{sec:variazione_fase_gate}
+
+Il generatore di $v_{\text{in}}(t)$ lavora in modalità burst, controllata da un segnale logico (gate). In questo capitolo analizziamo che cosa rappresenta la fase $\phi$ impostata sul generatore, come influisce sull'oscillazione parassita che si verifica nel momento di spegnimento del gate, e verifichiamo infine se variare $\phi$ altera l'ampiezza iniziale del ringdown $A_0$.
+
+\vspace{0.3cm}
+\noindent Innanzitutto la fase $\phi$ che impostiamo sul generatore (Agilent 33220A) è la fase di arresto di $v_{\text{in}}(t)$ rispetto ai fronti logici del gate. Finché il segnale di gate è alto ($t < 0$), il generatore eroga un numero intero di cicli sinusoidali a frequenza $f_{\text{in}}$:
+\begin{equation}
+    \label{eq:vin_burst_pre_gate}
+    v_{\text{in}}(t) = V_{\text{AC}} \sin(\omega_{\text{in}} t + \phi)
+\end{equation}
+Essendo il numero di cicli intero, l'angolo $\phi$ fissa il punto esatto del ciclo sinusoidale in cui si trova la tensione $v_{\text{in}}(t)$ al fronte di discesa del gate ($t = 0$). Se valutiamo l'eq.~\eqref{eq:vin_burst_pre_gate} e la sua derivata a $t=0$ otteniamo:
+\begin{align}
+    \label{eq:vin_zero_meno}
+    v_{\text{in}}(0) &= V_{\text{AC}} \sin(\phi) \\[4pt]
+    \label{eq:dvin_dt_zero_meno}
+    \left.\frac{dv_{\text{in}}(t)}{dt}\right|_{t=0} &= \omega_{\text{in}} V_{\text{AC}} \cos(\phi)
+\end{align}
+Inoltre a partire dall'istante in cui c'è il fronte di discesa del gate, il generatore congela l'ultimo valore di tensione raggiunto in $t = 0$, mantenendo sull'elettrodo di drive per tutto il ringdown un valore di tensione continuo pari a:
+\begin{equation}
+    \label{eq:vpost_def}
+    v_{\text{in}}(t \ge 0) = V_{\text{post}}(\phi) = V_{\text{AC}} \sin(\phi)
+\end{equation}
+
+\noindent In fig.~\ref{fig:stacco_gate_fase_vin} abbiamo verificato sperimentalmente l'eq.~\eqref{eq:vpost_def} misurando sull'oscilloscopio $V_{\text{post}}(\phi)$ da $-360^\circ$ a $+360^\circ$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{../variazione fase/grafici/vpost_vs_fase.png}
+\caption{Tensione continua $V_{\text{post}}(\phi) = V_{\text{AC}}\sin(\phi)$ mantenuta dal generatore di $v_{\text{in}}(t)$ dopo il fronte di discesa del gate, in funzione di $\phi$.}
+\label{fig:stacco_gate_fase_vin}
+\end{figure}
+\newpage
+
+\noindent Dalle eq.~\eqref{eq:vin_zero_meno}--\eqref{eq:dvin_dt_zero_meno} capiamo subito perché staccare il gate con $\phi = 0^\circ$ oppure con $\phi = \pm 90^\circ$ non è la stessa cosa dal punto di vista del transitorio elettrico sulla capacità parassita $C_p$. All'istante di spegnimento del gate, la tensione d'ingresso si blocca al valore costante $V_{\text{post}}$ e la sua derivata si annulla. Questo porta ad un gradino della corrente parassita attraverso $C_p$:
+\begin{equation}
+    \label{eq:salto_corrente_cp}
+    \Delta i_p(\phi) = i_p(0^+) - i_p(0^-) = -C_p \left.\frac{dv_{\text{in}}}{dt}\right|_{t=0^-} = -\omega_{\text{in}} C_p V_{\text{AC}} \cos(\phi)
+\end{equation}
+Ci aspettiamo quindi di avere un massimo a $\phi = 0^\circ$ oppure $\phi = \pm 180^\circ$ e un minimo a $\phi = \pm 90^\circ$.
+
+\vspace{0.3cm}
+\noindent Tutto questo vale anche con il ramo di compensazione attiva: dato che ovviamente non è possibile compensare perfettamente la capacità parassita $C_p$, rimarrà un $\Delta C_p = C_p - C_{\text{comp}}$ che causa comunque un'oscillazione parassita al fronte di discesa del gate.
+
+\newpage
+\subsection{Analisi dell'oscillazione parassita allo spegnimento del gate}
+\label{subsec:oscillazione_parassita_gate}
+
+Per isolare sperimentalmente il solo transitorio elettrico prodotto dallo spegnimento del gate, abbiamo posto a zero la tensione di polarizzazione del MEMS ($V_{\text{DC}} = \SI{0}{\volt}$), mantenendo attivo il circuito di compensazione hardware della sezione~\ref{sec:compensazione_hardware} e applicando la sinusoide in ingresso con ampiezza $V_{\text{AC}} = \SI{100}{\milli\volt}$ e frequenza $f_{\text{in}} = \SI{417.83}{\kilo\hertz}$.
+
+\vspace{0.3cm}
+\noindent In fig.~\ref{fig:transitorio_elettrico_vdc0} sono riportate due acquisizioni che mostrano l'andamento di $v_{\text{out}}(t)$ (in alto) e del corrispondente ingresso $v_{\text{in}}(t)$ (in basso) quando il gate si spegne in un tratto a pendenza positiva ($\left.\frac{dv_{\text{in}}}{dt}\right|_{t=0} > 0$, a sinistra) e in un tratto a pendenza negativa ($\left.\frac{dv_{\text{in}}}{dt}\right|_{t=0} < 0$, a destra).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png}
+\caption{Transitorio parassita misurato con il MEMS spento ($V_{\text{DC}} = \SI{0}{\volt}$) e con compensazione hardware attiva: spegnimento del gate con $\frac{dv_{\text{in}}}{dt} > 0$ (a sinistra) e con $\frac{dv_{\text{in}}}{dt} < 0$ (a destra).}
+\label{fig:transitorio_elettrico_vdc0}
+\end{figure}
+\noindent Prima dello spegnimento, il ramo di compensazione hardware cancella quasi completamente la corrente di $C_p$, lasciando su $v_{\text{out}}(t)$ un residuo picco-picco di $\approx \SI{31}{\milli\volt}$. Quando spegniamo il gate ($t = 0$): se $\left.\frac{dv_{\text{in}}}{dt}\right|_{t=0} > 0$ (a sinistra), l'uscita presenta un primo picco che è negativo, di $\mathbf{-\SI{607}{\milli\volt}}$; quando $\left.\frac{dv_{\text{in}}}{dt}\right|_{t=0} < 0$ (a destra), c'è un primo picco positivo di $\mathbf{+\SI{804}{\milli\volt}}$.
+
+\vspace{0.3cm}
+\noindent La distanza temporale tra due picchi ($\Delta T \approx \SI{1.65}{\micro\second}$) ci permette di estrapolare la frequenza dell'oscillazione parassita, di $\approx \mathbf{\SI{600}{\kilo\hertz}}$. L'oscillazione scende sotto il $10\%$ del valore del picco in circa $\SI{2.2}{\micro\second}$, confermando che scartare i primi $t_{\text{cut}} = \SI{20}{\micro\second}$ nelle misure del ringdown (sezione~\ref{sec:ringdown}) è sufficiente per evitare che l'oscillazione parassita falsifichi le misure.
+\vspace{0.3cm}
+
+\noindent Nel circuito ideale di fig.~\ref{fig:frontend_schema} (opamp ideali), un gradino di corrente non potrebbe mai generare un'oscillazione smorzata a $\SI{600}{\kilo\hertz}$. Per spiegare la comparsa di una coppia di poli complessi coniugati e lo smorzamento, abbiamo simulato il circuito di fig.~\ref{fig:modello_circuitale_parassita}, in cui:
+\begin{itemize}
+    \item Il ramo di compensazione è schematizzato con un invertitore ideale, seguito dalla capacità di compensazione $C_c$, lasciando uno sbilanciamento $\Delta C = C_p - C_c$.
+    \item Sul nodo invertente $V^-$ del TIA (OPA656) è presente una capacità verso massa $C_{\text{in}}$.
+    \item In parallelo a $R_f = \SI{500}{\kilo\ohm}$ abbiamo inserito una capacità $C_f$ (responsabile dello smorzamento);
+    \item L'amplificatore operazionale OPA656 viene descritto dal guadagno ad anello aperto (a polo dominante) $A(s) \approx \frac{\omega_t}{s}$, dove $\omega_t = 2\pi \cdot \text{GBW} = 2\pi \cdot \SI{230}{\mega\hertz} = \SI{1.445e9}{\radian/\second}$.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{circuitikz}[scale=0.80, transform shape, line width=0.7pt]
+    % Ingresso Vin
+    \draw (-1.2, 0.5) node[left] {$v_{\text{in}}(t)$} to[short, o-*] (-0.2, 0.5);
+    \draw (-0.2, 0.5) -- (-0.2, 1.6);
+    \draw (-0.2, 0.5) -- (-0.2, -0.6);
+
+    % Ramo parassita diretto Cp (in alto)
+    \draw (-0.2, 1.6) to[C, l_={$C_p$}] (3.6, 1.6) -- (4.0, 1.6);
+
+    % Ramo compensazione semplificato con blocco [-1] e Cc (in basso)
+    \node[draw, rectangle, fill=white, inner sep=3.8pt, font=\scriptsize] (inv) at (1.0, -0.6) {$-1$};
+    \draw (-0.2, -0.6) -- (inv.west);
+    \draw (inv.east) -- (1.7, -0.6) to[C, l={$C_c$}] (3.6, -0.6) -- (4.0, -0.6);
+
+    % Connessione al nodo di sense V^-
+    \draw (4.0, 1.6) -- (4.0, -0.6);
+    \draw (4.0, 0.5) to[short, *-*] (5.0, 0.5) coordinate (sense);
+    \node[above=2pt, font=\scriptsize] at (4.5, 0.5) {$V^-$};
+
+    % Cin verso massa
+    \draw (5.0, 0.5) to[C, *-] (5.0, -1.4) node[ground]{};
+    \node[left=3pt] at (4.8, -0.85) {$C_{\text{in}}$};
+
+    % TIA OPA656
+    \node[op amp] (opamp1) at (7.2, 0) {};
+    \node[font=\scriptsize, below=3pt] at (opamp1.south) {OPA656};
+    \draw (sense) -- (opamp1.-);
+    \draw (opamp1.+) -- (opamp1.+ |- 0, -1.4) node[ground]{};
+
+    % Retroazione TIA (Cf in parallelo a Rf)
+    \draw (sense) -- (5.0, 2.3) -- (5.7, 2.3);
+    \draw (5.7, 3.0) to[C, l=$C_f$] (7.9, 3.0);
+    \draw (5.7, 1.8) to[R, l=$R_f$] (7.9, 1.8);
+    \draw (5.7, 3.0) -- (5.7, 1.8);
+    \draw (7.9, 3.0) -- (7.9, 1.8);
+    \draw (7.9, 2.3) -| (opamp1.out);
+
+    % Secondo stadio AD817 (invertente G = -10)
+    \node[op amp] (opamp2) at (11.5, -0.5) {};
+    \node[font=\scriptsize, below=3pt] at (opamp2.south) {AD817};
+    \draw (opamp1.out) to[short, *-] (8.4, 0) to[R, l_={$R_1$}] (10.2, 0) -- (opamp2.-);
+    \draw (opamp2.+) -- (opamp2.+ |- 0, -1.4) node[ground]{};
+
+    % Retroazione AD817 (R2)
+    \draw (opamp2.-) to[short, *-] ++(0, 1.5) to[R, l={$R_2$}] ++(2.0, 0) -| (opamp2.out);
+
+    % Uscita finale
+    \draw (opamp2.out) to[short, *-o] ++(0.8, 0) node[right] {$v_{\text{out}}(t)$};
+\end{circuitikz}
+\caption{Modello circuitale con MEMS spento ($V_{\text{DC}} = \SI{0}{\volt}$), capacità verso massa $C_{\text{in}}$ e capacità di retroazione $C_f$.}
+\label{fig:modello_circuitale_parassita}
+\end{figure}
+
+\noindent Dato che $V_{\text{out,TIA}}(s) = -A(s) V^-(s)$, allora possiamo scrivere:
+\begin{equation}
+    \label{eq:vminus_opa656}
+    V^-(s) = -\frac{V_{\text{out,TIA}}(s)}{A(s)} = -\frac{s}{\omega_t} V_{\text{out,TIA}}(s)
+\end{equation}
+A partire da questo, possiamo ricavare la funzione di trasferimento complessiva del circuito:
+\begin{equation}
+    \label{eq:fdt_secondo_ordine_tia}
+    \frac{V_{\text{out}}(s)}{V_{\text{in}}(s)} = \frac{10 \, s R_f (C_p - C_c)}{1 + s \left( R_f C_f + \dfrac{1}{\omega_t} \right) + s^2 \dfrac{R_f \left(C_{\text{in}} + C_p + C_c + C_f\right)}{\omega_t}}
+\end{equation}
+Se confrontiamo il denominatore dell'eq.~\eqref{eq:fdt_secondo_ordine_tia} (dove $C_{\text{nodo}} = C_{\text{in}} + C_p + C_c + C_f$) con la sua forma standardizzata $1 + \frac{2\zeta}{\omega_n} s + \frac{s^2}{\omega_n^2}$, possiamo ricavare la pulsazione naturale $\omega_n$ e il fattore di smorzamento $\zeta$:
+\begin{equation}
+    \label{eq:wn_zeta_tia}
+    \omega_n = \sqrt{\frac{\omega_t}{R_f C_{\text{nodo}}}}, \qquad
+    \zeta = \frac{1}{2} \left( R_f C_f + \frac{1}{\omega_t} \right) \sqrt{\frac{\omega_t}{R_f C_{\text{nodo}}}}
+\end{equation}
+\newpage
+
+\noindent In fig.~\ref{fig:sovrapposizione_modello_semplificato} è mostrato il confronto tra la misura sperimentale dell'oscillazione parassita e la simulazione del circuito appena presentato, con $R_f = \SI{500}{\kilo\ohm}$, $C_{\text{in}} = \SI{188}{\pico\farad}$, $C_f = \SI{0.25}{\pico\farad}$, $\omega_t = \SI{1.445e9}{\radian/\second}$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.76\textwidth]{../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png}
+\caption{Confronto tra misura sperimentale dell'oscillazione parassita e la simulazione del circuito descritta dall'eq.~\eqref{eq:fdt_secondo_ordine_tia}.}
+\label{fig:sovrapposizione_modello_semplificato}
+\end{figure}
+
+
+\noindent Come si vede dalla fig.~\ref{fig:sovrapposizione_modello_semplificato}, la frequenza e il tempo di decadimento dell'oscillazione sono comparabili tra le due tracce, anche se non sono perfettamente sovrapponibili. Per questo motivo, abbiamo eseguito anche una simulazione su LTSPICE, con i modelli SPICE degli operazionali. Abbiamo simulato il circuito mostrato in fig.~\ref{fig:circuito_ltspice_schema}.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.99\textwidth]{../Oscillazione parassita/Grafici/circuito_ltspice_schema.png}
+\caption{Schematico completo implementato in LTSPICE.}
+\label{fig:circuito_ltspice_schema}
+\end{figure}
+
+\newpage
+
+\noindent In fig.~\ref{fig:simulazione_ltspice_confronto} è riportato il confronto  tra le tracce acquisite in laboratorio e quelle simulate in spice.
+ 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png}
+\caption{Confronto tra le tracce sperimentali e la simulazione circuitale in LTSPICE.}
+\label{fig:simulazione_ltspice_confronto}
+\end{figure}
+\noindent Per capire come varia l'entità del disturbo parassita in funzione della fase $\phi$, abbiamo mantenuto il MEMS spento ($V_{\text{DC}} = \SI{0}{\volt}$) con la compensazione hardware attiva e abbiamo eseguito uno sweep della fase $\phi$ da $-180^\circ$ a $+180^\circ$, misurando per ciascuna acquisizione il massimo $V_{\max}$, il minimo $V_{\min}$ e l'escursione picco picco $V_{pp} = V_{\max} - V_{\min}$ del transitorio. I risultati sono mostrati in fig.~\ref{fig:sweep_fase_vpp}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{../Oscillazione parassita/Grafici/sweep_fase_con_scope.png}
+\caption{A sinistra abbiamo le definizioni di $V_{\max}$, $V_{\min}$ e $V_{pp} = V_{\max} - V_{\min}$ sulla traccia sperimentale allo spegnimento del gate ($t = 0$). A destra abbiamo l'andamento di $V_{pp}$ al variare della fase $\phi$ con compensazione hardware attiva.}
+\label{fig:sweep_fase_vpp}
+\end{figure}
+\noindent In corrispondenza dei passaggi per lo zero di $v_{\text{in}}(t)$, la pendenza è massima, quindi a $\phi = 0^\circ$ e $\phi = \pm 180^\circ$ abbiamo il massimo di $V_{pp}$. Sui vertici della sinusoide la derivata si annulla, quindi a $\phi = \pm 90^\circ$ abbiamo il minimo di $V_{pp}$.
+
+\vspace{0.3cm}
+\noindent Quando abbiamo preso le misure nei capitoli precedenti (come nelle prime misure del ringdown della sezione~\ref{sec:ringdown}), avevamo però impostato una fase di $\phi = 103^\circ$. Il motivo è che la capacità $C_p$ produce in uscita un'onda sinusoidale di ampiezza $\approx \SI{1.2}{\volt}$, e in assenza di compensazione, il transitorio elettrico dipende da due contributi: da $\left.\frac{dv_{\text{in}}}{dt}\right|_{t=0}$ (che si annulla a $\phi = \pm 90^\circ$), ma anche proprio dal valore a cui si trova l'uscita $v_{\text{out}}(0)$ all'istante di stacco, cioè della carica accumulata che deve scaricarsi generando un transitorio. Se gli operazionali fossero ideali (ritardo nullo), avremmo $v_{\text{out}}(t) = R_{\text{trans}} C_p \frac{dv_{\text{in}}}{dt}$ e a $\phi = +90^\circ$ si annullerebbero entrambi contemporaneamente. Nella realtà, il TIA (OPA656) e l'AD817 introducono a $\SI{418}{\kilo\hertz}$ un ritardo di circa $13^\circ$, per cui nessuna fase $\phi$ può azzerare entrambi. Impostando $\phi = 103^\circ$ come fatto in laboratorio nella sezione~\ref{sec:ringdown}, spegniamo il gate quando $v_{\text{out}}(0) = \SI{0}{\volt}$. In questo punto però la derivata $\left.\frac{dv_{\text{in}}}{dt}\right|_{t=0}$ non è più esattamente nulla, quindi resta comunque un piccolo transitorio residuo, ma essendosi annullato $v_{\text{out}}(0)$, ci si trova molto vicini al minimo effettivo del disturbo.
+
+\vspace{0.3cm}
+\noindent Con compensazione hardware attiva, invece, l'onda parassita da $\SI{1.2}{\volt}$ in uscita è già cancellata ($v_{\text{out}}(0) \approx \SI{0}{\volt}$ per qualunque $\phi$): il contributo dovuto a $v_{\text{out}}(0) \neq 0$ sparisce e per minimizzare l'oscillazione parassita resta solo da annullare la derivata di $v_{\text{in}}(t)$.
+
+
+\newpage
+
+\subsection{Variazione dell'ampiezza iniziale del ringdown \texorpdfstring{$A_0$}{A0} con la fase del gate}
+\label{subsec:teoria_A0_indipendente_fase}
+
+Come abbiamo visto dall'eq.~\eqref{eq:vpost_def} e dalla fig.~\ref{fig:stacco_gate_fase_vin}, al momento dello stacco del gate la sinusoide d'ingresso viene interrotta in un punto diverso del ciclo a seconda di $\phi$ e si congela al valore continuo $V_{\text{post}}(\phi)$ per tutta la durata del ringdown. Verifichiamo quindi se variare la fase di stacco $\phi$ (e il relativo livello $V_{\text{post}}(\phi)$) modifichi o meno l'ampiezza iniziale $A_0$ del ringdown del MEMS.
+
+\vspace{0.3cm}
+\noindent Prima dello stacco del gate, la trave oscilla a $f_1$ con ampiezza $X_0$:
+\begin{align}
+    x(t) &= X_0 \sin(\omega_1 t + \phi) \\[4pt]
+    \dot{x}(t) &= \omega_1 X_0 \cos(\omega_1 t + \phi)
+\end{align}
+A partire dall'istante di spegnimento ($t \ge 0$), lo spostamento durante il ringdown si smorza con costante di tempo $\tau$:
+\begin{equation}
+    x(t) = X_0 \, e^{-t/\tau} \sin(\omega_1 t + \phi)
+\end{equation}
+Sappiamo che la tensione in uscita dal circuito di condizionamento ($v_{\text{out}}(t) = R_{\text{trans}} i_m(t) = R_{\text{trans}} \eta \dot{x}(t)$) è:
+\begin{equation}
+    \label{eq:vout_ringdown_phi}
+    v_{\text{out}}(t) = \underbrace{R_{\text{trans}} \eta \omega_1 X_0}_{A_0} \, e^{-t/\tau} \cos(\omega_1 t + \phi)
+\end{equation}
+\noindent Se ipotizziamo che $f_1$ sia costante e che il livello continuo $V_{\text{post}}(\phi)$ sull'elettrodo di drive non abbia alcun effetto (dato che la corrente $i_m(t)$ viene letta sull'elettrodo di sense e non su quello di drive), dall'eq.~\eqref{eq:vout_ringdown_phi} l'ampiezza $A_0 = R_{\text{trans}} \eta \omega_1 X_0$ risulterebbe del tutto indipendente da $\phi$.
+
+\vspace{0.3cm}
+\noindent Ma in realtà, la forza elettrostatica esercitata dall'elettrodo di drive sulla trave dipende da $\left(V_{\text{DC}} - v_{\text{in}}(t)\right)^2$. Se sostituiamo quindi $V_{\text{DC}} - V_{\text{post}}(\phi)$ al posto di $V_{\text{DC}}$ nella formula per il calcolo di $f_1$~\eqref{eq:legge_quadratica_f1_vdc}, otteniamo:
+\begin{equation}
+    \label{eq:f1_quadro_vpost_phi}
+    f_1^2(\phi) = f_{01}^2 - \gamma \Big( V_{\text{DC}} - V_{\text{post}}(\phi) \Big)^2 = f_{01}^2 - \gamma \Big( V_{\text{DC}} - V_{\text{AC}}\sin(\phi) \Big)^2
+\end{equation}
+Sviluppando il quadrato e trascurando il termine quadratico $V_{\text{AC}}^2$:
+\begin{equation}
+    \label{eq:f1_sin_phi_sviluppo}
+    f_1^2(\phi) \approx \underbrace{f_{01}^2 - \gamma V_{\text{DC}}^2}_{f_{1,0}^2} + 2 \gamma V_{\text{DC}} V_{\text{AC}} \sin(\phi) \implies f_1(\phi) \approx f_{1,0} + \Delta f_1 \sin(\phi)
+\end{equation}
+Quindi $f_1$ dipende da $V_{\text{post}}(\phi) = V_{\text{AC}}\sin(\phi)$ e quindi da $\sin(\phi)$. Per verificare sperimentalmente questo effetto, abbiamo mantenuto il MEMS a $V_{\text{DC}} = \SI{5}{\volt}$ con eccitazione $V_{\text{ACpp}} = \SI{200}{\milli\volt}$ ($V_{\text{AC}} = \SI{100}{\milli\volt}$ di ampiezza) e frequenza in ingresso $f_{\text{in}} = \SI{417.90}{\kilo\hertz}$. Abbiamo effettuato uno sweep della fase $\phi$ da $-360^\circ$ a $+360^\circ$ e abbiamo acquisito le tracce del ringdown per ciascun valore di $\phi$, estraendo i valori di $A_0$ e di $f_1$.
+
+\vspace{0.2cm}
+\noindent Se osserviamo il grafico inferiore di fig.~\ref{fig:deriva_termica_f1_A0} (i punti blu), notiamo che la dipendenza da $\sin(\phi)$ non appare evidente; infatti, è mascherata da una crescita da $\SI{20.03}{\milli\volt}$ a $\SI{25.86}{\milli\volt}$. Se questa rampa dipendesse dalla fase $\phi$, dovremmo misurare lo stesso identico valore di $A_0$ a $-360^\circ$, $0^\circ$ e $+360^\circ$. Il fatto che questi 3 punti abbiano ampiezze diverse significa che l'aumento da $\SI{20.03}{\milli\volt}$ a $\SI{25.86}{\milli\volt}$ non è causato dalla fase $\phi$, ma dal tempo trascorso tra la prima e l'ultima misura: come si vede dal grafico superiore di fig.~\ref{fig:deriva_termica_f1_A0}, durante la scansione la frequenza $f_1$ ha subito una deriva complessiva di $+\SI{33}{\hertz}$.
+
+\vspace{0.2cm}
+\noindent Ricordando che la frequenza del generatore era mantenuta fissa a $f_{\text{in}} = \SI{417.90}{\kilo\hertz}$, lo spostamento verso l'alto di $f_1$ di $+\SI{33}{\hertz}$ avvicina il picco di risonanza del MEMS alla frequenza di eccitazione $f_{\text{in}}$, riducendo $|f_{\text{in}} - f_1|$. Se sostituiamo la frequenza $f_1$ misurata dalle tracce del ringdown all'interno dell'equazione della curva lorenziana~\eqref{eq:lorentziana_ampiezza}:
+\begin{equation}
+    \label{eq:A0_da_deriva_f1}
+    A_{0,\text{teor}}(f_1) = \frac{A_{\max}}{\sqrt{1 + \left( \dfrac{2(f_{\text{in}} - f_1)}{\Delta f} \right)^2}}
+\end{equation}
+otteniamo la curva tratteggiata rossa riportata nel grafico inferiore di fig.~\ref{fig:deriva_termica_f1_A0}, che rappresenta l'andamento che avrebbe $A_0$ per effetto della sola deriva di $f_1$ (cioè se non ci fosse l'effetto di $\sin(\phi)$).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{../variazione fase/grafici/deriva_termica_f1_e_A0.png}
+\caption{In alto: frequenza di oscillazione $f_1$ misurata durante il ringdown. In basso: confronto tra l'ampiezza iniziale $A_0$ misurata (in blu) e l'ampiezza teorica predetta dall'eq.~\eqref{eq:A0_da_deriva_f1} per effetto della deriva di $f_1$ (tratteggiata rossa).}
+\label{fig:deriva_termica_f1_A0}
+\end{figure}
+
+\newpage
+
+\noindent Per togliere l'effetto della deriva di $f_1$ dalle misure di $A_0$, prendiamo come riferimento il punto a $\phi = 0^\circ$, dove $\sin(0^\circ) = 0$ e quindi $V_{\text{post}}(0^\circ) = \SI{0}{\volt}$. In questo punto abbiamo $f_1(0^\circ) = \SI{417.803}{\kilo\hertz}$ e, sostituendo questo valore nella lorenziana~\eqref{eq:A0_da_deriva_f1}, otteniamo $A_{0,\text{teor}}\big(f_1(0^\circ)\big) = \SI{22.25}{\milli\volt}$. Per tutte le altre fasi $\phi$, la differenza:
+\begin{equation}
+    \Delta A(\phi) = A_{0,\text{teor}}\big(f_1(\phi)\big) - A_{0,\text{teor}}\big(f_1(0^\circ)\big)
+\end{equation}
+rappresenta di quanto è cambiata l'ampiezza a causa della deriva di $f_1$ rispetto alla misura a $\phi = 0^\circ$. Sottraendo $\Delta A(\phi)$ dall'ampiezza misurata $A_0(\phi)$:
+\begin{equation}
+    \label{eq:A0_compensata_formula}
+    A_{0,\text{comp}}(\phi) = A_0(\phi) - \Delta A(\phi) = A_0(\phi) - \Big( A_{0,\text{teor}}\big(f_1(\phi)\big) - A_{0,\text{teor}}\big(f_1(0^\circ)\big) \Big)
+\end{equation}
+eliminiamo la salita dovuta alla deriva e otteniamo il grafico di fig.~\ref{fig:ampiezza_A0_vs_fase}, in cui si vede l'oscillazione legata a $V_{\text{post}}(\phi) = V_{\text{AC}}\sin(\phi)$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.84\textwidth]{../variazione fase/grafici/ampiezza_A0_vs_fase.png}
+\caption{Ampiezza iniziale del ringdown $A_0$ in funzione della fase di spegnimento del gate $\phi$ dopo la compensazione della deriva di $f_1$.}
+\label{fig:ampiezza_A0_vs_fase}
+\end{figure}
+\newpage
+
+\begin{thebibliography}{9}
+\bibitem{frangi2023}
+G.~Gobat, V.~Zega, P.~Fedeli, L.~G.~Falorni, A.~Frangi, 
+\textit{Frequency combs in a MEMS resonator featuring 1:2 internal resonance}, 
+Nonlinear Dynamics, vol.~111, pp.~2991--3016, 2023.
+
+\bibitem{nastro2026}
+A.~Nastro, M.~Zini, P.~Belardinelli, F.~Clementi, P.~Russo, L.~Bastianelli, L.~Rosafalco, T.~Ma, A.~Frangi, M.~Ferrari,
+\textit{Experimental Characterization of a Nonlinear Electrostatic-Capacitive MEMS Resonator featuring 1:2 Internal Resonance},
+IEEE Sensors Letters, 2026.
+
+\bibitem{wu2021}
+Z.~Wu, W.~Liu, Z.~Tong, S.~Zhang, Y.~Gu, G.~Wu, A.~Tovstopyat, C.~Sun, L.~Lou,
+\textit{A Novel Transfer Function Based Ring-Down Suppression System for PMUTs},
+Sensors, vol.~21, no.~19, art.~6414, 2021.
+\end{thebibliography}
+
+\end{document}
