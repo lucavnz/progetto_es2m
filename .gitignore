@@ -5,5 +5,9 @@ __pycache__/
 *.pyc
 *.fdb_latexmk
 *.fls
+*.xml
+*.bbl
+*.bcf
+*.blg
 *.synctex.gz
 .vscode/

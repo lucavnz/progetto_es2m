@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.28)  20 NOV 2026 10:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.28)  20 NOV 2026 11:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -686,33 +686,260 @@ Package microtype Info: Loading configuration file microtype.cfg.
 File: microtype.cfg 2026/03/01 v3.2d microtype main configuration file (RS)
 )
 LaTeX Info: Redefining \microtypesetup on input line 3065.
+) (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
+Package: biblatex 2024/03/21 v3.20 programmable bibliographies (PK/MW)
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count363
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+)) (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 47.
- (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
+\c@tabx@nest=\count364
+\c@listtotal=\count365
+\c@listcount=\count366
+\c@liststart=\count367
+\c@liststop=\count368
+\c@citecount=\count369
+\c@citetotal=\count370
+\c@multicitecount=\count371
+\c@multicitetotal=\count372
+\c@instcount=\count373
+\c@maxnames=\count374
+\c@minnames=\count375
+\c@maxitems=\count376
+\c@minitems=\count377
+\c@citecounter=\count378
+\c@maxcitecounter=\count379
+\c@savedcitecounter=\count380
+\c@uniquelist=\count381
+\c@uniquename=\count382
+\c@refsection=\count383
+\c@refsegment=\count384
+\c@maxextratitle=\count385
+\c@maxextratitleyear=\count386
+\c@maxextraname=\count387
+\c@maxextradate=\count388
+\c@maxextraalpha=\count389
+\c@abbrvpenalty=\count390
+\c@highnamepenalty=\count391
+\c@lownamepenalty=\count392
+\c@maxparens=\count393
+\c@parenlevel=\count394
+\blx@tempcnta=\count395
+\blx@tempcntb=\count396
+\blx@tempcntc=\count397
+\c@blx@maxsection=\count398
+\blx@maxsegment@0=\count399
+\blx@notetype=\count400
+\blx@parenlevel@text=\count401
+\blx@parenlevel@foot=\count402
+\blx@sectionciteorder@0=\count403
+\blx@sectionciteorderinternal@0=\count404
+\blx@entrysetcounter=\count405
+\blx@biblioinstance=\count406
+\labelnumberwidth=\skip62
+\labelalphawidth=\skip63
+\biblabelsep=\skip64
+\bibitemsep=\skip65
+\bibnamesep=\skip66
+\bibinitsep=\skip67
+\bibparsep=\skip68
+\bibhang=\skip69
+\blx@bcfin=\read4
+\blx@bcfout=\write4
+\blx@langwohyphens=\language80
+\c@mincomprange=\count407
+\c@maxcomprange=\count408
+\c@mincompwidth=\count409
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-dm.def
+File: blx-dm.def 2024/03/21 v3.20 biblatex datamodel (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'numeric.dbx' not found.
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count410
+\c@savedafterword=\count411
+\c@annotator=\count412
+\c@savedannotator=\count413
+\c@author=\count414
+\c@savedauthor=\count415
+\c@bookauthor=\count416
+\c@savedbookauthor=\count417
+\c@commentator=\count418
+\c@savedcommentator=\count419
+\c@editor=\count420
+\c@savededitor=\count421
+\c@editora=\count422
+\c@savededitora=\count423
+\c@editorb=\count424
+\c@savededitorb=\count425
+\c@editorc=\count426
+\c@savededitorc=\count427
+\c@foreword=\count428
+\c@savedforeword=\count429
+\c@holder=\count430
+\c@savedholder=\count431
+\c@introduction=\count432
+\c@savedintroduction=\count433
+\c@namea=\count434
+\c@savednamea=\count435
+\c@nameb=\count436
+\c@savednameb=\count437
+\c@namec=\count438
+\c@savednamec=\count439
+\c@translator=\count440
+\c@savedtranslator=\count441
+\c@shortauthor=\count442
+\c@savedshortauthor=\count443
+\c@shorteditor=\count444
+\c@savedshorteditor=\count445
+\c@labelname=\count446
+\c@savedlabelname=\count447
+\c@institution=\count448
+\c@savedinstitution=\count449
+\c@lista=\count450
+\c@savedlista=\count451
+\c@listb=\count452
+\c@savedlistb=\count453
+\c@listc=\count454
+\c@savedlistc=\count455
+\c@listd=\count456
+\c@savedlistd=\count457
+\c@liste=\count458
+\c@savedliste=\count459
+\c@listf=\count460
+\c@savedlistf=\count461
+\c@location=\count462
+\c@savedlocation=\count463
+\c@organization=\count464
+\c@savedorganization=\count465
+\c@origlocation=\count466
+\c@savedoriglocation=\count467
+\c@origpublisher=\count468
+\c@savedorigpublisher=\count469
+\c@publisher=\count470
+\c@savedpublisher=\count471
+\c@language=\count472
+\c@savedlanguage=\count473
+\c@origlanguage=\count474
+\c@savedoriglanguage=\count475
+\c@pageref=\count476
+\c@savedpageref=\count477
+\shorthandwidth=\skip70
+\shortjournalwidth=\skip71
+\shortserieswidth=\skip72
+\shorttitlewidth=\skip73
+\shortauthorwidth=\skip74
+\shorteditorwidth=\skip75
+\locallabelnumberwidth=\skip76
+\locallabelalphawidth=\skip77
+\localshorthandwidth=\skip78
+\localshortjournalwidth=\skip79
+\localshortserieswidth=\skip80
+\localshorttitlewidth=\skip81
+\localshortauthorwidth=\skip82
+\localshorteditorwidth=\skip83
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-compat.def
+File: blx-compat.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
+File: biblatex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
+\c@textcitecount=\count478
+\c@textcitetotal=\count479
+\c@textcitemaxnames=\count480
+\c@biburlbigbreakpenalty=\count481
+\c@biburlbreakpenalty=\count482
+\c@biburlnumpenalty=\count483
+\c@biburlucpenalty=\count484
+\c@biburllcpenalty=\count485
+\biburlbigskip=\muskip19
+\biburlnumskip=\muskip20
+\biburlucskip=\muskip21
+\biburllcskip=\muskip22
+\c@smartand=\count486
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\numeric.bbx
+File: numeric.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard.bbx
+File: standard.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count487
+\c@bbx:relatedtotal=\count488
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/cbx\numeric.cbx
+File: numeric.cbx 2024/03/21 v3.20 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.cfg
+File: biblatex.cfg 
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Document encoding is UTF8 ....
+Package biblatex Info: ... and expl3
+(biblatex)             2025-04-29 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-case-expl3.sty
+Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
+))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+\@quotelevel=\count489
+\@quotereset=\count490
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 58.
+(C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (relazione.aux)
 \openout1 = `relazione.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Info: Redefining \it@ocap on input line 47.
-LaTeX Info: Redefining \it@ccap on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Info: Redefining \it@ocap on input line 58.
+LaTeX Info: Redefining \it@ccap on input line 58.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -754,16 +981,16 @@ File: siunitx-abbreviations.cfg 2021-04-17 v2.8e siunitx: Abbreviated units
 Dictionary: translator-basic-dictionary, Language: English 
 ) (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count363
+\scratchcounter=\count491
 \scratchdimen=\dimen335
 \scratchbox=\box78
-\nofMPsegments=\count364
-\nofMParguments=\count365
+\nofMPsegments=\count492
+\nofMParguments=\count493
 \everyMPshowfont=\toks41
-\MPscratchCnt=\count366
+\MPscratchCnt=\count494
 \MPscratchDim=\dimen336
-\MPnumerator=\count367
-\makeMPintoPDFobject=\count368
+\MPnumerator=\count495
+\makeMPintoPDFobject=\count496
 \everyMPtoPDFconversion=\toks42
 ) (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -771,18 +998,18 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 47.
+Package hyperref Info: Link coloring ON on input line 58.
  (relazione.out) (relazione.out)
-\@outlinefile=\write4
-\openout4 = `relazione.out'.
+\@outlinefile=\write5
+\openout5 = `relazione.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 47.
-Package microtype Info: Applying patch `item' on input line 47.
-Package microtype Info: Applying patch `toc' on input line 47.
-Package microtype Info: Applying patch `eqnum' on input line 47.
-Package microtype Info: Applying patch `footnote' on input line 47.
-Package microtype Info: Applying patch `verbatim' on input line 47.
-LaTeX Info: Redefining \microtypesetup on input line 47.
+LaTeX Info: Redefining \microtypecontext on input line 58.
+Package microtype Info: Applying patch `item' on input line 58.
+Package microtype Info: Applying patch `toc' on input line 58.
+Package microtype Info: Applying patch `eqnum' on input line 58.
+Package microtype Info: Applying patch `footnote' on input line 58.
+Package microtype Info: Applying patch `verbatim' on input line 58.
+LaTeX Info: Redefining \microtypesetup on input line 58.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -796,41 +1023,56 @@ Package microtype Info: No adjustment of character kerning.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 47.
+Package biblatex Info: Trying to load language 'italian'...
+Package biblatex Info: ... file 'italian.lbx' found.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\italian.lbx
+File: italian.lbx 2024/03/21 v3.20 biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout4 = `relazione.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'relazione.bbl' found.
+ (relazione.bbl)
+Package biblatex Info: Reference section=0 on input line 58.
+Package biblatex Info: Reference segment=0 on input line 58.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 58.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 47.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 58.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 47.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 58.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 47.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 58.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 47.
+(Font)              <10.95> on input line 58.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 47.
+(Font)              <8> on input line 58.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 47.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
+(Font)              <6> on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 47.
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 58.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -838,42 +1080,42 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 47.
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 58.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 50.
+(Font)              <12> on input line 61.
  (relazione.toc)
-\tf@toc=\write5
-\openout5 = `relazione.toc'.
+\tf@toc=\write6
+\openout6 = `relazione.toc'.
 
 
 
 [1
 
 {C:/Users/Phoenix/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 58.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 69.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 134.
+(Font)              <9> on input line 145.
 
 
 [2{C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<../Paper/modi_vibrazione_trave.png, id=176, 1089.06876pt x 399.4925pt>
+<../Paper/modi_vibrazione_trave.png, id=178, 1089.06876pt x 399.4925pt>
 File: ../Paper/modi_vibrazione_trave.png Graphic file (type png)
 <use ../Paper/modi_vibrazione_trave.png>
-Package pdftex.def Info: ../Paper/modi_vibrazione_trave.png  used on input line 171.
+Package pdftex.def Info: ../Paper/modi_vibrazione_trave.png  used on input line 181.
 (pdftex.def)             Requested size: 355.08984pt x 130.25412pt.
 
 
 [3 <../Paper/modi_vibrazione_trave.png (PNG copy)>]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 204.
+(Font)              <10> on input line 215.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 204.
+(Font)              <7> on input line 215.
 
 
 [4]
@@ -891,52 +1133,52 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [10]
 
 [11]
-<../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png, id=286, 1011.78pt x 722.7pt>
+<../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png, id=287, 1011.78pt x 722.7pt>
 File: ../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png Graphic file (type png)
 <use ../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png>
-Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png  used on input line 596.
+Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png  used on input line 607.
 (pdftex.def)             Requested size: 437.0374pt x 312.17749pt.
 
 
 [12 <../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png>]
-<../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png, id=299, 635.976pt x 397.485pt>
+<../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png, id=300, 635.976pt x 397.485pt>
 File: ../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png Graphic file (type png)
 <use ../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png>
-Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png  used on input line 632.
+Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png  used on input line 643.
 (pdftex.def)             Requested size: 373.3035pt x 233.31322pt.
 
 
 [13 <../Ampiezza_Frequenza/grafici/ampiezza_vs_frequenza.png>]
-<../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png, id=308, 635.976pt x 397.485pt>
+<../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png, id=309, 635.976pt x 397.485pt>
 File: ../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png Graphic file (type png)
 <use ../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png>
-Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png  used on input line 646.
+Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png  used on input line 657.
 (pdftex.def)             Requested size: 373.3035pt x 233.31322pt.
 
 
 [14 <../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png>]
-<../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png, id=318, 635.976pt x 397.485pt>
+<../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png, id=319, 635.976pt x 397.485pt>
 File: ../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png Graphic file (type png)
 <use ../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png>
-Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png  used on input line 673.
+Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png  used on input line 684.
 (pdftex.def)             Requested size: 373.3035pt x 233.31322pt.
 
 
 [15 <../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png>]
 
 [16]
-<../Risposta in frequenza/grafici/bode_completo.png, id=335, 635.976pt x 505.89pt>
+<../Risposta in frequenza/grafici/bode_completo.png, id=336, 635.976pt x 505.89pt>
 File: ../Risposta in frequenza/grafici/bode_completo.png Graphic file (type png)
 <use ../Risposta in frequenza/grafici/bode_completo.png>
-Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_completo.png  used on input line 712.
+Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_completo.png  used on input line 723.
 (pdftex.def)             Requested size: 418.82375pt x 333.15509pt.
 
 
 [17 <../Risposta in frequenza/grafici/bode_completo.png>]
-<../Risposta in frequenza/grafici/bode_compensato.png, id=348, 635.976pt x 505.89pt>
+<../Risposta in frequenza/grafici/bode_compensato.png, id=349, 635.976pt x 505.89pt>
 File: ../Risposta in frequenza/grafici/bode_compensato.png Graphic file (type png)
 <use ../Risposta in frequenza/grafici/bode_compensato.png>
-Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_compensato.png  used on input line 752.
+Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_compensato.png  used on input line 763.
 (pdftex.def)             Requested size: 418.82375pt x 333.15509pt.
 
 
@@ -949,60 +1191,60 @@ Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_compensato.png  u
 [21]
 
 [22]
-<../Compensazione Hardware/grafici/scope_165_compensato.png, id=413, 592.614pt x 332.442pt>
+<../Compensazione Hardware/grafici/scope_165_compensato.png, id=414, 592.614pt x 332.442pt>
 File: ../Compensazione Hardware/grafici/scope_165_compensato.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/scope_165_compensato.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/scope_165_compensato.png  used on input line 1048.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/scope_165_compensato.png  used on input line 1059.
 (pdftex.def)             Requested size: 355.08984pt x 199.20296pt.
 
 
 [23 <../Compensazione Hardware/grafici/scope_165_compensato.png>]
-<../Compensazione Hardware/grafici/bode_off.png, id=426, 635.976pt x 505.89pt>
+<../Compensazione Hardware/grafici/bode_off.png, id=427, 635.976pt x 505.89pt>
 File: ../Compensazione Hardware/grafici/bode_off.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/bode_off.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/bode_off.png  used on input line 1062.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/bode_off.png  used on input line 1073.
 (pdftex.def)             Requested size: 409.71692pt x 325.90671pt.
 
 
 [24 <../Compensazione Hardware/grafici/bode_off.png>]
-<../Compensazione Hardware/grafici/bode_set2.png, id=436, 635.976pt x 505.89pt>
+<../Compensazione Hardware/grafici/bode_set2.png, id=437, 635.976pt x 505.89pt>
 File: ../Compensazione Hardware/grafici/bode_set2.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/bode_set2.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/bode_set2.png  used on input line 1079.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/bode_set2.png  used on input line 1090.
 (pdftex.def)             Requested size: 409.71692pt x 325.90671pt.
 
 
 [25 <../Compensazione Hardware/grafici/bode_set2.png>]
-<../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png, id=453, 635.976pt x 520.344pt>
+<../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png, id=454, 635.976pt x 520.344pt>
 File: ../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png  used on input line 1110.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png  used on input line 1121.
 (pdftex.def)             Requested size: 409.71692pt x 335.21834pt.
 
 
 [26 <../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png>]
-<../Compensazione Hardware/grafici/confronto_hardware_vs_software.png, id=461, 635.976pt x 397.485pt>
+<../Compensazione Hardware/grafici/confronto_hardware_vs_software.png, id=462, 635.976pt x 397.485pt>
 File: ../Compensazione Hardware/grafici/confronto_hardware_vs_software.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/confronto_hardware_vs_software.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/confronto_hardware_vs_software.png  used on input line 1122.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/confronto_hardware_vs_software.png  used on input line 1133.
 (pdftex.def)             Requested size: 391.51021pt x 244.69139pt.
 
 
 [27 <../Compensazione Hardware/grafici/confronto_hardware_vs_software.png>]
-<../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png, id=476, 896.148pt x 419.166pt>
+<../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png, id=477, 896.148pt x 419.166pt>
 File: ../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png  used on input line 1162.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png  used on input line 1173.
 (pdftex.def)             Requested size: 446.13727pt x 208.68065pt.
-<../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png, id=477, 896.148pt x 419.166pt>
+<../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png, id=478, 896.148pt x 419.166pt>
 File: ../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png  used on input line 1169.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png  used on input line 1180.
 (pdftex.def)             Requested size: 446.13727pt x 208.68065pt.
-<../Compensazione Hardware/grafici/nyquist_set2_frequenza.png, id=478, 592.614pt x 448.074pt>
+<../Compensazione Hardware/grafici/nyquist_set2_frequenza.png, id=479, 592.614pt x 448.074pt>
 File: ../Compensazione Hardware/grafici/nyquist_set2_frequenza.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/nyquist_set2_frequenza.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/nyquist_set2_frequenza.png  used on input line 1176.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/nyquist_set2_frequenza.png  used on input line 1187.
 (pdftex.def)             Requested size: 355.08984pt x 268.49094pt.
 
 
@@ -1015,18 +1257,18 @@ Package pdftex.def Info: ../Compensazione Hardware/grafici/nyquist_set2_frequenz
 [31]
 
 [32]
-<../Duffing/duffing_ampiezza_compressione.png, id=530, 614.295pt x 433.62pt>
+<../Duffing/duffing_ampiezza_compressione.png, id=531, 614.295pt x 433.62pt>
 File: ../Duffing/duffing_ampiezza_compressione.png Graphic file (type png)
 <use ../Duffing/duffing_ampiezza_compressione.png>
-Package pdftex.def Info: ../Duffing/duffing_ampiezza_compressione.png  used on input line 1276.
+Package pdftex.def Info: ../Duffing/duffing_ampiezza_compressione.png  used on input line 1287.
 (pdftex.def)             Requested size: 391.51021pt x 276.36458pt.
 
 
 [33 <../Duffing/duffing_ampiezza_compressione.png>]
-<../Duffing/duffing_backbone_e_chirp.png, id=548, 614.295pt x 433.62pt>
+<../Duffing/duffing_backbone_e_chirp.png, id=549, 614.295pt x 433.62pt>
 File: ../Duffing/duffing_backbone_e_chirp.png Graphic file (type png)
 <use ../Duffing/duffing_backbone_e_chirp.png>
-Package pdftex.def Info: ../Duffing/duffing_backbone_e_chirp.png  used on input line 1330.
+Package pdftex.def Info: ../Duffing/duffing_backbone_e_chirp.png  used on input line 1341.
 (pdftex.def)             Requested size: 400.61703pt x 282.7892pt.
 
 
@@ -1035,35 +1277,35 @@ Package pdftex.def Info: ../Duffing/duffing_backbone_e_chirp.png  used on input 
 [35 <../Duffing/duffing_backbone_e_chirp.png>]
 
 [36]
-<../Distorsione/distorsione_armoniche_vs_vac.png, id=594, 614.295pt x 433.62pt>
+<../Distorsione/distorsione_armoniche_vs_vac.png, id=595, 614.295pt x 433.62pt>
 File: ../Distorsione/distorsione_armoniche_vs_vac.png Graphic file (type png)
 <use ../Distorsione/distorsione_armoniche_vs_vac.png>
-Package pdftex.def Info: ../Distorsione/distorsione_armoniche_vs_vac.png  used on input line 1402.
+Package pdftex.def Info: ../Distorsione/distorsione_armoniche_vs_vac.png  used on input line 1413.
 (pdftex.def)             Requested size: 318.66948pt x 224.94115pt.
-<../Distorsione/distorsione_hd2_rapporto.png, id=595, 614.295pt x 433.62pt>
+<../Distorsione/distorsione_hd2_rapporto.png, id=596, 614.295pt x 433.62pt>
 File: ../Distorsione/distorsione_hd2_rapporto.png Graphic file (type png)
 <use ../Distorsione/distorsione_hd2_rapporto.png>
-Package pdftex.def Info: ../Distorsione/distorsione_hd2_rapporto.png  used on input line 1409.
+Package pdftex.def Info: ../Distorsione/distorsione_hd2_rapporto.png  used on input line 1420.
 (pdftex.def)             Requested size: 295.90588pt x 208.87628pt.
 
 
 [37 <../Distorsione/distorsione_armoniche_vs_vac.png> <../Distorsione/distorsione_hd2_rapporto.png>]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 1416.
+(Font)              <14.4> on input line 1427.
 
 
 [38]
-Overfull \hbox (3.61383pt too wide) in paragraph at lines 1472--1474
-\T1/lmr/m/n/10.95 (-20) Dalla ta-bel-la 2 di [[]], $\OML/lmm/m/it/10.95 c[] \OT1/lmr/m/n/10.95 (-20) = [] []$\T1/lmr/m/n/10.95 (-20) ; $\OML/lmm/m/it/10.95 "[] \OT1/lmr/m/n/10.95 (-20) = [] [] = [] []$\T1/lmr/m/n/10.95 (-20) ;
+Overfull \hbox (3.50433pt too wide) in paragraph at lines 1483--1485
+\T1/lmr/m/n/10.95 (-20) Dalla ta-bel-la 2 di [[][]1[][]], $\OML/lmm/m/it/10.95 c[] \OT1/lmr/m/n/10.95 (-20) = [] []$\T1/lmr/m/n/10.95 (-20) ; $\OML/lmm/m/it/10.95 "[] \OT1/lmr/m/n/10.95 (-20) = [] [] = [] []$\T1/lmr/m/n/10.95 (-20) ;
  []
 
 
 
 [39]
-<../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png, id=637, 614.295pt x 433.62pt>
+<../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png, id=638, 614.295pt x 433.62pt>
 File: ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png Graphic file (type png)
 <use ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png>
-Package pdftex.def Info: ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png  used on input line 1484.
+Package pdftex.def Info: ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png  used on input line 1495.
 (pdftex.def)             Requested size: 382.40338pt x 269.93333pt.
 
 
@@ -1076,69 +1318,69 @@ Package pdftex.def Info: ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png  u
 [43]
 
 [44]
-<../Decay/grafici/controfase_dinamica_completa.png, id=733, 794.97pt x 491.436pt>
+<../Decay/grafici/controfase_dinamica_completa.png, id=734, 794.97pt x 491.436pt>
 File: ../Decay/grafici/controfase_dinamica_completa.png Graphic file (type png)
 <use ../Decay/grafici/controfase_dinamica_completa.png>
-Package pdftex.def Info: ../Decay/grafici/controfase_dinamica_completa.png  used on input line 1692.
+Package pdftex.def Info: ../Decay/grafici/controfase_dinamica_completa.png  used on input line 1703.
 (pdftex.def)             Requested size: 432.48051pt x 267.35864pt.
-<../Decay/grafici/esponenziale_controfase.png, id=734, 758.835pt x 419.166pt>
+<../Decay/grafici/esponenziale_controfase.png, id=735, 758.835pt x 419.166pt>
 File: ../Decay/grafici/esponenziale_controfase.png Graphic file (type png)
 <use ../Decay/grafici/esponenziale_controfase.png>
-Package pdftex.def Info: ../Decay/grafici/esponenziale_controfase.png  used on input line 1699.
+Package pdftex.def Info: ../Decay/grafici/esponenziale_controfase.png  used on input line 1710.
 (pdftex.def)             Requested size: 418.82375pt x 231.3543pt.
 
 
 [45 <../Decay/grafici/controfase_dinamica_completa.png>]
-<../Decay/grafici/simulazione_ode_controfase.png, id=743, 758.835pt x 310.761pt>
+<../Decay/grafici/simulazione_ode_controfase.png, id=744, 758.835pt x 310.761pt>
 File: ../Decay/grafici/simulazione_ode_controfase.png Graphic file (type png)
 <use ../Decay/grafici/simulazione_ode_controfase.png>
-Package pdftex.def Info: ../Decay/grafici/simulazione_ode_controfase.png  used on input line 1721.
+Package pdftex.def Info: ../Decay/grafici/simulazione_ode_controfase.png  used on input line 1732.
 (pdftex.def)             Requested size: 432.48051pt x 177.1119pt.
 
 
 [46 <../Decay/grafici/esponenziale_controfase.png> <../Decay/grafici/simulazione_ode_controfase.png>]
-<../variazione fase/grafici/vpost_vs_fase.png, id=756, 626.5809pt x 366.4089pt>
+<../variazione fase/grafici/vpost_vs_fase.png, id=757, 626.5809pt x 366.4089pt>
 File: ../variazione fase/grafici/vpost_vs_fase.png Graphic file (type png)
 <use ../variazione fase/grafici/vpost_vs_fase.png>
-Package pdftex.def Info: ../variazione fase/grafici/vpost_vs_fase.png  used on input line 1756.
+Package pdftex.def Info: ../variazione fase/grafici/vpost_vs_fase.png  used on input line 1767.
 (pdftex.def)             Requested size: 355.08984pt x 207.65318pt.
 
 
 [47 <../variazione fase/grafici/vpost_vs_fase.png>]
 
 [48]
-<../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png, id=776, 852.3042pt x 541.3023pt>
+<../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png, id=777, 852.3042pt x 541.3023pt>
 File: ../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png  used on input line 1783.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png  used on input line 1794.
 (pdftex.def)             Requested size: 446.13727pt x 283.34549pt.
 
 
 [49 <../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png>]
 
 [50]
-<../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png, id=797, 565.8741pt x 388.0899pt>
+<../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png, id=798, 565.8741pt x 388.0899pt>
 File: ../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png  used on input line 1878.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png  used on input line 1889.
 (pdftex.def)             Requested size: 345.98302pt x 237.29114pt.
-<../Oscillazione parassita/Grafici/circuito_ltspice_schema.png, id=802, 1253.4027pt x 382.0674pt>
+<../Oscillazione parassita/Grafici/circuito_ltspice_schema.png, id=803, 1253.4027pt x 382.0674pt>
 File: ../Oscillazione parassita/Grafici/circuito_ltspice_schema.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/circuito_ltspice_schema.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/circuito_ltspice_schema.png  used on input line 1887.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/circuito_ltspice_schema.png  used on input line 1898.
 (pdftex.def)             Requested size: 450.69417pt x 137.3809pt.
 
 
 [51 <../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png> <../Oscillazione parassita/Grafici/circuito_ltspice_schema.png>]
-<../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png, id=812, 944.5689pt x 380.8629pt>
+<../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png, id=813, 944.5689pt x 380.8629pt>
 File: ../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png  used on input line 1898.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png  used on input line 1909.
 (pdftex.def)             Requested size: 446.13727pt x 179.88892pt.
-<../Oscillazione parassita/Grafici/sweep_fase_con_scope.png, id=814, 822.9144pt x 406.8801pt>
+<../Oscillazione parassita/Grafici/sweep_fase_con_scope.png, id=815, 822.9144pt x 406.8801pt>
 File: ../Oscillazione parassita/Grafici/sweep_fase_con_scope.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/sweep_fase_con_scope.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/sweep_fase_con_scope.png  used on input line 1906.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/sweep_fase_con_scope.png  used on input line 1917.
 (pdftex.def)             Requested size: 446.13727pt x 220.58737pt.
 
 
@@ -1147,22 +1389,34 @@ Package pdftex.def Info: ../Oscillazione parassita/Grafici/sweep_fase_con_scope.
 [53]
 
 [54]
-<../variazione fase/grafici/deriva_termica_f1_e_A0.png, id=848, 664.884pt x 592.614pt>
+<../variazione fase/grafici/deriva_termica_f1_e_A0.png, id=849, 664.884pt x 592.614pt>
 File: ../variazione fase/grafici/deriva_termica_f1_e_A0.png Graphic file (type png)
 <use ../variazione fase/grafici/deriva_termica_f1_e_A0.png>
-Package pdftex.def Info: ../variazione fase/grafici/deriva_termica_f1_e_A0.png  used on input line 1969.
+Package pdftex.def Info: ../variazione fase/grafici/deriva_termica_f1_e_A0.png  used on input line 1980.
 (pdftex.def)             Requested size: 418.82375pt x 373.29454pt.
 
 
 [55 <../variazione fase/grafici/deriva_termica_f1_e_A0.png>]
-<../variazione fase/grafici/ampiezza_A0_vs_fase.png, id=860, 635.976pt x 397.485pt>
+<../variazione fase/grafici/ampiezza_A0_vs_fase.png, id=861, 635.976pt x 397.485pt>
 File: ../variazione fase/grafici/ampiezza_A0_vs_fase.png Graphic file (type png)
 <use ../variazione fase/grafici/ampiezza_A0_vs_fase.png>
-Package pdftex.def Info: ../variazione fase/grafici/ampiezza_A0_vs_fase.png  used on input line 1989.
+Package pdftex.def Info: ../variazione fase/grafici/ampiezza_A0_vs_fase.png  used on input line 2000.
 (pdftex.def)             Requested size: 382.40338pt x 239.0023pt.
 
 
 [56 <../variazione fase/grafici/ampiezza_A0_vs_fase.png>]
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/lmr/m/sc/10.95'.
+(microtype)             Ignoring protrusion settings for this character.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2005.
+ (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
 
 [57] (relazione.aux)
  ***********
@@ -1171,19 +1425,22 @@ L3 programming layer <2025-04-29>
  ***********
 Package rerunfilecheck Info: File `relazione.out' has not changed.
 (rerunfilecheck)             Checksum: 33B6D774C2227929385491F8AE492D8D;9211.
+Package logreq Info: Writing requests to 'relazione.run.xml'.
+\openout1 = `relazione.run.xml'.
+
  ) 
 Here is how much of TeX's memory you used:
- 50647 strings out of 469923
- 1226920 string characters out of 5468202
- 1873983 words of memory out of 5000000
- 76196 multiletter control sequences out of 15000+600000
- 799469 words of font info for 338 fonts, out of 8000000 for 9000
+ 57881 strings out of 469923
+ 1373180 string characters out of 5468202
+ 2402585 words of memory out of 5000000
+ 83376 multiletter control sequences out of 15000+600000
+ 802702 words of font info for 341 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,18n,87p,1554b,1049s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbsy10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on relazione.pdf (57 pages, 8831091 bytes).
+ 84i,18n,87p,1554b,1819s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbsy10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on relazione.pdf (57 pages, 8867105 bytes).
 PDF statistics:
- 1049 PDF objects out of 1200 (max. 8388607)
- 324 named destinations out of 1000 (max. 500000)
- 107396 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 1062 PDF objects out of 1200 (max. 8388607)
+ 323 named destinations out of 1000 (max. 500000)
+ 109956 words of extra memory for PDF output out of 128383 (max. 10000000)
 

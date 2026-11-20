@@ -40,6 +40,17 @@
 }
 \usepackage{microtype}
 
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=none,
+maxbibnames=10, 
+mincrossrefs=1
+]{biblatex}
+
+\addbibresource{bibliography.bib}
+
+
 \title{\textbf{Caratterizzazione sperimentale di un risonatore MEMS e tecnica per la riduzione del tempo di decadimento}}
 \author{\textbf{Avanzi Luca - Corazzina Marco}}
 \date{\today}
@@ -55,9 +66,9 @@
 \section{Struttura e principi di funzionamento del MEMS}
 
 
-Il dispositivo è un risonatore MEMS realizzato tramite il processo \textit{ThELMA} (\textit{Thick Epitaxial Layer for Microactuators and Accelerometers}) di STMicroelectronics. La struttura è quella di una trave a doppio incastro, sospesa sopra il substrato di silicio. La trave non è perfettamente rettilinea, ma presenta una lieve curvatura  ad arco. Le sue dimensioni sono: lunghezza $L = \SI{532}{\micro\meter}$ (intesa lungo l'arco, ovvero a trave distesa), larghezza $w = \SI{5}{\micro\meter}$, spessore $h = \SI{24}{\micro\meter}$.
+Il dispositivo analizzato all'interno di questa relazione è un risonatore MEMS realizzato tramite il processo \textit{ThELMA} (\textit{Thick Epitaxial Layer for Microactuators and Accelerometers}) di STMicroelectronics. La struttura è quella di una trave a doppio incastro, sospesa sopra il substrato di silicio. La trave non è perfettamente rettilinea, ma presenta una lieve curvatura  ad arco. Le sue dimensioni sono: lunghezza $L = \SI{532}{\micro\meter}$ (intesa lungo l'arco, ovvero a trave distesa), larghezza $w = \SI{5}{\micro\meter}$, spessore $h = \SI{24}{\micro\meter}$.
 
-A differenza di una trave dritta, questa forma curva introduce un'asimmetria nella risposta elastica della struttura. Nei paper teorici di riferimento, questa geometria è stata progettata apposta per favorire uno scambio di energia tra il primo modo di vibrazione e il secondo modo a frequenza doppia, fenomeno noto come risonanza interna 1:2.
+\noindent A differenza di una trave dritta, questa forma curva introduce un'asimmetria nella risposta elastica della struttura. Nei paper teorici di riferimento\cite{frangi2023}, questa geometria è stata progettata apposta per favorire uno scambio di energia tra il primo modo di vibrazione e il secondo modo a frequenza doppia, fenomeno noto come risonanza interna 1:2.
 
 \vspace{0.3cm}
 \noindent Nelle nostre misure sperimentali, tuttavia, questo accoppiamento non viene innescato: la trave viene sollecitata a livelli tali da operare esclusivamente sul primo modo fondamentale. 
@@ -156,13 +167,12 @@ A differenza di una trave dritta, questa forma curva introduce un'asimmetria nel
 
 \newpage
 
-\noindent Quando la trave vibra, ogni suo punto di coordinata $y \in [0, L]$ si sposta lungo la direzione $x$ al variare del tempo $t$: la deformazione dell'intera struttura è quindi descritta da una funzione di due variabili, $u(y, t)$.
+\noindent Quando la trave vibra, ogni suo punto di coordinata $y \in [0, L]$ si sposta nello spazio al variare del tempo $t$: la deformazione dell'intera struttura è quindi descritta da una funzione di due variabili, $u(y, t)$.
 
-La trave ha infiniti modi di vibrazione, ciascuno caratterizzato da una propria frequenza di risonanza e da una specifica forma geometrica:
+\noindent La trave ha idealmente infiniti modi di vibrazione, ciascuno caratterizzato da una propria frequenza di risonanza e da una specifica forma d'onda nello spazio. In questo lavoro ci si concentrerà sui primi due modi di vibrazione lungo l'asse x:
 \begin{itemize}
     \item Il primo modo flessionale con una singola ``pancia'' centrale (figura~\ref{fig:modi_fem}a);
-    \item Il secondo modo flessionale a forma di ``S'' antisimmetrica (figura~\ref{fig:modi_fem}b);
-    \item Modi superiori a frequenze nell'ordine dei megahertz.
+    \item Il secondo modo flessionale a forma di ``S'' antisimmetrica (figura~\ref{fig:modi_fem}b).
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -194,7 +204,8 @@ La trave ha infiniti modi di vibrazione, ciascuno caratterizzato da una propria 
 dove:
 \begin{itemize}
     \item $\phi(y)$ è la forma modale: dipende solo dalla coordinata spaziale $y$ e descrive la geometria fissa assunta dalla trave durante l'oscillazione (figura~\ref{fig:mode_shape}). Per convenzione, la forma modale è normalizzata imponendo che valga $0$ agli incastri ($\phi(0) = \phi(L) = 0$) e $1$ al centro dell'arco ($y = L/2$).
-    \item $x(t)$ è la coordinata modale. Dato che al centro vale $\phi(L/2) = 1$, sostituendo nell'eq.~\eqref{eq:separazione_variabili} si ottiene $u(L/2, t) = x(t)$. Quindi, $x(t)$ è lo spostamento nel tempo del punto centrale della trave.
+    
+    \item $x(t)$ è la coordinata modale. Dato che al centro vale $\phi(L/2) = 1$, sostituendo nell'eq.~\eqref{eq:separazione_variabili} si ottiene $u(L/2, t) = x(t)$. Quindi, $x(t)$ è lo spostamento nel tempo del punto centrale della trave lungo l'asse $x$.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -1991,7 +2002,9 @@ eliminiamo la salita dovuta alla deriva e otteniamo il grafico di fig.~\ref{fig:
 \label{fig:ampiezza_A0_vs_fase}
 \end{figure}
 \newpage
+\printbibliography
 
+\iffalse
 \begin{thebibliography}{9}
 \bibitem{frangi2023}
 G.~Gobat, V.~Zega, P.~Fedeli, L.~G.~Falorni, A.~Frangi, 
@@ -2008,5 +2021,5 @@ Z.~Wu, W.~Liu, Z.~Tong, S.~Zhang, Y.~Gu, G.~Wu, A.~Tovstopyat, C.~Sun, L.~Lou,
 \textit{A Novel Transfer Function Based Ring-Down Suppression System for PMUTs},
 Sensors, vol.~21, no.~19, art.~6414, 2021.
 \end{thebibliography}
-
+\fi
 \end{document}
