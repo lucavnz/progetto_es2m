@@ -167,45 +167,51 @@ Il dispositivo analizzato all'interno di questa relazione è un risonatore MEMS 
 
 \newpage
 
-\noindent Quando la trave vibra, ogni suo punto di coordinata $y \in [0, L]$ si sposta nello spazio al variare del tempo $t$: la deformazione dell'intera struttura è quindi descritta da una funzione di due variabili, $u(y, t)$.
+\noindent Quando la trave vibra, ogni suo punto di coordinata $y \in [0, L]$ si sposta nello spazio al variare del tempo $t$: la deformazione dell'intera struttura è quindi descritta da una funzione di due variabili, $\mathbf{w}(y, t)$.
 
-\noindent La trave ha idealmente infiniti modi di vibrazione, ciascuno caratterizzato da una propria frequenza di risonanza e da una specifica forma d'onda nello spazio. In questo lavoro ci si concentrerà sui primi due modi di vibrazione lungo l'asse x:
+\noindent La trave ha idealmente infiniti modi di vibrazione, ciascuno caratterizzato da una propria frequenza di risonanza e da una specifica forma d'onda nello spazio:
 \begin{itemize}
-    \item Il primo modo flessionale con una singola ``pancia'' centrale (figura~\ref{fig:modi_fem}a);
-    \item Il secondo modo flessionale a forma di ``S'' antisimmetrica (figura~\ref{fig:modi_fem}b).
+    \item Il primo modo flessionale lungo l'asse $x$ con una singola ``pancia'' centrale (Figura~\ref{fig:modi_fem}a);
+    \item Il modo flessionale lungo l'asse $x$ a frequenza circa doppia rispetto al primo  (Figura~\ref{fig:modi_fem}f);
+    \item Altri esempi di modi flessionali anche lungo altre dimensioni (da Figura~\ref{fig:modi_fem}b a Figura~\ref{fig:modi_fem}e).
 \end{itemize}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
     \node[anchor=center] (img) at (0,0) {\includegraphics[width=0.78\textwidth]{../Paper/modi_vibrazione_trave.png}};
-    \node[font=\small\bfseries, anchor=east] at ($(img.north west) + (0.05, -0.95)$) {(a)};
-    \node[font=\small\bfseries, anchor=east] at ($(img.south west) + (0.05,  0.95)$) {(b)};
 \end{tikzpicture}
-\caption{Esempi di forme modali del MEMS: (a)~primo modo flessionale a singola ``pancia'' centrale; (b)~modo flessionale antisimmetrico a forma di ``S''.}
+\caption{Esempi di forme modali del MEMS}
 \label{fig:modi_fem}
 \end{figure}
+
 \noindent Facciamo qui una precisazione sulla nomenclatura che useremo nel resto della relazione: poiché nel nostro MEMS il fattore di merito è molto elevato ($Q \approx 2800$), useremo come sinonimi frequenza naturale, frequenza di risonanza e frequenza di oscillazione libera, indicandole tutte con lo stesso simbolo. \textbf{Forse non farei questa precisazione}
 
-\vspace{0.3cm}
-
-\noindent Il moto $u(y, t)$ sarebbe dato dalla sovrapposizione di tutti questi modi. Tuttavia, un fattore di qualità così alto rende il risonatore un filtro meccanico estremamente selettivo:
-\begin{itemize}
-    \item Quando applichiamo all'elettrodo di drive una tensione sinusoidale con frequenza $f_{in}$ prossima a quella del primo modo flessionale, la risposta meccanica su questo specifico modo viene amplificata di un fattore pari a $Q$.
-    \item Tutti gli altri modi hanno frequenze di risonanza distanti dalla frequenza di eccitazione. Di conseguenza, la loro ampiezza di oscillazione risulta del tutto trascurabile rispetto alla risposta del primo modo.
-\end{itemize}
 \newpage
 
-\noindent Dato che viene eccitato solo il primo modo, durante l'oscillazione la forma geometrica assunta dalla trave nello spazio (il profilo a singola ``pancia'') rimane fissa e non cambia nel tempo: a variare nel tempo è soltanto l'ampiezza della flessione. Questo permette di separare la dipendenza spaziale ($y$) da quella temporale ($t$), scrivendo la funzione $u(y, t)$ come prodotto di due termini:
+\noindent Il moto $\mathbf{w}(y, t)$ sarebbe dato dalla sovrapposizione degli effetti introdotti da tutti questi modi:
+
+\[\mathbf{w}(y, t) = \sum_{i=1}^{\infty} \mathbf{w}_i(y, t)\]
+
+\noindent Tuttavia, con un fattore di qualità sufficientemente alto e un eccitazione ad una singola frequenza, si può considerare il risonatore un filtro meccanico estremamente selettivo:
+\begin{itemize}
+    \item Quando applichiamo all'elettrodo di drive una tensione sinusoidale con frequenza $f_{in}$ prossima a quella del primo modo flessionale, l'ampiezza dell'oscillazione sarà all'incirca proporzionale alla forza ed al fattore di qualità $Q$.
+    \item Tutti gli altri modi hanno frequenze di risonanza distanti dalla frequenza di eccitazione. Di conseguenza, la loro ampiezza di oscillazione si aspetta del tutto trascurabile rispetto alla risposta del primo modo.
+\end{itemize}
+
+\noindent Questa approssimazione verrà successivamente verificata sperimentalmente per definirne anche dei limiti di validità. I limiti sono dovuti alle non linearità intrinseche alla struttura ed alle leggi fisiche che legano il dominio elettrico a quello meccanico. 
+
+\noindent Di fatto possiamo ora approssimare lo spostamento a quello dovuto al solo primo modo e, come si vedrà in seguito, parzialmente a quello a frequenza doppia. Entrambi sono vibrazioni lungo l'asse $x$, riducendo dunque lo spostamento ad una dimensione spaziale $w(y, t)$. Attualmente si considererà l'eccitazione del solo primo modo.
+\noindent Ora, come dimostrato in altri lavori\cite{frangi2023}, nella funzione $w(y, t)$ si può separare la dipendenza spaziale nella trave ($y$) da quella temporale ($t$), scrivendola dunque come prodotto di due termini:
 \begin{equation}
     \label{eq:separazione_variabili}
-    u(y, t) = \phi(y) \cdot x(t)
+    w(y, t) = \phi(y) \cdot x(t)
 \end{equation}
 dove:
 \begin{itemize}
     \item $\phi(y)$ è la forma modale: dipende solo dalla coordinata spaziale $y$ e descrive la geometria fissa assunta dalla trave durante l'oscillazione (figura~\ref{fig:mode_shape}). Per convenzione, la forma modale è normalizzata imponendo che valga $0$ agli incastri ($\phi(0) = \phi(L) = 0$) e $1$ al centro dell'arco ($y = L/2$).
     
-    \item $x(t)$ è la coordinata modale. Dato che al centro vale $\phi(L/2) = 1$, sostituendo nell'eq.~\eqref{eq:separazione_variabili} si ottiene $u(L/2, t) = x(t)$. Quindi, $x(t)$ è lo spostamento nel tempo del punto centrale della trave lungo l'asse $x$.
+    \item $x(t)$ è la coordinata modale. Dato che al centro vale $\phi(L/2) = 1$, sostituendo nell'eq.~\eqref{eq:separazione_variabili} si ottiene $w(L/2, t) = x(t)$. Quindi, $x(t)$ è lo spostamento nel tempo del punto centrale della trave lungo l'asse $x$.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -240,7 +246,7 @@ dove:
     \node[above=3pt, font=\scriptsize, text=black!75] at (-0.22, 0.4) {$\phi(0) = 0$};
     \node[above=3pt, font=\scriptsize, text=black!75] at (7.72, 0.4) {$\phi(L) = 0$};
 \end{tikzpicture}
-\caption{Visualizzazione della forma modale $\phi(y)$.}
+\caption{Visualizzazione della forma modale $\phi(y)$ associata al primo modo.}
 \label{fig:mode_shape}
 \end{figure}
 
@@ -248,8 +254,8 @@ dove:
 
 \noindent Grazie alla relazione \eqref{eq:separazione_variabili}, possiamo conoscere:
 \begin{enumerate}
-    \item Lo spostamento di ogni punto $u(y, t) = \phi(y) \, x(t)$. (Es. al centro sbanda di $x(t)$, a un quarto sbanda di $\phi(L/4) x(t)$, agli incastri sbanda di $0$);
-    \item La velocità $v(y, t) = \frac{\partial u}{\partial t} = \phi(y) \, \dot{x}(t)$;
+    \item Lo spostamento di ogni punto $w(y, t) = \phi(y) \, x(t)$. (Es. al centro sbanda di $x(t)$, a un quarto sbanda di $\phi(L/4) x(t)$, agli incastri sbanda di $0$);
+    \item La velocità $u(y, t) = \frac{\partial u}{\partial t} = \phi(y) \, \dot{x}(t)$;
     \item L'accelerazione $a(y, t) = \frac{\partial^2 u}{\partial t^2} = \phi(y) \, \ddot{x}(t)$;
 \end{enumerate}
 
@@ -276,7 +282,9 @@ dove:
 \subsection{Attuazione elettrostatica}
 \label{sec:forze_elettrostatiche}
 
-Consideriamo la capacità di drive $C_d(x)$ formata tra l'elettrodo di drive e la trave mobile. L'energia elettrostatica immagazzinata nel condensatore è:
+Consideriamo la capacità di drive $C_d(x)$ formata tra l'elettrodo di drive e la trave mobile. 
+\textbf{TODO:Spiegare meglio la C(x) con la formula}
+\noindent L'energia elettrostatica immagazzinata nel condensatore è:
 \begin{equation}
     U_e = \frac{1}{2} C_d(x) V^2(t)
 \end{equation}
