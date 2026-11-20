@@ -389,43 +389,34 @@ La corrente erogata dal MEMS è quindi direttamente proporzionale alla velocità
 
 \newpage
 
-
 \begin{figure}[htbp]
-\centering
-\begin{circuitikz}[scale=0.88, transform shape]
-    % --- INGRESSO DRIVE ---
-    \draw (0.5, 2) node[left] {$v_{\text{in}}(t)$} to[short, o-] (2.0, 2);
-    \draw (0.5, 0) node[ground]{} -- (2.0, 0);
 
-    % Trasformatore 1: Drive (1 : eta)
-    \draw (2.0, 2) to[L, l_={}] (2.0, 0);
-    \draw (2.8, 2) to[L, l_={}] (2.8, 0);
-    \draw[thick] (2.3, 2.1) -- (2.3, -0.1);
-    \draw[thick] (2.5, 2.1) -- (2.5, -0.1);
-    \node[above, font=\footnotesize] at (2.4, 2.2) {$1 : \eta$};
+    \hspace{2.7cm}\textit{Elettrico}\hspace{3.1cm} \textit{Meccanico}\hspace{4cm} \textit{Elettrico}
+    
+    \centering
+    \begin{circuitikz} [straight voltages, american inductors]
+    
+        \draw (0,0) node[ground](GND){} to [sV] ++(0,2) -- ++(1,0)
+        node[transformer, circuitikz/inductors/coils=4,
+        anchor=A1](T){1 : $\eta$};
+        \draw (T.A2) to[short, -*] (0,-0.1)
+        (T.B2) to[open, v=$F_{drive}(t)$] (T.B1)
+        (-0.7,0) to[open, v^=$v_{in}(t)$] (-0.7,2)
+        
+        (T.B1){} to[R, l=$b_{eff}$] (5,2)
+        (5,2) to[L, l=$m_{eff}$] (7,2)
+        (7,2) to[C, l=$1/k_{eff}$] (8,2)
+        (8,2) to[short, i=$\dot{x}(t)$] (9,2)
+        node[transformer, circuitikz/inductors/coils=4,
+        anchor=A1](T2){$\eta$ : 1};
+        \draw (T.B2) to[short] (T2.A2);
+        \draw (T2.B1) to[short, -o, i=$i_m(t)$] (12,2);
+        \draw (12,-0.1) node[ground](G){} to[short] (T2.B2);
+        ;
 
-    % Anello Meccanico Centrale (Massa - Smorzatore - Molla)
-    \draw (2.8, 2) -- (4.2, 2)
-        to[L, l_=$m_{\text{eff}}$] (5.8, 2)
-        to[R, l_=$b_{\text{eff}}$] (7.4, 2)
-        to[C, l_=$1/k_{\text{eff}}$] (9.0, 2)
-        -- (10.2, 2);
-    \draw (2.8, 0) -- (10.2, 0);
-
-    % Trasformatore 2: Sense (eta : 1)
-    \draw (10.2, 2) to[L, l_={}] (10.2, 0);
-    \draw (11.0, 2) to[L, l_={}] (11.0, 0);
-    \draw[thick] (10.5, 2.1) -- (10.5, -0.1);
-    \draw[thick] (10.7, 2.1) -- (10.7, -0.1);
-    \node[above, font=\footnotesize] at (10.6, 2.2) {$\eta : 1$};
-
-    % Uscita Elettrica
-    \draw (11.0, 2) to[short, -o, i=$i_m(t)$] (12.5, 2);
-    \draw (11.0, 0) -- (12.5, 0) node[ground]{};
-
-\end{circuitikz}
-\caption{Modello elettromeccanico del dispositivo.}
-\label{fig:trasformatore}
+    \end{circuitikz}
+    \caption{Modello elettromeccanico del dispositivo.}
+    \label{fig:trasformatore}
 \end{figure}
 
 \noindent Come ricavato nell'equazione \eqref{eq:is_vs_xdot}:
