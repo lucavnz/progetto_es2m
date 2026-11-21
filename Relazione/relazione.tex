@@ -277,13 +277,34 @@ dove:
         \omega_{01} = \sqrt{\frac{k_m}{m_{\text{eff}}}}
     \end{equation}
 
+\textbf{Forse lascerei anche solo keff, che poi tanto se ne parla}
+
 \newpage
 
 \subsection{Attuazione elettrostatica}
 \label{sec:forze_elettrostatiche}
 
-Consideriamo la capacità di drive $C_d(x)$ formata tra l'elettrodo di drive e la trave mobile. 
-\textbf{TODO:Spiegare meglio la C(x) con la formula}
+La struttura descritta si può andare a rappresentare con il circuito in Figura \ref{fig:caps}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{circuitikz}
+
+        \draw (0,0) to[open] (1.5,0) 
+        node[ground](GND){} to[C, l_=$C_s(x)$, -*] (1.5,2);
+        \draw (0,2) node[left] {$V_{DC}$} to[short, o-] (1.5,2);
+        \draw (1.5,5) node[above] {$v_{in}(t)$} to[short, o-] (1.5,4)
+         to[C, l=$C_d(x)$] (1.5,2);
+        \draw (1.5,4) to[short, *-] (4,4)
+        to[C, l=$C_p$] (4,0)
+        to[short, -*] (GND)
+        ;
+    \end{circuitikz}
+    \caption{Circuito elettrico equivalente della struttura}
+    \label{fig:caps}
+\end{figure}
+
+\noindent Consideriamo ora la capacità di drive $C_d(x)$ formata tra l'elettrodo di drive e la trave mobile. 
 \noindent L'energia elettrostatica immagazzinata nel condensatore è:
 \begin{equation}
     U_e = \frac{1}{2} C_d(x) V^2(t)
@@ -293,6 +314,20 @@ dove la differenza di potenziale $V(t)$ applicata tra la trave (a potenziale $V_
 \begin{equation}
     V(t) = V_{\text{DC}} - v_{\text{in}}(t)
 \end{equation}
+
+\noindent E la capacità $C_d(x)$, approssimata ad un condensatore a facce piane parallele, è data da:
+
+\begin{equation}
+    C_d(x) = \epsilon \frac{A}{d_0-x}
+\end{equation}
+
+Con:
+\begin{itemize}
+    \item $\epsilon$ permittività elettrica del materiale tra gli elettrodo di drive e la trave;
+    \item $A$ area degli elettrodi;
+    \item $d_0$ distanza tra l'elettrodo di drive e il punto centrale della trave in condizione di riposo;
+    \item $x$ spostamento del punto centrale della trave dalla posizione di riposo in direzione $x$.
+\end{itemize}
 
 \noindent La forza elettrostatica che agisce sulla trave è dunque:
 
@@ -307,7 +342,7 @@ dove la differenza di potenziale $V(t)$ applicata tra la trave (a potenziale $V_
     \left( V_{\text{DC}} - v_{\text{in}}(t) \right)^2 = V_{\text{DC}}^2 - 2 V_{\text{DC}} v_{\text{in}}(t) + v_{\text{in}}^2(t)
 \end{equation}
 
-\noindent Dato che $|v_{\text{in}}(t)| \ll V_{\text{DC}}$, il termine quadratico $v_{\text{in}}^2(t)$ può essere trascurato. Poiché la capacità $C_d(x)$ dipende dalla distanza $g_0 - x(t)$ tra la trave e l'elettrodo, in regime di piccole oscillazioni ($|x(t)| \ll g_0$) possiamo approssimare la derivata $\frac{\partial C_d(x)}{\partial x}$ al primo ordine dello sviluppo di Taylor attorno alla posizione di riposo $x = 0$:
+\noindent Dato che $|v_{\text{in}}(t)| \ll V_{\text{DC}}$, il termine quadratico $v_{\text{in}}^2(t)$ può essere trascurato. Poiché la capacità $C_d(x)$ dipende dalla distanza $d_0 - x(t)$ tra la trave e l'elettrodo, in regime di piccole oscillazioni ($|x(t)| \ll g_0$) possiamo approssimare la derivata $\frac{\partial C_d(x)}{\partial x}$ al primo ordine dello sviluppo di Taylor attorno alla posizione di riposo $x = 0$:
 
 \begin{equation}
     \frac{\partial C_d(x)}{\partial x} \approx \left. \frac{\partial C_d}{\partial x} \right|_{x=0} + \left. \frac{\partial^2 C_d}{\partial x^2} \right|_{x=0} x(t)
