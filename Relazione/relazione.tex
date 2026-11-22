@@ -284,7 +284,7 @@ dove:
 \subsection{Attuazione elettrostatica}
 \label{sec:forze_elettrostatiche}
 
-La struttura descritta si può andare a rappresentare con il circuito in Figura \ref{fig:caps}.
+La struttura descritta si può andare a rappresentare con il circuito in Figura \ref{fig:caps}; il condensatore $C_d$ rappresenta la capacità tra elettrodo di drive e la trave, il condensatore $C_s$ rappresenta la capacità tra elettrodo di sense e la trave, mentre $C_p$ rappresenta la capacità parassita dovuta al fringing del campo elettrico tra l'elettrodo di drive e quello di sense.
 
 \begin{figure}[h!]
     \centering
@@ -499,7 +499,7 @@ Per $V_{\text{DC}} = \SI{5.0}{\volt}$, otteniamo le seguenti stime:
     \item Capacità motrice: $C_m = \mathbf{\SI{4.83}{\atto\farad}}$;
 \end{itemize}
 \subsubsection{Capacità parassita}
-Nel dispositivo reale sono presenti accoppiamenti capacitivi parassiti. I risultati raccolti durante la sperimentazione in laboratorio ci hanno indirizzato a modellare una capacità parassita $C_p$ in parallelo al ramo serie RLC, come mostrato in Fig.~\ref{fig:mems_circuito}. Come si vedrà a breve, il nodo da cui viene estratta la corrente $i_{\text{tot}}(t)$ sarà mantenuto a $0\text{ V}$ dalla massa virtuale di un amplificatore a transimpedenza (TIA).
+Come anticipato precedentemente, nel dispositivo reale sono presenti accoppiamenti capacitivi parassiti modellabili tremite una capacità parassita $C_p$; questa andrà in parallelo al ramo serie RLC, come mostrato in Fig.~\ref{fig:mems_circuito}. Come si vedrà a breve, il nodo da cui viene estratta la corrente $i_{\text{tot}}(t)$ sarà mantenuto a $0\text{ V}$ dalla massa virtuale di un amplificatore a transimpedenza (TIA).
 
 \begin{figure}[htbp]
 \centering
@@ -608,24 +608,24 @@ La corrente complessiva $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$ prodotta dal ME
 \section{Caratterizzazione sperimentale della risposta libera (ringdown)}
 \label{sec:ringdown}
 
-In questa sezione presentiamo le misure sperimentali condotte sul MEMS per determinare la frequenza di risonanza $f_1$, la costante di tempo di smorzamento $\tau$ e il fattore di merito $Q$ del primo modo, analizzando la risposta libera a seguito dell'interruzione di una forzante. A partire dall'istante di spegnimento dell'eccitazione, la trave non riceve più alcuna spinta forzante dall'esterno e si ritrova in regime di oscillazione libera smorzata, in cui l'energia meccanica viene gradualmente dissipata.
+In questa sezione presentiamo le misure sperimentali condotte sul MEMS per determinare la frequenza di risonanza $f_1$, la costante di tempo di smorzamento $\tau$ e il fattore di merito $Q$ del primo modo, analizzando la risposta libera dell'uscita $v_{out}(t)$ a seguito dell'interruzione di una forzante sinusoidale. A partire dall'istante di spegnimento dell'eccitazione, la trave non riceve più alcuna spinta forzante dall'esterno e si ritrova in regime di oscillazione libera smorzata, in cui l'energia meccanica viene gradualmente dissipata.
 
 \vspace{0.3cm}
-\noindent Ecco gli step che abbiamo fatto:
+\noindent Di seguito la configurazione che abbiamo applicato:
 
 \begin{itemize}
     \item La tensione di polarizzazione della trave è stata fissata a $V_{\text{DC}} = \SI{5.0}{\volt}$.
-    \item Abbiamo applicato un segnale sinusoidale $v_{\text{in}}(t) = V_{\text{AC}} \sin(2\pi f_{\text{in}} t)$, con ampiezza $V_{\text{AC}} = \SI{100}{\milli\volt}$, sull'elettrodo di drive, in modalità burst,controllata da un segnale di sincronizzazione logico (Gate): finché il gate è alto, il segnale sinusoidale è applicato sull'elettrodo di drive; al fronte di discesa del gate (istante $t = 0$ nella scala dei tempi delle misure che presenteremo), $v_{\text{in}}(t)$ viene interrotta e portata a $\SI{0}{\volt}$.
+    \item Abbiamo applicato un segnale sinusoidale $v_{\text{in}}(t) = V_{\text{AC}} \sin(2\pi f_{\text{in}} t)$, con ampiezza picco-picco di $ \SI{100}{\milli\volt}$, sull'elettrodo di drive, in modalità burst,controllata da un segnale di sincronizzazione logico (Gate): finché il gate è alto, il segnale sinusoidale è applicato sull'elettrodo di drive; al fronte di discesa del gate (istante $t = 0$ nella scala dei tempi delle misure che presenteremo), $v_{\text{in}}(t)$ viene mantenuta ad una tensione continua pari a $v_{\text{in}}(0)$.
     \item Tramite l'oscilloscopio, abbiamo estrapolato la traccia del ringdown. L'esperimento è stato ripetuto per 25 diverse frequenze di ingresso $f_{\text{in}}$, distribuite in una finestra compresa tra $\SI{417.26}{\kilo\hertz}$ e $\SI{418.40}{\kilo\hertz}$.
 \end{itemize}
 
 
 \vspace{0.3cm}
 
-\noindent Sul generatore è possibile impostare la fase di arresto del burst $\phi$, ossia il punto del ciclo sinusoidale in cui viene interrotta $v_{\text{in}}(t)$ al fronte di discesa del gate. Questo ci interessa perchè, appena stacchiamo il gate, compare un'oscillazione parassita sull'uscita, e proprio per ridurre questo disturbo, abbiamo impostato una fase $\phi \approx 103^\circ$ (interrompiamo il gate esattamente quando $v_{\text{out}}(t)=\SI{0}{\volt}$, ne parleremo in modo dettagliato nella sezione~\ref{sec:variazione_fase_gate}). Rimane comunque un breve transitorio elettrico dovuto a $C_p$ che si esaurisce in circa $\SI{2.4}{\micro\second}$; per evitare che questo disturbo sporchi le nostre misure, abbiamo scartato i primi $\SI{20}{\micro\second}$ successivi al fronte del gate. 
+\noindent Sul generatore è possibile impostare la fase di arresto del burst $\phi$, ossia il punto del ciclo sinusoidale in cui viene interrotta $v_{\text{in}}(t)$ al fronte di discesa del gate. Questo ci interessa perchè, appena stacchiamo il gate, compare un'oscillazione parassita sull'uscita, e proprio per ridurre questo disturbo, abbiamo impostato una fase $\phi \approx 103^\circ$ (interrompiamo il gate esattamente quando $v_{\text{out}}(t)=\SI{0}{\volt}$, ne parleremo in modo dettagliato nella sezione~\ref{sec:variazione_fase_gate}). Rimane comunque un breve transitorio elettrico dovuto a $C_p$ che si esaurisce in circa $\SI{2.4}{\micro\second}$; per evitare che questo disturbo disturbi le nostre misure, abbiamo scartato i primi $\SI{20}{\micro\second}$ successivi al fronte del gate. 
 
 \vspace{0.3cm}
-\noindent Abbiamo realizzato un algoritmo che individua i picchi locali della sinusoide smorzata. Questi picchi seguono un decadimento esponenziale di questo tipo:
+\noindent Abbiamo utilizzato un algoritmo di \textit{Envelope Detection} per individuare la funzione inviluppata dai picchi locali della sinusoide smorzata. Questi picchi seguono un decadimento esponenziale di questo tipo:
 \begin{equation}
         \label{eq:legge_decadimento}
         A(t) = A_0 e^{-t/\tau}
@@ -635,7 +635,7 @@ dove $A_0$ è l'ampiezza di picco estrapolata all'istante di spegnimento $t=0$, 
 
 \newpage
 
-\noindent Abbiamo fittato i picchi ai minimi quadrati. In fig.~\ref{fig:ringdown_4casi} sono riportati i ringdown di quattro frequenze di eccitazione rappresentative.
+\noindent Abbiamo fittato i picchi ai minimi quadrati. In Fig.~\ref{fig:ringdown_4casi} sono riportate le tracce di ringdown associati a quattro frequenze di eccitazione rappresentative.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.96\textwidth]{../Ampiezza_Frequenza/grafici/ringdown_fit_4casi.png}
@@ -648,9 +648,9 @@ dove $A_0$ è l'ampiezza di picco estrapolata all'istante di spegnimento $t=0$, 
 \label{subsec:risposta_ampiezza}
 
 
-In fig.~\ref{fig:ampiezza_vs_frequenza} è riportato il grafico dell'ampiezza iniziale $A_0$ estratta all'istante di spegnimento del gate ($t=0$) in funzione della frequenza forzante $f_{\text{in}}$. Poiché per $t < 0$ la trave si trova in regime sinusoidale forzato, ci aspettiamo che l'energia meccanica accumulata (e quindi l'ampiezza $A_0$) sia massima quando la frequenza di eccitazione è vicina alla frequenza di risonanza del primo modo, ovvero $f_{\text{in}} = f_1$.
+In Fig.~\ref{fig:ampiezza_vs_frequenza} è riportato il grafico dell'ampiezza iniziale $A_0$ estratta all'istante di spegnimento del gate ($t=0$) in funzione della frequenza forzante $f_{\text{in}}$. Poiché per $t < 0$ la trave si trova in regime sinusoidale forzato, ci aspettiamo che l'energia meccanica accumulata (e quindi l'ampiezza $A_0$) sia massima quando la frequenza di eccitazione è vicina alla frequenza di risonanza del primo modo, ovvero $f_{\text{in}} = f_1$.
 
-\noindent La linea tratteggiata rossa di fig.~\ref{fig:ampiezza_vs_frequenza} rappresenta il fit lorenziano ottenuto per regressione ai minimi quadrati:
+\noindent La linea tratteggiata rossa di Fig.~\ref{fig:ampiezza_vs_frequenza} rappresenta il fit lorentziano ottenuto per regressione ai minimi quadrati:
 
 \begin{equation}
     \label{eq:lorentziana_ampiezza}
