@@ -74,7 +74,7 @@ Il dispositivo analizzato all'interno di questa relazione è un risonatore MEMS 
 \noindent Nelle nostre misure sperimentali, tuttavia, questo accoppiamento non viene innescato: la trave viene sollecitata a livelli tali da operare esclusivamente sul primo modo fondamentale. 
 
 \vspace{0.3cm}
-\noindent Lateralmente all'arco sono disposti degli elettrodi ad una distanza di $g_0 = \SI{1.8}{\micro\meter}$. In figura \ref{fig:mems_layout} è mostrato uno schema concettuale semplificato della struttura. 
+\noindent Lateralmente all'arco sono disposti degli elettrodi ad una distanza di $d_0 = \SI{1.8}{\micro\meter}$. In figura \ref{fig:mems_layout} è mostrato uno schema concettuale semplificato della struttura. 
 
 \begin{figure}[htbp]
 \centering
@@ -802,7 +802,7 @@ In Fig.~\ref{fig:bode_compensato} è riportata la risposta in frequenza ottenuta
 \caption{Diagramma di Bode della risposta in frequenza del solo ramo RLC, ottenuta a seguito della compensazione software di $C_p$ a $V_{\text{DC}} = \SI{5.0}{\volt}$.}
 \label{fig:bode_compensato}
 \end{figure}
-\noindent Emerge chiaramente un profilo lorenziano, centrato attorno a $f_1 = \SI{417665}{\hertz}$ e con un ampiezza di picco pari a:
+\noindent Fittando i punti sperimentali con una lorentziana, is ottiene il picco di risonanza alla frequenza $f_1 = \SI{417665}{\hertz}$ un ampiezza massima pari a:
     \begin{equation}
         A_{\text{max}} = \left| \frac{V_{\text{out}}}{V_{\text{in}}} \right|_{\max} = 0.4364
     \end{equation}
@@ -871,7 +871,7 @@ Eseguendo il prodotto con i dati sperimentali e con quelli teorici:
 
 In questo capitolo, presentiamo un circuito per la compensazione della capacità parassita $C_p$: deve iniettare sul nodo di massa virtuale del TIA una corrente uguale in modulo e sfasata di $180^\circ$ rispetto alla corrente parassita. Poniamo $V_{\text{DC}}=0$ (così possiamo trascurare il ramo RLC e concentrarci solo su quello parassita) ed eccitiamo alla frequenza di risonanza.
 
-Anticipiamo fin da subito che, per le ragioni che evidenzieremo tra poco nella sezione~\ref{subsec:ruolo_rp_scope}, abbiamo ipotizzato la presenza di una resistenza parassita $R_p$ posta in parallelo a $C_p$. Di conseguenza, nello schema del circuito di compensazione riportato in fig.~\ref{fig:schema_comp_hw}, la rete di compensazione collegata al nodo $V^-$ del TIA comprende due componenti:
+\noindent Anticipiamo fin da subito che, per le ragioni che evidenzieremo tra poco nella sezione~\ref{subsec:ruolo_rp_scope}, abbiamo ipotizzato la presenza di una resistenza parassita $R_p$ posta in parallelo a $C_p$. Di conseguenza, nello schema del circuito di compensazione riportato in Fig.~\ref{fig:schema_comp_hw}, la rete di compensazione collegata al nodo $V^-$ del TIA comprende due componenti:
 \begin{itemize}
     \item $C_c = \SI{10}{\pico\farad}$, che rappresenta la capacità di compensazione (incaricata di cancellare il contributo di $C_p$);
     \item $R_c = \SI{1}{\mega\ohm}$, che rappresenta la resistenza di compensazione posta in parallelo a $C_c$ (incaricata di cancellare il contributo di $R_p$).
@@ -1003,7 +1003,7 @@ Passando a $s = j\omega$, il modulo e la fase di $T_1(j\omega)$ sono:
 Di conseguenza, la regolazione del guadagno tramite $R_{P\phi 2}$ è disaccoppiata dalla fase: è possibile aggiustare il guadagno di $U_1$ senza alterare la condizione di controfase appena raggiunta tra $v_{\text{in}}(t)$ e $v_{U2}(t)$.
 
 \vspace{0.3cm}
-\noindent All'uscita del primo operazionale $U_1$, abbiamo inserito un trimmer $R_A$ usato come partitore di tensione (schematizzato in fig.~\ref{fig:schema_comp_hw} dalle due resistenze $R_{A1}$ e $R_{A2}$). Indicando con $\alpha \in [0, 1]$ la frazione di partizione impostata dalla posizione del cursore:
+\noindent All'uscita del primo operazionale $U_1$, abbiamo inserito un trimmer $R_A$ usato come partitore di tensione (schematizzato in Fig.~\ref{fig:schema_comp_hw} dalle due resistenze $R_{A1}$ e $R_{A2}$). Indicando con $\alpha \in [0, 1]$ la frazione di partizione impostata dalla posizione del cursore:
 \begin{equation}
     \alpha = \frac{R_{A2}}{R_{A1} + R_{A2}} = \frac{R_{A2}}{R_A}
 \end{equation}
@@ -1032,7 +1032,7 @@ Affinché esista una posizione del cursore $\alpha \in (0, 1)$ in grado di bilan
 \subsection{Resistenza parassita \texorpdfstring{$R_p$}{Rp} e dimensionamento di \texorpdfstring{$R_c$}{Rc}}
 \label{subsec:ruolo_rp_scope}
 
-Analizziamo ora perchè nella rete di compensazione di fig.~\ref{fig:schema_comp_hw} abbiamo inserito in parallelo al condensatore $C_c = \SI{10}{\pico\farad}$ anche il resistore di compensazione $R_c = \SI{1}{\mega\ohm}$.
+Analizziamo ora perchè nella rete di compensazione di Fig.~\ref{fig:schema_comp_hw} abbiamo inserito in parallelo al condensatore $C_c = \SI{10}{\pico\farad}$ anche il resistore di compensazione $R_c = \SI{1}{\mega\ohm}$.
 
 \vspace{0.3cm}
 
@@ -1104,7 +1104,7 @@ Per annullare sia la componente in quadratura sia la componente in fase con l'in
 
 Per verificare sperimentalmente il funzionamento della rete di compensazione, abbiamo effettuato uno sweep in frequenza su una banda da $\SI{407.75}{\kilo\hertz}$ a $\SI{427.75}{\kilo\hertz}$.
 
-Come dimostrato nella sezione~\ref{subsec:bode_completo}, a $V_{\text{DC}} = \SI{0}{\volt}$ il fattore di trasduzione elettromeccanica è nullo e il MEMS si riduce al solo ramo parassita. In fig.~\ref{fig:bode_hw_off} è riportato il diagramma di Bode misurato in questa condizione.
+\noindent Come dimostrato nella sezione~\ref{subsec:bode_completo}, a $V_{\text{DC}} = \SI{0}{\volt}$ il fattore di trasduzione elettromeccanica è nullo e il MEMS si riduce al solo ramo parassita. In Fig.~\ref{fig:bode_hw_off} è riportato il diagramma di Bode misurato in questa condizione.
 
 \begin{figure}[htbp]
 \centering
@@ -1116,7 +1116,7 @@ Come dimostrato nella sezione~\ref{subsec:bode_completo}, a $V_{\text{DC}} = \SI
 \noindent Lontano dalla frequenza di risonanza, il guadagno vale circa $-\SI{6.0}{\decibel}$. Avvicinandosi al centro, il modulo scende fino a circa $\mathbf{-\SI{20}{\decibel}}$. Per quanto riguarda la fase, in prossimità della frequenza di risonanza, c'è la rotazione di $180^\circ$.
 
 \vspace{0.2cm}
-\noindent Questo andamento si spiega considerando che la taratura dei trimmer è stata fatta a una singola frequenza fissa, ma il modulo e la fase dello stadio sfasatore $T_1(j\omega)$ (eq.~\eqref{eq:T1_modulo}--\eqref{eq:T1_fase}) e degli operazionali dipendono dalla frequenza. Il fondo della buca non scende a $-\infty\,\si{\decibel}$ ma si appiattisce attorno a $-\SI{20}{\decibel}$ perché ovviamente la compensazione capacità non può essere perfetta, c'è uno sbilanciamento residuo. Spostandosi invece verso gli estremi, avendo tarato il circuito di compensazione alla frequenza di risonanza, la corrente residua netta $i_{\text{net}} = i_p + i_{\text{comp}}$ cresce e il modulo risale fino a $-\SI{6.0}{\decibel}$. 
+\noindent Questo andamento si spiega considerando che la taratura dei trimmer è stata fatta a una singola frequenza fissa, ma il modulo e la fase dello stadio sfasatore $T_1(j\omega)$ (eq.~\eqref{eq:T1_modulo}--\eqref{eq:T1_fase}) e degli operazionali dipendono dalla frequenza. Il fondo della buca non scende a $-\infty\,\si{\decibel}$ ma si appiattisce attorno a $-\SI{20}{\decibel}$ perché ovviamente la compensazione della capacità non può essere perfetta, c'è uno sbilanciamento residuo. Spostandosi invece verso gli estremi, avendo tarato il circuito di compensazione alla frequenza di risonanza, la corrente residua netta $i_{\text{net}} = i_p + i_{\text{comp}}$ cresce e il modulo risale fino a $-\SI{6.0}{\decibel}$. 
 
 Spostandosi immediatamente a destra e sinistra del minimo del modulo, si inverte quale delle due correnti prevale sull'altra (sotto $f_1$ domina leggermente un ramo, sopra $f_1$ domina l'altro). Di conseguenza, la corrente residua $i_{\text{net}}$ cambia di segno, producendo il salto di fase di $180^\circ$ (con i punti centrali più dispersi perché lì il segnale è quasi nullo e immerso nel rumore).
 
@@ -1149,10 +1149,10 @@ Imponendo infine la condizione di risonanza $\omega_1^2 = \frac{1}{L_m C_m}$, de
     \label{eq:cm_hw}
     C_m = \frac{1}{\omega_1^2 L_m} = \mathbf{\SI{15.59}{\atto\farad}}
 \end{equation}
-I valori trovati sono coerenti con quelli estratti tramite compensazione software ($R_m = \SI{11.46}{\mega\ohm}$, $L_m = \SI{13.06}{\kilo\henry}$, $C_m = \SI{11.12}{\atto\farad}$): in particolare $R_m$ coincide entro meno del $6\%$, mentre la  differenza su $L_m$ e $C_m$ è legata al valore di $Q$ che risulta inferiore ($2262$ contro $2992$), probabilmente dovuto al piccolo fondo capacitivo residuo.
+I valori trovati sono coerenti con quelli estratti tramite compensazione software ($R_m = \SI{11.46}{\mega\ohm}$, $L_m = \SI{13.06}{\kilo\henry}$, $C_m = \SI{11.12}{\atto\farad}$): in particolare $R_m$ coincide entro meno del $6\%$, mentre la  differenza su $L_m$ e $C_m$ è legata al valore di $Q$ che risulta inferiore ($2262$ contro $2992$), probabilmente dovuto al piccolo residuo dovuto alla compensazione non perfetta.
 
 \vspace{0.3cm}
-\noindent In fig.~\ref{fig:benchmark_con_senza_hw} è riportato il confronto tra la risposta in frequenza non compensata e la risposta con compensazione hardware attiva, mentre in fig.~\ref{fig:confronto_hw_vs_sw} il modulo ottenuto via hardware è sovrapposto a quello ricavato tramite compensazione software nella sezione~\ref{subsec:compensazione_software}. Poiché le due acquisizioni sono state effettuate in giorni diversi, la frequenza di risonanza ha subito una lieve deriva di circa $\SI{100}{\hertz}$ ($\SI{417.66}{\kilo\hertz}$ contro $\SI{417.76}{\kilo\hertz}$); per confrontare direttamente la forma delle due campane sullo stesso intervallo di frequenze, in fig.~\ref{fig:confronto_hw_vs_sw} la curva software è stata traslata orizzontalmente di $+\SI{100}{\hertz}$ in modo da riallineare i due picchi.
+\noindent In Fig.~\ref{fig:benchmark_con_senza_hw} è riportato il confronto tra la risposta in frequenza non compensata e la risposta con compensazione hardware attiva, mentre in Fig.~\ref{fig:confronto_hw_vs_sw} il modulo ottenuto via hardware è sovrapposto a quello ricavato tramite compensazione software nella sezione~\ref{subsec:compensazione_software}. Poiché le due acquisizioni sono state effettuate in giorni diversi, la frequenza di risonanza ha subito una lieve deriva di circa $\SI{100}{\hertz}$ ($\SI{417.66}{\kilo\hertz}$ contro $\SI{417.76}{\kilo\hertz}$); per confrontare direttamente la forma delle due campane sullo stesso intervallo di frequenze, in Fig.~\ref{fig:confronto_hw_vs_sw} la curva software è stata traslata orizzontalmente di $+\SI{100}{\hertz}$ in modo da riallineare i due picchi.
 
 \begin{figure}[htbp]
 \centering
@@ -1174,7 +1174,7 @@ I valori trovati sono coerenti con quelli estratti tramite compensazione softwar
 \end{figure}
 
 \noindent Rappresentiamo ora la funzione di trasferimento $T(j\omega) = \mathrm{Re}\{T(j\omega)\} + j\,\mathrm{Im}\{T(j\omega)\}$ nel piano complesso di Gauss. 
-Consideriamo inizialmente il solo ramo RLC del MEMS (senza parassiti). Definiamo la variabile $x(f)$, già introdotta nell'eq.~\eqref{eq:lorentziana_ampiezza} per descrivere la lorenziana:
+Consideriamo inizialmente il solo ramo RLC del MEMS (senza parassiti). Definiamo la variabile $x(f)$, già introdotta nell'eq.~\eqref{eq:lorentziana_ampiezza} (\textbf{TODO: oddio non è introdotta, ocio che si potrebbe confondere con la x spostamento; idem per le altre variabili})per descrivere la lorenziana:
 \begin{equation}
     \label{eq:coordinata_x_lorentz}
     x(f) = \frac{2(f - f_1)}{\Delta f} = 2Q \frac{f - f_1}{f_1}
