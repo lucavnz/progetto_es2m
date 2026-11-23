@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {3.3}Costante di tempo di decadimento $\tau $ e stima del fattore di merito $Q$}{15}{subsection.3.3}%
 \contentsline {section}{\numberline {4}Caratterizzazione sperimentale della risposta in frequenza}{16}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Risposta in frequenza e fit del modello RLC + $C_p$}{17}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Compensazione software di $C_p$ e isolamento del picco motrice}{18}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.2}Compensazione software di $C_p$}{18}{subsection.4.2}%
 \contentsline {section}{\numberline {5}Compensazione hardware attiva della capacità parassita}{20}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Resistenza parassita $R_p$ e dimensionamento di $R_c$}{22}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Risposta in frequenza con compensazione capacitiva}{24}{subsection.5.2}%

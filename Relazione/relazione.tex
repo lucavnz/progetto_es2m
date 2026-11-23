@@ -608,14 +608,14 @@ La corrente complessiva $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$ prodotta dal ME
 \section{Caratterizzazione sperimentale della risposta libera (ringdown)}
 \label{sec:ringdown}
 
-In questa sezione presentiamo le misure sperimentali condotte sul MEMS per determinare la frequenza di risonanza $f_1$, la costante di tempo di smorzamento $\tau$ e il fattore di merito $Q$ del primo modo, analizzando la risposta libera dell'uscita $v_{out}(t)$ a seguito dell'interruzione di una forzante sinusoidale. A partire dall'istante di spegnimento dell'eccitazione, la trave non riceve più alcuna spinta forzante dall'esterno e si ritrova in regime di oscillazione libera smorzata, in cui l'energia meccanica viene gradualmente dissipata.
+In questa sezione presentiamo le misure sperimentali condotte sul MEMS per determinare la frequenza di risonanza $f_1$, la costante di tempo di smorzamento $\tau$ e il fattore di merito $Q$ del primo modo, analizzando la risposta libera dell'uscita $v_{out}(t)$ a seguito dell'interruzione di una forzante sinusoidale posta all'ingresso $v_{in}(t)$. A partire dall'istante di spegnimento dell'eccitazione, la trave non riceve più alcuna spinta forzante dall'esterno e si ritrova in regime di oscillazione libera smorzata, da qui in poi definita come ringdown, in cui l'energia meccanica viene gradualmente dissipata.
 
 \vspace{0.3cm}
 \noindent Di seguito la configurazione che abbiamo applicato:
 
 \begin{itemize}
     \item La tensione di polarizzazione della trave è stata fissata a $V_{\text{DC}} = \SI{5.0}{\volt}$.
-    \item Abbiamo applicato un segnale sinusoidale $v_{\text{in}}(t) = V_{\text{AC}} \sin(2\pi f_{\text{in}} t)$, con ampiezza picco-picco di $ \SI{100}{\milli\volt}$, sull'elettrodo di drive, in modalità burst,controllata da un segnale di sincronizzazione logico (Gate): finché il gate è alto, il segnale sinusoidale è applicato sull'elettrodo di drive; al fronte di discesa del gate (istante $t = 0$ nella scala dei tempi delle misure che presenteremo), $v_{\text{in}}(t)$ viene mantenuta ad una tensione continua pari a $v_{\text{in}}(0)$.
+    \item Abbiamo applicato un segnale sinusoidale $v_{\text{in}}(t) = V_{\text{AC}} \sin(2\pi f_{\text{in}} t)$, con ampiezza $V_{\text{AC}} = \SI{50}{\milli\volt}$, sull'elettrodo di drive, in modalità burst,controllata da un segnale di sincronizzazione logico (Gate): finché il gate è alto, il segnale sinusoidale è applicato sull'elettrodo di drive; al fronte di discesa del gate (istante $t = 0$ nella scala dei tempi delle misure che presenteremo), $v_{\text{in}}(t)$ viene mantenuta ad una tensione continua pari a $v_{\text{in}}(0)$.
     \item Tramite l'oscilloscopio, abbiamo estrapolato la traccia del ringdown. L'esperimento è stato ripetuto per 25 diverse frequenze di ingresso $f_{\text{in}}$, distribuite in una finestra compresa tra $\SI{417.26}{\kilo\hertz}$ e $\SI{418.40}{\kilo\hertz}$.
 \end{itemize}
 
@@ -684,7 +684,7 @@ Il punto sperimentale più vicino al picco si trova a $f_{\text{in}} = \SI{417.8
 \subsection{Frequenza di oscillazione libera durante il ringdown (\texorpdfstring{$f_1$}{f1} vs \texorpdfstring{$f_{\text{in}}$}{fin})}
 \label{subsec:frequenza_ringdown}
 
-In fig.~\ref{fig:frequenza_vs_fin} è riportato il grafico della frequenza di oscillazione $f_1$ durante il ringdown rispetto alla frequenza $f_{\text{in}}$ di eccitazione. I punti arancio sono stati ottenuti tramite FFT, mentre quelli blu tramite fit lineare della fase istantanea $\phi(t) = 2\pi f_1 t + \phi_0$, il cui valor medio, rappresentato tramite la linea tratteggiata rossa, è di $f_1 = \SI{417859}{\hertz}$
+In Fig.~\ref{fig:frequenza_vs_fin} è riportato il grafico della frequenza di oscillazione $f_1$ durante il ringdown rispetto alla frequenza $f_{\text{in}}$ di eccitazione. I punti arancio sono stati ottenuti tramite FFT, mentre quelli blu tramite fit lineare della fase istantanea $\phi(t) = 2\pi f_1 t + \phi_0$, il cui valor medio, rappresentato tramite la linea tratteggiata rossa, è di $f_1 = \SI{417859}{\hertz}$
 
 \begin{figure}[htbp]
 \centering
@@ -699,12 +699,15 @@ In fig.~\ref{fig:frequenza_vs_fin} è riportato il grafico della frequenza di os
     \item C'è una deriva della frequenza di risonanza nel tempo che ci abbiamo messo per acquisire le misure: in laboratorio abbiamo infatti registrato prima i punti da $\SI{417.83}{\kilo\hertz}$ scendendo fino a $\SI{417.26}{\kilo\hertz}$, e in un secondo momento abbiamo ripreso dal centro ($\SI{417.84}{\kilo\hertz}$) salendo fino a $\SI{418.40}{\kilo\hertz}$.
 \end{itemize}
 
+\textbf{Magari accennare a fattori ambientali, tipo temperatura e umidità, che potrebbero influire sulla risonanza come possile spunto/sviluppo; forse tra l'altro qua non si vede molto bene}
+
 \newpage
+
 
 \subsection{Costante di tempo di decadimento \texorpdfstring{$\tau$}{tau} e stima del fattore di merito \texorpdfstring{$Q$}{Q}}
 \label{subsec:tau_q}
-La costante di tempo di decadimento $\tau$ descrive la velocità con cui l'energia meccanica viene dissipata.
-In fig.~\ref{fig:tau_vs_frequenza} sono riportati i valori di $\tau$, estratti dal fit esponenziale dei picchi, al variare della frequenza forzante $f_{\text{in}}$. Il valor medio sperimentale risulta essere $\tau_{\text{medio}} = \SI{2.32}{\milli\second}$.
+Il valore $\tau$ nella relazione \ref{eq:legge_decadimento} descrive la costante di tempo associata allo smorzamento dell'oscillatore.
+In Fig.~\ref{fig:tau_vs_frequenza} sono riportati i valori di $\tau$, estratti dal fit esponenziale dei picchi, al variare della frequenza forzante $f_{\text{in}}$. Il valor medio sperimentale risulta essere $\tau_{\text{medio}} = \SI{2.32}{\milli\second}$.
 
 \noindent Da $\tau$, possiamo calcolare il fattore di merito meccanico $Q$ del primo modo flessionale:
 \begin{equation}
@@ -730,19 +733,19 @@ In questa sezione analizziamo la risposta del MEMS nel dominio della frequenza i
 \vspace{0.3cm}
 \noindent Per misurare la funzione di trasferimento $T(j\omega) = \frac{V_{\text{out}}(j\omega)}{V_{\text{in}}(j\omega)}$ abbiamo impostato le seguenti condizioni:
 \begin{itemize}
-    \item $V_{\text{DC}} = \SI{5.0}{\volt}$ e $v_{\text{in}}(t) = V_{\text{AC}} \sin(2\pi f_{\text{in}} t)$, con ampiezza $V_{\text{AC}} = \SI{100}{\milli\volt}$, esattamente come per l'analisi del ringdown nel capitolo precedente.
-    \item Abbiamo fatto uno sweep della $f_{\text{in}}$: 500 punti compresi nell'intervallo da $\SI{417.20}{\kilo\hertz}$ e $\SI{418.00}{\kilo\hertz}$, con un passo di con un passo di $\SI{2}{\hertz}$.
+    \item $V_{\text{DC}} = \SI{5.0}{\volt}$ e $v_{\text{in}}(t) = V_{\text{AC}} \sin(2\pi f_{\text{in}} t)$, con ampiezza $V_{\text{AC}} = \SI{50}{\milli\volt}$, esattamente come per l'analisi del ringdown nel capitolo precedente.
+    \item Abbiamo fatto uno sweep della $f_{\text{in}}$: 500 punti compresi nell'intervallo da $\SI{417.20}{\kilo\hertz}$ e $\SI{418.00}{\kilo\hertz}$, con un passo di $\SI{2}{\hertz}$.
     \item Per ogni frequenza $f_{\text{in}}$ vengono registrati il guadagno in ampiezza e lo sfasamento tra ingresso e uscita.
 \end{itemize}
 
-\noindent Come illustrato nello schema circuitale equivalente di fig.~\ref{fig:frontend_schema}, la corrente complessiva $i_{\text{tot}}(t)$ che fluisce verso il nodo di massa virtuale del TIA è $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$. L'ammettenza vista dall'ingresso è dunque:
+\noindent Come illustrato nello schema circuitale equivalente di Fig.~\ref{fig:frontend_schema}, la corrente complessiva $i_{\text{tot}}(t)$ che fluisce verso il nodo di massa virtuale del TIA è $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$. L'ammettenza vista dall'ingresso è dunque:
 \begin{equation}
     Y(j\omega) = \frac{I_{\text{tot}}(j\omega)}{V_{\text{in}}(j\omega)} = \underbrace{\frac{1}{R_m + j\omega L_m + \frac{1}{j\omega C_m}}}_{Y_m(j\omega) \text{ (ramo RLC)}} + \underbrace{j\omega C_p}_{Y_{p}(j\omega) \text{ (ramo parassita)}}
 \end{equation}
 Poiché l'uscita finale del circuito di condizionamento è legata alla corrente $I_{\text{tot}}(j\omega)$ (con le lettere maiuscole delle grandezze elettriche stiamo indicando le trasformate fasoriali) dalla transresistenza $R_{\text{trans}}$, la funzione di trasferimento complessiva è:
 \begin{equation}
     \label{eq:trasferimento_totale}
-    T(j\omega) = \frac{V_{\text{out}}(j\omega)}{V_{\text{in}}(j\omega)} = R_{\text{trans}} \cdot Y_{\text{mems}}(j\omega) = \frac{R_{\text{trans}}}{R_m + j\omega L_m + \frac{1}{j\omega C_m}} + j \omega C_p R_{\text{trans}}
+    T(j\omega) = \frac{V_{\text{out}}(j\omega)}{V_{\text{in}}(j\omega)} = R_{\text{trans}} \cdot Y_{\text{mems}}(j\omega) = \underbrace{\frac{R_{\text{trans}}}{R_m + j\omega L_m + \frac{1}{j\omega C_m}}}_{T_m} + \underbrace{j \omega C_p R_{\text{trans}}}_{T_p}
 \end{equation}
 
 \newpage
@@ -782,15 +785,16 @@ In Fig.~\ref{fig:bode_completo} sono riportati i diagrammi di Bode (modulo in al
 
 
 
-\subsection{Compensazione software di \texorpdfstring{$C_p$}{Cp} e isolamento del picco motrice}
+\subsection{Compensazione software di \texorpdfstring{$C_p$}{Cp}}
 \label{subsec:compensazione_software}
 
-All'uscita dell'amplificatore arriva la somma di due cose: il segnale del ramo RLC e la corrente parassita che passa per $C_p$. Dato che il circuito è stato trattato come lineare, la risposta totale misurata $T(f)$ è la somma dei due contributi: $T_{\text{m}}(f)$ e $T_{\text{p}}(f)$. Per isolare il comportamento del ramo RLC, possiamo compensare la capacità $C_p$ via software, sottraendo $T_p$ dalla risposta totale:
+All'uscita dell'amplificatore arriva la somma di due effetti: la corrente del ramo RLC e la quella che passa per $C_p$. Dato che il circuito è stato trattato come lineare, la risposta totale misurata $T(f)$ è la somma dei due contributi: $T_{\text{m}}(f)$ e $T_{\text{p}}(f)$. Per isolare il comportamento del ramo RLC, possiamo compensare la capacità $C_p$ via software, sottraendo $T_p$ dalla risposta totale:
 \begin{equation}
     \label{eq:sottrazione_software}
     T_m(f) = T(f) - T_{\text{p}}(f)
 \end{equation}
-In fig.~\ref{fig:bode_compensato} è riportata la risposta in frequenza ottenuta a seguito della compensazione software.
+In Fig.~\ref{fig:bode_compensato} è riportata la risposta in frequenza ottenuta a seguito della compensazione software.\\
+\textbf{TODO: mettere il valore ci $C_p$ utilizzato per il calcolo} 
 
 \begin{figure}[htbp]
 \centering

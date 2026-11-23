@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.28)  22 NOV 2026 17:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.28)  23 NOV 2026 17:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1162,28 +1162,28 @@ Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.pn
 
 
 [14 <../Ampiezza_Frequenza/grafici/ringdown_fit_dettaglio.png>]
-<../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png, id=326, 635.976pt x 397.485pt>
+<../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png, id=327, 635.976pt x 397.485pt>
 File: ../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png Graphic file (type png)
 <use ../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png>
-Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png  used on input line 718.
+Package pdftex.def Info: ../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png  used on input line 721.
 (pdftex.def)             Requested size: 373.3035pt x 233.31322pt.
 
 
 [15 <../Ampiezza_Frequenza/grafici/tau_vs_frequenza.png>]
 
 [16]
-<../Risposta in frequenza/grafici/bode_completo.png, id=343, 635.976pt x 505.89pt>
+<../Risposta in frequenza/grafici/bode_completo.png, id=344, 635.976pt x 505.89pt>
 File: ../Risposta in frequenza/grafici/bode_completo.png Graphic file (type png)
 <use ../Risposta in frequenza/grafici/bode_completo.png>
-Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_completo.png  used on input line 757.
+Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_completo.png  used on input line 760.
 (pdftex.def)             Requested size: 418.82375pt x 333.15509pt.
 
 
 [17 <../Risposta in frequenza/grafici/bode_completo.png>]
-<../Risposta in frequenza/grafici/bode_compensato.png, id=356, 635.976pt x 505.89pt>
+<../Risposta in frequenza/grafici/bode_compensato.png, id=357, 635.976pt x 505.89pt>
 File: ../Risposta in frequenza/grafici/bode_compensato.png Graphic file (type png)
 <use ../Risposta in frequenza/grafici/bode_compensato.png>
-Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_compensato.png  used on input line 797.
+Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_compensato.png  used on input line 801.
 (pdftex.def)             Requested size: 418.82375pt x 333.15509pt.
 
 
@@ -1196,60 +1196,60 @@ Package pdftex.def Info: ../Risposta in frequenza/grafici/bode_compensato.png  u
 [21]
 
 [22]
-<../Compensazione Hardware/grafici/scope_165_compensato.png, id=421, 592.614pt x 332.442pt>
+<../Compensazione Hardware/grafici/scope_165_compensato.png, id=422, 592.614pt x 332.442pt>
 File: ../Compensazione Hardware/grafici/scope_165_compensato.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/scope_165_compensato.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/scope_165_compensato.png  used on input line 1093.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/scope_165_compensato.png  used on input line 1097.
 (pdftex.def)             Requested size: 355.08984pt x 199.20296pt.
 
 
 [23 <../Compensazione Hardware/grafici/scope_165_compensato.png>]
-<../Compensazione Hardware/grafici/bode_off.png, id=434, 635.976pt x 505.89pt>
+<../Compensazione Hardware/grafici/bode_off.png, id=435, 635.976pt x 505.89pt>
 File: ../Compensazione Hardware/grafici/bode_off.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/bode_off.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/bode_off.png  used on input line 1107.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/bode_off.png  used on input line 1111.
 (pdftex.def)             Requested size: 409.71692pt x 325.90671pt.
 
 
 [24 <../Compensazione Hardware/grafici/bode_off.png>]
-<../Compensazione Hardware/grafici/bode_set2.png, id=444, 635.976pt x 505.89pt>
+<../Compensazione Hardware/grafici/bode_set2.png, id=445, 635.976pt x 505.89pt>
 File: ../Compensazione Hardware/grafici/bode_set2.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/bode_set2.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/bode_set2.png  used on input line 1124.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/bode_set2.png  used on input line 1128.
 (pdftex.def)             Requested size: 409.71692pt x 325.90671pt.
 
 
 [25 <../Compensazione Hardware/grafici/bode_set2.png>]
-<../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png, id=461, 635.976pt x 520.344pt>
+<../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png, id=462, 635.976pt x 520.344pt>
 File: ../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png  used on input line 1155.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png  used on input line 1159.
 (pdftex.def)             Requested size: 409.71692pt x 335.21834pt.
 
 
 [26 <../Compensazione Hardware/grafici/confronto_con_senza_compensazione.png>]
-<../Compensazione Hardware/grafici/confronto_hardware_vs_software.png, id=469, 635.976pt x 397.485pt>
+<../Compensazione Hardware/grafici/confronto_hardware_vs_software.png, id=470, 635.976pt x 397.485pt>
 File: ../Compensazione Hardware/grafici/confronto_hardware_vs_software.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/confronto_hardware_vs_software.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/confronto_hardware_vs_software.png  used on input line 1167.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/confronto_hardware_vs_software.png  used on input line 1171.
 (pdftex.def)             Requested size: 391.51021pt x 244.69139pt.
 
 
 [27 <../Compensazione Hardware/grafici/confronto_hardware_vs_software.png>]
-<../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png, id=484, 896.148pt x 419.166pt>
+<../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png, id=485, 896.148pt x 419.166pt>
 File: ../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png  used on input line 1207.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/cerchio_nyquist_confronto_globale.png  used on input line 1211.
 (pdftex.def)             Requested size: 446.13727pt x 208.68065pt.
-<../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png, id=485, 896.148pt x 419.166pt>
+<../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png, id=486, 896.148pt x 419.166pt>
 File: ../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png  used on input line 1214.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/cerchio_nyquist_dettaglio_fano.png  used on input line 1218.
 (pdftex.def)             Requested size: 446.13727pt x 208.68065pt.
-<../Compensazione Hardware/grafici/nyquist_set2_frequenza.png, id=486, 592.614pt x 448.074pt>
+<../Compensazione Hardware/grafici/nyquist_set2_frequenza.png, id=487, 592.614pt x 448.074pt>
 File: ../Compensazione Hardware/grafici/nyquist_set2_frequenza.png Graphic file (type png)
 <use ../Compensazione Hardware/grafici/nyquist_set2_frequenza.png>
-Package pdftex.def Info: ../Compensazione Hardware/grafici/nyquist_set2_frequenza.png  used on input line 1221.
+Package pdftex.def Info: ../Compensazione Hardware/grafici/nyquist_set2_frequenza.png  used on input line 1225.
 (pdftex.def)             Requested size: 355.08984pt x 268.49094pt.
 
 
@@ -1262,18 +1262,18 @@ Package pdftex.def Info: ../Compensazione Hardware/grafici/nyquist_set2_frequenz
 [31]
 
 [32]
-<../Duffing/duffing_ampiezza_compressione.png, id=538, 614.295pt x 433.62pt>
+<../Duffing/duffing_ampiezza_compressione.png, id=539, 614.295pt x 433.62pt>
 File: ../Duffing/duffing_ampiezza_compressione.png Graphic file (type png)
 <use ../Duffing/duffing_ampiezza_compressione.png>
-Package pdftex.def Info: ../Duffing/duffing_ampiezza_compressione.png  used on input line 1321.
+Package pdftex.def Info: ../Duffing/duffing_ampiezza_compressione.png  used on input line 1325.
 (pdftex.def)             Requested size: 391.51021pt x 276.36458pt.
 
 
 [33 <../Duffing/duffing_ampiezza_compressione.png>]
-<../Duffing/duffing_backbone_e_chirp.png, id=556, 614.295pt x 433.62pt>
+<../Duffing/duffing_backbone_e_chirp.png, id=557, 614.295pt x 433.62pt>
 File: ../Duffing/duffing_backbone_e_chirp.png Graphic file (type png)
 <use ../Duffing/duffing_backbone_e_chirp.png>
-Package pdftex.def Info: ../Duffing/duffing_backbone_e_chirp.png  used on input line 1375.
+Package pdftex.def Info: ../Duffing/duffing_backbone_e_chirp.png  used on input line 1379.
 (pdftex.def)             Requested size: 400.61703pt x 282.7892pt.
 
 
@@ -1282,35 +1282,35 @@ Package pdftex.def Info: ../Duffing/duffing_backbone_e_chirp.png  used on input 
 [35 <../Duffing/duffing_backbone_e_chirp.png>]
 
 [36]
-<../Distorsione/distorsione_armoniche_vs_vac.png, id=602, 614.295pt x 433.62pt>
+<../Distorsione/distorsione_armoniche_vs_vac.png, id=603, 614.295pt x 433.62pt>
 File: ../Distorsione/distorsione_armoniche_vs_vac.png Graphic file (type png)
 <use ../Distorsione/distorsione_armoniche_vs_vac.png>
-Package pdftex.def Info: ../Distorsione/distorsione_armoniche_vs_vac.png  used on input line 1447.
+Package pdftex.def Info: ../Distorsione/distorsione_armoniche_vs_vac.png  used on input line 1451.
 (pdftex.def)             Requested size: 318.66948pt x 224.94115pt.
-<../Distorsione/distorsione_hd2_rapporto.png, id=603, 614.295pt x 433.62pt>
+<../Distorsione/distorsione_hd2_rapporto.png, id=604, 614.295pt x 433.62pt>
 File: ../Distorsione/distorsione_hd2_rapporto.png Graphic file (type png)
 <use ../Distorsione/distorsione_hd2_rapporto.png>
-Package pdftex.def Info: ../Distorsione/distorsione_hd2_rapporto.png  used on input line 1454.
+Package pdftex.def Info: ../Distorsione/distorsione_hd2_rapporto.png  used on input line 1458.
 (pdftex.def)             Requested size: 295.90588pt x 208.87628pt.
 
 
 [37 <../Distorsione/distorsione_armoniche_vs_vac.png> <../Distorsione/distorsione_hd2_rapporto.png>]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 1461.
+(Font)              <14.4> on input line 1465.
 
 
 [38]
-Overfull \hbox (3.50433pt too wide) in paragraph at lines 1517--1519
+Overfull \hbox (3.50433pt too wide) in paragraph at lines 1521--1523
 \T1/lmr/m/n/10.95 (-20) Dalla ta-bel-la 2 di [[][]1[][]], $\OML/lmm/m/it/10.95 c[] \OT1/lmr/m/n/10.95 (-20) = [] []$\T1/lmr/m/n/10.95 (-20) ; $\OML/lmm/m/it/10.95 "[] \OT1/lmr/m/n/10.95 (-20) = [] [] = [] []$\T1/lmr/m/n/10.95 (-20) ;
  []
 
 
 
 [39]
-<../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png, id=645, 614.295pt x 433.62pt>
+<../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png, id=646, 614.295pt x 433.62pt>
 File: ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png Graphic file (type png)
 <use ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png>
-Package pdftex.def Info: ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png  used on input line 1529.
+Package pdftex.def Info: ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png  used on input line 1533.
 (pdftex.def)             Requested size: 382.40338pt x 269.93333pt.
 
 
@@ -1323,69 +1323,69 @@ Package pdftex.def Info: ../Frequenza_Vdc/grafici/f1_quadro_vs_vdc_quadro.png  u
 [43]
 
 [44]
-<../Decay/grafici/controfase_dinamica_completa.png, id=741, 794.97pt x 491.436pt>
+<../Decay/grafici/controfase_dinamica_completa.png, id=742, 794.97pt x 491.436pt>
 File: ../Decay/grafici/controfase_dinamica_completa.png Graphic file (type png)
 <use ../Decay/grafici/controfase_dinamica_completa.png>
-Package pdftex.def Info: ../Decay/grafici/controfase_dinamica_completa.png  used on input line 1737.
+Package pdftex.def Info: ../Decay/grafici/controfase_dinamica_completa.png  used on input line 1741.
 (pdftex.def)             Requested size: 432.48051pt x 267.35864pt.
-<../Decay/grafici/esponenziale_controfase.png, id=742, 758.835pt x 419.166pt>
+<../Decay/grafici/esponenziale_controfase.png, id=743, 758.835pt x 419.166pt>
 File: ../Decay/grafici/esponenziale_controfase.png Graphic file (type png)
 <use ../Decay/grafici/esponenziale_controfase.png>
-Package pdftex.def Info: ../Decay/grafici/esponenziale_controfase.png  used on input line 1744.
+Package pdftex.def Info: ../Decay/grafici/esponenziale_controfase.png  used on input line 1748.
 (pdftex.def)             Requested size: 418.82375pt x 231.3543pt.
 
 
 [45 <../Decay/grafici/controfase_dinamica_completa.png>]
-<../Decay/grafici/simulazione_ode_controfase.png, id=751, 758.835pt x 310.761pt>
+<../Decay/grafici/simulazione_ode_controfase.png, id=752, 758.835pt x 310.761pt>
 File: ../Decay/grafici/simulazione_ode_controfase.png Graphic file (type png)
 <use ../Decay/grafici/simulazione_ode_controfase.png>
-Package pdftex.def Info: ../Decay/grafici/simulazione_ode_controfase.png  used on input line 1766.
+Package pdftex.def Info: ../Decay/grafici/simulazione_ode_controfase.png  used on input line 1770.
 (pdftex.def)             Requested size: 432.48051pt x 177.1119pt.
 
 
 [46 <../Decay/grafici/esponenziale_controfase.png> <../Decay/grafici/simulazione_ode_controfase.png>]
-<../variazione fase/grafici/vpost_vs_fase.png, id=764, 626.5809pt x 366.4089pt>
+<../variazione fase/grafici/vpost_vs_fase.png, id=765, 626.5809pt x 366.4089pt>
 File: ../variazione fase/grafici/vpost_vs_fase.png Graphic file (type png)
 <use ../variazione fase/grafici/vpost_vs_fase.png>
-Package pdftex.def Info: ../variazione fase/grafici/vpost_vs_fase.png  used on input line 1801.
+Package pdftex.def Info: ../variazione fase/grafici/vpost_vs_fase.png  used on input line 1805.
 (pdftex.def)             Requested size: 355.08984pt x 207.65318pt.
 
 
 [47 <../variazione fase/grafici/vpost_vs_fase.png>]
 
 [48]
-<../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png, id=784, 852.3042pt x 541.3023pt>
+<../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png, id=785, 852.3042pt x 541.3023pt>
 File: ../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png  used on input line 1828.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png  used on input line 1832.
 (pdftex.def)             Requested size: 446.13727pt x 283.34549pt.
 
 
 [49 <../Oscillazione parassita/Grafici/transitorio_elettrico_vdc0.png>]
 
 [50]
-<../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png, id=805, 565.8741pt x 388.0899pt>
+<../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png, id=806, 565.8741pt x 388.0899pt>
 File: ../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png  used on input line 1923.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png  used on input line 1927.
 (pdftex.def)             Requested size: 345.98302pt x 237.29114pt.
-<../Oscillazione parassita/Grafici/circuito_ltspice_schema.png, id=810, 1253.4027pt x 382.0674pt>
+<../Oscillazione parassita/Grafici/circuito_ltspice_schema.png, id=811, 1253.4027pt x 382.0674pt>
 File: ../Oscillazione parassita/Grafici/circuito_ltspice_schema.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/circuito_ltspice_schema.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/circuito_ltspice_schema.png  used on input line 1932.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/circuito_ltspice_schema.png  used on input line 1936.
 (pdftex.def)             Requested size: 450.69417pt x 137.3809pt.
 
 
 [51 <../Oscillazione parassita/Grafici/sovrapposizione_simulazione_reale.png> <../Oscillazione parassita/Grafici/circuito_ltspice_schema.png>]
-<../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png, id=820, 944.5689pt x 380.8629pt>
+<../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png, id=821, 944.5689pt x 380.8629pt>
 File: ../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png  used on input line 1943.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/simulazione_ltspice_confronto.png  used on input line 1947.
 (pdftex.def)             Requested size: 446.13727pt x 179.88892pt.
-<../Oscillazione parassita/Grafici/sweep_fase_con_scope.png, id=822, 822.9144pt x 406.8801pt>
+<../Oscillazione parassita/Grafici/sweep_fase_con_scope.png, id=823, 822.9144pt x 406.8801pt>
 File: ../Oscillazione parassita/Grafici/sweep_fase_con_scope.png Graphic file (type png)
 <use ../Oscillazione parassita/Grafici/sweep_fase_con_scope.png>
-Package pdftex.def Info: ../Oscillazione parassita/Grafici/sweep_fase_con_scope.png  used on input line 1951.
+Package pdftex.def Info: ../Oscillazione parassita/Grafici/sweep_fase_con_scope.png  used on input line 1955.
 (pdftex.def)             Requested size: 446.13727pt x 220.58737pt.
 
 
@@ -1394,18 +1394,18 @@ Package pdftex.def Info: ../Oscillazione parassita/Grafici/sweep_fase_con_scope.
 [53]
 
 [54]
-<../variazione fase/grafici/deriva_termica_f1_e_A0.png, id=856, 664.884pt x 592.614pt>
+<../variazione fase/grafici/deriva_termica_f1_e_A0.png, id=857, 664.884pt x 592.614pt>
 File: ../variazione fase/grafici/deriva_termica_f1_e_A0.png Graphic file (type png)
 <use ../variazione fase/grafici/deriva_termica_f1_e_A0.png>
-Package pdftex.def Info: ../variazione fase/grafici/deriva_termica_f1_e_A0.png  used on input line 2014.
+Package pdftex.def Info: ../variazione fase/grafici/deriva_termica_f1_e_A0.png  used on input line 2018.
 (pdftex.def)             Requested size: 418.82375pt x 373.29454pt.
 
 
 [55 <../variazione fase/grafici/deriva_termica_f1_e_A0.png>]
-<../variazione fase/grafici/ampiezza_A0_vs_fase.png, id=868, 635.976pt x 397.485pt>
+<../variazione fase/grafici/ampiezza_A0_vs_fase.png, id=869, 635.976pt x 397.485pt>
 File: ../variazione fase/grafici/ampiezza_A0_vs_fase.png Graphic file (type png)
 <use ../variazione fase/grafici/ampiezza_A0_vs_fase.png>
-Package pdftex.def Info: ../variazione fase/grafici/ampiezza_A0_vs_fase.png  used on input line 2034.
+Package pdftex.def Info: ../variazione fase/grafici/ampiezza_A0_vs_fase.png  used on input line 2038.
 (pdftex.def)             Requested size: 382.40338pt x 239.0023pt.
 
 
@@ -1413,7 +1413,7 @@ Package pdftex.def Info: ../variazione fase/grafici/ampiezza_A0_vs_fase.png  use
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2039.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2043.
  (C:\Users\Phoenix\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1429,23 +1429,23 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-29>
  ***********
 Package rerunfilecheck Info: File `relazione.out' has not changed.
-(rerunfilecheck)             Checksum: 33B6D774C2227929385491F8AE492D8D;9211.
+(rerunfilecheck)             Checksum: E05DC184C86CB60866122B3DB1C161A2;9041.
 Package logreq Info: Writing requests to 'relazione.run.xml'.
 \openout1 = `relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 58385 strings out of 469923
- 1386389 string characters out of 5468202
- 2402569 words of memory out of 5000000
+ 58383 strings out of 469923
+ 1386369 string characters out of 5468202
+ 2401445 words of memory out of 5000000
  83876 multiletter control sequences out of 15000+600000
- 802832 words of font info for 342 fonts, out of 8000000 for 9000
+ 802749 words of font info for 341 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,18n,87p,1554b,1819s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbsy10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/Phoenix/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on relazione.pdf (57 pages, 9077459 bytes).
+Output written on relazione.pdf (57 pages, 9078810 bytes).
 PDF statistics:
- 1071 PDF objects out of 1200 (max. 8388607)
+ 1072 PDF objects out of 1200 (max. 8388607)
  325 named destinations out of 1000 (max. 500000)
  109956 words of extra memory for PDF output out of 128383 (max. 10000000)
 
