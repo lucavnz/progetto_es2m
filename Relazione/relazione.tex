@@ -277,7 +277,6 @@ dove:
         \omega_{01} = \sqrt{\frac{k_m}{m_{\text{eff}}}}
     \end{equation}
 
-\textbf{Forse lascerei anche solo keff, che poi tanto se ne parla}
 
 \newpage
 
@@ -390,6 +389,8 @@ Quando la trave vibra con velocità $\dot{x}(t) = \frac{dx}{dt}$, la capacità $
 \begin{equation}
     i_m(t) = \frac{d q_{\text{s}}}{dt} = \frac{d}{dt} \left[ C_s(x) V_{\text{DC}} \right] = V_{\text{DC}} \frac{d C_s}{dt} = V_{\text{DC}} \left( \left. \frac{\partial C_s}{\partial x} \right|_0 \frac{dx}{dt} \right)
 \end{equation}
+
+\textbf{TODO: non è che magati è qua che ci perdiamo il fattore 2 di prima?}\\
 Definiamo il fattore di trasduzione in uscita $\eta_{\text{s}} = V_{\text{DC}} \left. \frac{\partial C_s}{\partial x} \right|_0$. Dato che l'elettrodo di sense è identico a quello di drive, possiamo dire che i due fattori di trasduzione sono uguali:
 \begin{equation}
     \eta_{\text{sense}} = \eta_{\text{drive}} = \eta
@@ -512,10 +513,13 @@ Come anticipato precedentemente, nel dispositivo reale sono presenti accoppiamen
 \label{fig:mems_circuito}
 \end{figure}
 
+\newpage
+
 \section{Circuito di condizionamento}
 \label{sec:condizionamento}
 
-La corrente complessiva $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$ prodotta dal MEMS entra nella catena di amplificazione riportata in fig.~\ref{fig:frontend_schema}.
+Per condizionare la corrente proveniente dall'elettrodo di sense del MEMS si utilizzerà il frontend elettronico utilizzato in un precedente lavoro di analisi del MEMS \cite{nastro2026}.
+La corrente complessiva $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$ prodotta dal MEMS entra nella catena di amplificazione riportata in Fig.~\ref{fig:frontend_schema}.
 
 \begin{figure}[htbp]
 \centering
@@ -526,16 +530,16 @@ La corrente complessiva $i_{\text{tot}}(t) = i_m(t) + i_{Cp}(t)$ prodotta dal ME
     \draw (-1.5, 0.5) node[left] {$v_{\text{in}}(t)$} to[short, o-*] (-0.4, 0.5) coordinate (in_split);
     
     % Ramo superiore parassita Cp
-    \draw (in_split) -- (-0.4, 1.8) to[C, l=$C_p$] (4.6, 1.8) -- (4.6, 0.5);
+    \draw (in_split) -- (-0.4, 1.8) to[C, l=$C_p$, i=$i_{C_p}$] (4.6, 1.8) -- (4.6, 0.5);
 
     % Ramo inferiore motrice RLC serie
     \draw (in_split) -- (-0.4, -0.8)
         to[R, l=$R_m$] (1.1, -0.8)
         to[L, l=$L_m$] (2.8, -0.8)
-        to[C, l=$C_m$] (4.6, -0.8) -- (4.6, 0.5);
+        to[C, l=$C_m$, i=$i_m$] (4.6, -0.8) -- (4.6, 0.5);
 
     % Nodo di giunzione al sense
-    \draw (4.6, 0.5) to[short, *-*] (5.4, 0.5) coordinate (sense);
+    \draw (4.6, 0.5) to[short, *-*, i=$i_{tot}$] (5.4, 0.5) coordinate (sense);
 
     % -------------------------------------------------------------
     % STADIO 1: TIA (OPA656)
