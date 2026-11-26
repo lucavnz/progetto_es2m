@@ -315,20 +315,6 @@ dove la differenza di potenziale $V(t)$ applicata tra la trave (a potenziale $V_
     V(t) = V_{\text{DC}} - v_{\text{in}}(t)
 \end{equation}
 
-\noindent E la capacità $C_d(x)$, approssimata ad un condensatore a facce piane parallele, è data da:
-
-\begin{equation}
-    C_d(x) = \epsilon \frac{A}{d_0-x}
-\end{equation}
-
-Con:
-\begin{itemize}
-    \item $\epsilon$ permittività elettrica del materiale tra gli elettrodo di drive e la trave;
-    \item $A$ area degli elettrodi;
-    \item $d_0$ distanza tra l'elettrodo di drive e il punto centrale della trave in condizione di riposo;
-    \item $x$ spostamento del punto centrale della trave dalla posizione di riposo in direzione $x$.
-\end{itemize}
-
 \noindent La forza elettrostatica che agisce sulla trave è dunque:
 
 \begin{equation}
@@ -342,7 +328,7 @@ Con:
     \left( V_{\text{DC}} - v_{\text{in}}(t) \right)^2 = V_{\text{DC}}^2 - 2 V_{\text{DC}} v_{\text{in}}(t) + v_{\text{in}}^2(t)
 \end{equation}
 
-\noindent Dato che $|v_{\text{in}}(t)| \ll V_{\text{DC}}$, il termine quadratico $v_{\text{in}}^2(t)$ può essere trascurato. Poiché la capacità $C_d(x)$ dipende dalla distanza $d_0 - x(t)$ tra la trave e l'elettrodo, in regime di piccole oscillazioni ($|x(t)| \ll g_0$) possiamo approssimare la derivata $\frac{\partial C_d(x)}{\partial x}$ al primo ordine dello sviluppo di Taylor attorno alla posizione di riposo $x = 0$:
+\noindent Dato che $|v_{\text{in}}(t)| \ll V_{\text{DC}}$, il termine quadratico $v_{\text{in}}^2(t)$ può essere trascurato. Poiché la capacità $C_d(x)$ dipende dalla distanza $d_0 - x(t)$ tra la trave e l'elettrodo, in regime di piccole oscillazioni ($|x(t)| \ll d_0$) possiamo approssimare la derivata $\frac{\partial C_d(x)}{\partial x}$ al primo ordine dello sviluppo di Taylor attorno alla posizione di riposo $x = 0$:
 
 \begin{equation}
     \frac{\partial C_d(x)}{\partial x} \approx \left. \frac{\partial C_d}{\partial x} \right|_{x=0} + \left. \frac{\partial^2 C_d}{\partial x^2} \right|_{x=0} x(t)
@@ -351,6 +337,8 @@ Con:
 \begin{equation}
     F_e(x, t) \approx \underbrace{\frac{1}{2} \left. \frac{\partial C_d}{\partial x} \right|_0 V_{\text{DC}}^2}_{F_{\text{DC}}} + \underbrace{\frac{1}{2} \left. \frac{\partial^2 C_d}{\partial x^2} \right|_0 V_{\text{DC}}^2 x(t)}_{k_e \, x(t)} - \underbrace{V_{\text{DC}} \left. \frac{\partial C_d}{\partial x} \right|_0 v_{\text{in}}(t)}_{F_{\text{drive}}(t)}
 \end{equation}
+
+\newpage
 
 \noindent Analizziamo ciascun termine:
 
@@ -794,7 +782,7 @@ All'uscita dell'amplificatore arriva la somma di due effetti: la corrente del ra
     T_m(f) = T(f) - T_{\text{p}}(f)
 \end{equation}
 In Fig.~\ref{fig:bode_compensato} è riportata la risposta in frequenza ottenuta a seguito della compensazione software.\\
-\textbf{TODO: mettere il valore ci $C_p$ utilizzato per il calcolo} 
+\textbf{TODO: mettere il valore ci $C_p$ utilizzato per il calcolo 0.892pF} 
 
 \begin{figure}[htbp]
 \centering
@@ -859,11 +847,7 @@ Se il rapporto tra fattore di trasduzione sperimentale e teorico è, per esempio
     \begin{equation}
         R_m \cdot C_m = \left( \frac{b_{\text{eff}}}{\eta^2} \right) \cdot \left( \frac{\eta^2}{k_{\text{eff}}} \right) = \frac{b_{\text{eff}}}{k_{\text{eff}}} = \frac{1}{\omega_1 Q}
     \end{equation}
-Eseguendo il prodotto con i dati sperimentali e con quelli teorici:
-    \begin{align}
-        (R_m \cdot C_m)_{\text{teor}} &= (\SI{28.29e6}{\ohm}) \times (\SI{4.83e-18}{\farad}) = \SI{0.137}{\nano\second} \\
-        (R_m \cdot C_m)_{\text{sper}} &= (\SI{11.46e6}{\ohm}) \times (\SI{11.12e-18}{\farad}) = \SI{0.127}{\nano\second}
-    \end{align}
+
 
 \newpage
 \section{Compensazione hardware attiva della capacità parassita}
