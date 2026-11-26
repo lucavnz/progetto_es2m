@@ -20,10 +20,10 @@
 \contentsline {subsection}{\numberline {6.2}Evoluzione temporale della frequenza di risonanza durante il ringdown}{34}{subsection.6.2}%
 \contentsline {section}{\numberline {7}Risonanza interna 1:2}{35}{section.7}%
 \contentsline {section}{\numberline {8}Variazione della frequenza di risonanza con la tensione di polarizzazione $V_{\text {DC}}$}{38}{section.8}%
-\contentsline {section}{\numberline {9}Riduzione del tempo di decadimento mediante eccitazione in controfase}{41}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Decadimento spontaneo senza controfase}{41}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Teoria dell'eccitazione in controfase e modello matematico}{42}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Risultati sperimentali e verifica del modello}{45}{subsection.9.3}%
-\contentsline {section}{\numberline {10}Fase di spegnimento del gate, transitorio elettrico parassita e impatto sull'ampiezza iniziale del ringdown}{47}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Analisi dell'oscillazione parassita allo spegnimento del gate}{49}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Variazione dell'ampiezza iniziale del ringdown $A_0$ con la fase del gate}{54}{subsection.10.2}%
+\contentsline {section}{\numberline {9}Riduzione del tempo di decadimento mediante eccitazione in controfase}{40}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Decadimento spontaneo senza controfase}{40}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Teoria dell'eccitazione in controfase e modello matematico}{41}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Risultati sperimentali e verifica del modello}{44}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Fase di spegnimento del gate, transitorio elettrico parassita e impatto sull'ampiezza iniziale del ringdown}{46}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Analisi dell'oscillazione parassita allo spegnimento del gate}{48}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Variazione dell'ampiezza iniziale del ringdown $A_0$ con la fase del gate}{53}{subsection.10.2}%
